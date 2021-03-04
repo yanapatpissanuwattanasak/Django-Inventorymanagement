@@ -1,0 +1,65 @@
+
+    {% extends "header.html" %}
+    {% block content %}
+    <div class="container-fluid d-flex justify-content-center" style="margin-top: 2%;">
+        <div class="" style="width: 560px;height: 700px ;background-color: black;border-top-left-radius:20px; ;border-top-right-radius:20px ;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;">
+            <div class=" d-flex justify-content-center" style=" margin-top: 4%;">
+                <div class="" style="width: 500px;height: 650px ;background-color: white;border-top-left-radius:20px ;border-top-right-radius:20px ;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;" >
+                    <div class="container-fluid" >
+                    <div class=" " style="margin-top: 3%;">
+                        <div class="d-flex justify-content-center" >
+                            <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 170px; width: 170px;margin-top: 7%;"/>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-center">
+                        
+                        <form  style="width: 350px; margin-top: 20%;" action="" method="POST">
+                            {% csrf_token %} 
+                           
+                                <div class="row ">
+                                    <div class="col-2">
+                                    <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 32px; width: 32px;"/>
+                                    </div>
+                                    <div class="col-10">
+                                    <input class="form-control" type="text" name="username"> 
+                                    </div>
+                                </div>
+                           
+                                <div class="row ">
+                                    <div class="col-2">
+                                    <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 32px; width: 32px;"/>
+                                    </div>
+                                <div class="col-10">
+                                <input class="form-control" type="text" name="password"> <br>
+                                </div>
+                                </div>
+                               
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6">
+                                <input id='btn-click' class="form-control" type="submit" name="Login" value="Login"> </input>
+                                </div>
+                                </div>
+
+                           
+                        </div>
+                        </form>
+                        <div class="text-center" style="margin-top: 50px;">
+                        <a href="" >ลืมรหัสผ่าน</a><br>
+                        <br>
+                        <a> Don't have an account     </a>
+                        <a href="register" >Sign Up</a>
+                        
+                        
+                        </div>
+                       
+                    </div>
+                    <div>
+                    
+                </div>
+                
+            </div>
+        </div>
+       
+        
+    </div>
+    {% endblock content %}
