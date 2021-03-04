@@ -1,0 +1,151 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      #state1{
+        position: absolute;
+        width: 22px;
+        height: 23px;
+        left: 1295px;
+        top: 295px;
+        background: #27AE60;
+        border-radius: 5px;
+      }
+      #state2{
+        position: absolute;
+        width: 22px;
+        height: 23px;
+        left: 1295px;
+        top: 335px;
+        background: #EB5757;
+        border-radius: 5px;
+      }
+      #state3{
+        position: absolute;
+        width: 22px;
+        height: 23px;
+        left: 1295px;
+        top: 375px;
+        background: #BDBDBD;
+        border-radius: 5px;
+      }
+      .dropbtn {  
+        background-color: rgb(156, 156, 149);  
+        color: black;  
+        padding: 10px;  
+        font-size: 12px;  
+      }  
+      .dropdown {  
+          display: inline-block;  
+          position: relative  
+      }  
+      .dropdown-content {  
+          position: absolute;  
+          background-color: lightgrey;  
+          min-width: 200px;  
+          display: none;  
+          z-index: 1;  
+      }  
+      .dropdown-content a {  
+          color: black;  
+          padding: 12px 16px;  
+          text-decoration: none;  
+          display: block;  
+      }  
+      .dropdown-content a:hover {  
+          background-color: rgb(187, 184, 178);  
+      }  
+      .dropdown:hover .dropdown-content {  
+          display: block;  
+      }  
+      .dropdown:hover .dropbtn {  
+          background-color: grey;  
+      } 
+      #filter{
+        position: absolute;
+        left: 1145px;
+        top: 215px;
+      } 
+    </style>
+    <div class="container">
+    <br>
+    <h1 align="center">รายชื่อผู้ขอเข้าใช้</h1>
+    <br>
+    <div>
+        <nav class="navbar navbar-light">
+        <form class="d-flex">
+          <div class="input-group" style="position: absolute; top:0px; right:0px; width: 300px;">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" class="form-control me-2" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+          </div>
+        </form>
+      </nav>
+    </div>
+    <br><br><br>
+    <div id="filter">
+    <div class="dropdown">  
+      <button class="dropbtn">arrange&xdtri;</button>  
+      <div class="dropdown-content">  
+      <a href="#"> ลำดับ &uarr;</a>  
+      <a href="#"> ลำดับ &darr;</a>
+      <a href="#"> ชื่อ &uarr;</a> 
+      <a href="#"> ชื่อ &darr;</a> 
+      <a href="#"> Username &uarr;</a>  
+      <a href="#"> Username&darr;</a> 
+      </div>  
+    </div> 
+    <div class="dropdown">  
+      <button class="dropbtn"> Filter&xdtri;</button>  
+      <div class="dropdown-content">  
+      <a href="#"> ทั้งหมด </a>  
+      <a href="#"> ผ่านยืนยัน </a>  
+      <a href="#"> ปฏิเสธ </a>  
+      <a href="#">ยังไม่พิจารณา </a> 
+      </div>  
+    </div> 
+  </div>
+    <div>
+        <table class="table table-bordered" style="width:80%" align="center">
+            <thead>
+              <tr align="center" style="background-color:#FFB800">
+                <th scope="col">รายการ</th>
+                <th scope="col">Username</th>
+                <th scope="col">ชื่อ-สกุล</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr align="center">
+                <th scope="row">1</th>
+                <td><a href="/detail_user/Mark">Mark</a></td>
+                <td>Mark Otto</td>
+                <td>@mdo</td>
+                <td style="background-color:#06e97f"></td>
+              </tr> -->
+              {% for user in list_user%}
+              <tr align="center">
+                <th scope="row">{{forloop.counter}}</th>
+                <td><a href="/detail_user/{{user.username}}">{{user.username}}</a></td>
+                <td>{{user.fullname}}</td>
+                <td>{{user.email}}</td>
+                {%if user.rank == 3 %}
+                  <td style="background-color:#929292"></td>
+                {%else%}
+                  <td style="background-color:#06e97f"></td>
+                {%endif%}
+              </tr>
+              {% endfor%}
+            </tbody>
+          </table>
+    </div>
+    <div id="state1"></div>
+    <div><b style="position: absolute;left: 1325px;top: 295px;">ยืนยันเรียบร้อย</b></div>
+    <div id="state2"></div>
+    <div><b style="position: absolute;left: 1325px;top: 335px;">ปฏิเสธ</b></div>
+    <div id="state3"></div>
+    <div><b style="position: absolute;left: 1325px;top: 375px;">ยังไม่พิจารณา</b></div>
+    </div>
+{% endblock %}

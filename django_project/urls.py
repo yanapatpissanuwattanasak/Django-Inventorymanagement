@@ -19,10 +19,38 @@ from project_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.login),
-    
+    path('',views.stock),
+    path('login',views.login),
+    path('login/<slug:validation>',views.login),
+    path('go_login',views.go_login),
     path('update/<int:id>',views.update),
     path('delete/<int:id>',views.delete),
     path('insert',views.insert),
-    path('register',views.register_employee)
+    path('register',views.register_employee),
+    path('create_account',views.create_account),
+    path('logout',views.logout),
+    path('history',views.open_history),
+    path('history_import',views.history_import),
+    path('Transmission_history',views.Transmission_history),
+    path('user_list',views.user_list),
+    path('detail/<slug:product_id>',views.detail),
+    path('import_product',views.import_product),
+    path('detail_user/<slug:user_id>',views.detail_user),
+    path('shipping',views.shipping),
+    path('status_request_send',views.status_request_send),
+    path('status_send',views.status_send),
+    path('checkstock',views.checkstock),
+    path('edit_item',views.edit_item),
+    path('input',views.input),
+    path('submit_product',views.submit_product),
+     path('lost_item',views.lost_item),
+    path('check_detail',views.check_detail),
+    path('contact',views.contact),
+    path('sumarize',views.sumarize),
+    path('checkemployee',views.checkemployee),
+    path('submit_user/<slug:user_id>',views.submit_user),
+    path('sale_output_owner',views.sale_output_owner),
+    path('output',views.output_product)
+
+
 ]

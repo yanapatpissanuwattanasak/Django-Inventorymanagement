@@ -1,6 +1,24 @@
 
-    {% extends "header.html" %}
-    {% block content %}
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bright Company</title>
+        <link rel="stylesheet"  href="{%  static  'css/mystyle.css'  %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>  
+    
+    </head>
+    <body>
     <div class="container-fluid d-flex justify-content-center" style="margin-top: 2%;">
         <div class="" style="width: 560px;height: 700px ;background-color: black;border-top-left-radius:20px; ;border-top-right-radius:20px ;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;">
             <div class=" d-flex justify-content-center" style=" margin-top: 4%;">
@@ -8,32 +26,39 @@
                     <div class="container-fluid" >
                     <div class=" " style="margin-top: 3%;">
                         <div class="d-flex justify-content-center" >
-                            <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 170px; width: 170px;margin-top: 7%;"/>
+                            <img class=""  src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgaWQ9IkZpbGxlZG91dGxpbmUiPjxyZWN0IGZpbGw9IiMwMDkzYjkiIGhlaWdodD0iMzc2IiByeD0iMjQiIHdpZHRoPSIyNzIiIHg9IjE0NCIgeT0iNTYiLz48cGF0aCBkPSJtMTc2IDg4aDIwOHYzMTJoLTIwOHoiIGZpbGw9IiNlM2U0ZTIiLz48cGF0aCBkPSJtMzM2IDg4aC0xMTJ2LTMyaDMybC04LTMyaDY0bC04IDMyaDMyeiIgZmlsbD0iIzU3YzNjMSIvPjxwYXRoIGQ9Im0zMjAgNDg4aC0yODh2LTI1NmgxNDR2MTI4aDE0NHoiIGZpbGw9IiNmOGJjMWUiLz48cGF0aCBkPSJtMjI0IDM2MGg0OHY0OGgtNDh6IiBmaWxsPSIjZjlkYTYyIi8+PHBhdGggZD0ibTMyMCAzNjhoLTEyYTEyIDEyIDAgMCAwIC0xMiAxMnYyMC4zMDVhNjMuNyA2My43IDAgMCAxIC02My42OTUgNjMuNjk1aC0zNi4zMDVhMTIgMTIgMCAwIDAgLTEyIDEydjEyaDEzNnoiIGZpbGw9IiNmNWE5MjIiLz48cGF0aCBkPSJtODAgMzYwaDQ4djQ4aC00OHoiIGZpbGw9IiNmOWRhNjIiLz48cGF0aCBkPSJtMTc2IDM2OGgtMTJhMTIgMTIgMCAwIDAgLTEyIDEydjIwLjMwNWE2My43IDYzLjcgMCAwIDEgLTYzLjY5NSA2My42OTVoLTM2LjMwNWExMiAxMiAwIDAgMCAtMTIgMTJ2MTJoMTM2eiIgZmlsbD0iI2Y1YTkyMiIvPjxwYXRoIGQ9Im04MCAyMzJoNDh2NDhoLTQ4eiIgZmlsbD0iI2Y5ZGE2MiIvPjxwYXRoIGQ9Im0xNzYgMjQwaC0xMmExMiAxMiAwIDAgMCAtMTIgMTJ2MjAuMzA1YTYzLjcgNjMuNyAwIDAgMSAtNjMuNjk1IDYzLjY5NWgtMzYuMzA1YTEyIDEyIDAgMCAwIC0xMiAxMnYxMmgxMzZ6IiBmaWxsPSIjZjVhOTIyIi8+PHBhdGggZD0ibTQ2NS44NDQgMjYxLjk0OC0yMTQuNiA2NC4yMDgtMzUuMjQ0LTYuMTU2IDI2LjA3MS0yNC41IDIxNC42LTY0LjIwOGExNiAxNiAwIDAgMSAxOS45MTUgMTAuNzQyIDE2IDE2IDAgMCAxIC0xMC43NDIgMTkuOTE0eiIgZmlsbD0iI2Y4YmMxZSIvPjxwYXRoIGQ9Im00ODQuMjUgMjM5Ljc0MWEyNCAyNCAwIDAgMCAtMjkuODcxLTE2LjExNGwtMjE0LjYgNjQuMjA3YTguMDE2IDguMDE2IDAgMCAwIC0zLjE4NSAxLjgzNWwtMjYuMDcyIDI0LjVhOCA4IDAgMCAwIDQuMSAxMy43MTFsMzUuMjQzIDYuMTU2YTguMDE5IDguMDE5IDAgMCAwIDMuNjctLjIxNmwxNzQuMTI4LTUyLjEuNzU0IDE2LjQ3NS01NS4zMyAxNi41NTQgNC41ODYgMTUuMzMgNjEuMzE0LTE4LjM0NmE4IDggMCAwIDAgNS43LTguMDI5bC0xLjIyMy0yNi43MDQgMjQuNjczLTcuMzgyYTI0IDI0IDAgMCAwIDE2LjExMy0yOS44NzJ6bS0yMzMuNDkgNzguMjEtMTcuNjIyLTMuMDc4IDEzLjAzNi0xMi4yNTEgMzYuNTEyLTEwLjkyMiA0LjU4NiAxNS4zMjh6bTUxLjg0LTE1LjUxMS00LjU4Ni0xNS4zMjggMTI4LjE0Mi0zOC4zNDEuNzU0IDE2LjQ3NnptMTY1LjctNTIuMDIzYTcuOTUyIDcuOTUyIDAgMCAxIC00Ljc0OCAzLjg2N2wtMjAuODQxIDYuMjM1LS43NTQtMTYuNDc1IDE3LjAwOS01LjA4OWE4IDggMCAwIDEgOS4zMzQgMTEuNDYyeiIvPjxwYXRoIGQ9Im0zMjAgMzUyaC0xMzZ2LTEyMGE4IDggMCAwIDAgLTgtOGgtMTQ0YTggOCAwIDAgMCAtOCA4djI1NmE4IDggMCAwIDAgOCA4aDI4OGE4IDggMCAwIDAgOC04di0xMjhhOCA4IDAgMCAwIC04LTh6bS04OCAxNmgzMnYzMmgtMzJ6bS0xNDQtMTI4aDMydjMyaC0zMnptLTQ4IDBoMzJ2NDBhOCA4IDAgMCAwIDggOGg0OGE4IDggMCAwIDAgOC04di00MGgzMnYxMTJoLTEyOHptNDggMTI4aDMydjMyaC0zMnptLTQ4IDBoMzJ2NDBhOCA4IDAgMCAwIDggOGg0OGE4IDggMCAwIDAgOC04di00MGgzMnYxMTJoLTEyOHptMjcyIDExMmgtMTI4di0xMTJoMzJ2NDBhOCA4IDAgMCAwIDggOGg0OGE4IDggMCAwIDAgOC04di00MGgzMnoiLz48cGF0aCBkPSJtMjgwIDQ0OGgxNnYxNmgtMTZ6Ii8+PHBhdGggZD0ibTEzNiA0NDhoMTZ2MTZoLTE2eiIvPjxwYXRoIGQ9Im0xMzYgMzIwaDE2djE2aC0xNnoiLz48cGF0aCBkPSJtMTUyIDgwYTE2LjAxOSAxNi4wMTkgMCAwIDEgMTYtMTZoNDh2MTZoLTQwYTggOCAwIDAgMCAtOCA4djEyMGgxNnYtMTEyaDE5MnYxMjhoMTZ2LTEzNmE4IDggMCAwIDAgLTgtOGgtNDB2LTE2aDQ4YTE2LjAxOSAxNi4wMTkgMCAwIDEgMTYgMTZ2MTM2aDE2di0xMzZhMzIuMDM2IDMyLjAzNiAwIDAgMCAtMzItMzJoLTc3Ljc1NGw1LjUxNS0yMi4wNmE4IDggMCAwIDAgLTcuNzYxLTkuOTRoLTY0YTggOCAwIDAgMCAtNy43NjEgOS45NGw1LjUxNSAyMi4wNmgtNzcuNzU0YTMyLjAzNiAzMi4wMzYgMCAwIDAgLTMyIDMydjEyOGgxNnptODAtMTZoMjRhOCA4IDAgMCAwIDcuNzYxLTkuOTRsLTUuNTE1LTIyLjA2aDQzLjUwOGwtNS41MTUgMjIuMDZhOCA4IDAgMCAwIDcuNzYxIDkuOTRoMjR2MTZoLTk2eiIvPjxwYXRoIGQ9Im00MDggNDA4YTE2LjAxOSAxNi4wMTkgMCAwIDEgLTE2IDE2aC00OHYxNmg0OGEzMi4wMzYgMzIuMDM2IDAgMCAwIDMyLTMydi03MmgtMTZ6Ii8+PHBhdGggZD0ibTM5MiA0MDB2LTU2aC0xNnY0OGgtMzJ2MTZoNDBhOCA4IDAgMCAwIDgtOHoiLz48cGF0aCBkPSJtMjQ4IDEyMGE4IDggMCAwIDAgLTgtOGgtMzJhOCA4IDAgMCAwIC04IDh2MzJhOCA4IDAgMCAwIDggOGgzMmE4IDggMCAwIDAgOC04em0tMTYgMjRoLTE2di0xNmgxNnoiLz48cGF0aCBkPSJtMjQwIDE4NGgtMzJhOCA4IDAgMCAwIC04IDh2MzJhOCA4IDAgMCAwIDggOGgzMmE4IDggMCAwIDAgOC04di0zMmE4IDggMCAwIDAgLTgtOHptLTggMzJoLTE2di0xNmgxNnoiLz48cGF0aCBkPSJtMjY0IDExMmgxNnYxNmgtMTZ6Ii8+PHBhdGggZD0ibTI2NCAxNDRoOTZ2MTZoLTk2eiIvPjxwYXRoIGQ9Im0yOTYgMTEyaDY0djE2aC02NHoiLz48cGF0aCBkPSJtMjY0IDE4NGgxNnYxNmgtMTZ6Ii8+PHBhdGggZD0ibTI2NCAyMTZoOTZ2MTZoLTk2eiIvPjxwYXRoIGQ9Im0yOTYgMTg0aDY0djE2aC02NHoiLz48L2c+PC9zdmc+" style="height: 170px; width: 170px;margin-top: 7%;"/>
                         </div>
                         <br>
                         <div class="d-flex justify-content-center">
                         
-                        <form  style="width: 350px; margin-top: 20%;" action="" method="POST">
+                        <form  style="width: 350px; margin-top: 20%;" action="/login" method="POST">
                             {% csrf_token %} 
-                           
+                            
                                 <div class="row ">
                                     <div class="col-2">
-                                    <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 32px; width: 32px;"/>
+                                        
+                                    <img class=""  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ1OXB4IiBoZWlnaHQ9IjQ1OXB4IiB2aWV3Qm94PSIwIDAgNDU5IDQ1OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDU5IDQ1OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9ImNoZWNrLWJveC1vdXRsaW5lIj4NCgkJPHBhdGggZD0iTTEyNC45NSwxODEuMDVsLTM1LjcsMzUuN0wyMDQsMzMxLjVsMjU1LTI1NWwtMzUuNy0zNS43TDIwNCwyNjAuMUwxMjQuOTUsMTgxLjA1eiBNNDA4LDQwOEg1MVY1MWgyNTVWMEg1MQ0KCQkJQzIyLjk1LDAsMCwyMi45NSwwLDUxdjM1N2MwLDI4LjA1LDIyLjk1LDUxLDUxLDUxaDM1N2MyOC4wNSwwLDUxLTIyLjk1LDUxLTUxVjIwNGgtNTFWNDA4eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" style="height: 32px; width: 32px;"/>
                                     </div>
                                     <div class="col-10">
-                                    <input class="form-control" type="text" name="username"> 
+                                    <input class="form-control" placeholder="Username" type="text" name="username" required> 
+                                   
                                     </div>
                                 </div>
-                           
+                                <br>
                                 <div class="row ">
                                     <div class="col-2">
-                                    <img class=""  src="https://www.flaticon.com/svg/vstatic/svg/2897/2897785.svg?token=exp=1613059894~hmac=8983f971d5b4977c0f905e22829eebc6" style="height: 32px; width: 32px;"/>
+                                    <img class=""  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ1OXB4IiBoZWlnaHQ9IjQ1OXB4IiB2aWV3Qm94PSIwIDAgNDU5IDQ1OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDU5IDQ1OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGcgaWQ9ImNoZWNrLWJveC1vdXRsaW5lIj4NCgkJPHBhdGggZD0iTTEyNC45NSwxODEuMDVsLTM1LjcsMzUuN0wyMDQsMzMxLjVsMjU1LTI1NWwtMzUuNy0zNS43TDIwNCwyNjAuMUwxMjQuOTUsMTgxLjA1eiBNNDA4LDQwOEg1MVY1MWgyNTVWMEg1MQ0KCQkJQzIyLjk1LDAsMCwyMi45NSwwLDUxdjM1N2MwLDI4LjA1LDIyLjk1LDUxLDUxLDUxaDM1N2MyOC4wNSwwLDUxLTIyLjk1LDUxLTUxVjIwNGgtNTFWNDA4eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" style="height: 32px; width: 32px;"/>
                                     </div>
                                 <div class="col-10">
-                                <input class="form-control" type="text" name="password"> <br>
+                                <input class="form-control" placeholder="Password" type="password" name="password" required> <br>
+                                {% if validation == False %}
+                                    <div id="validationServer03Feedback" class="invalid-feedback d-flex justify-content-left">
+                                        กรุณาตรวจสอบEmail หรือ Password ให้ถูกต้อง
+                                      </div>
+                                    {% endif %}
                                 </div>
                                 </div>
-                               
+                                <br>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-6">
                                 <input id='btn-click' class="form-control" type="submit" name="Login" value="Login"> </input>
@@ -62,4 +87,4 @@
        
         
     </div>
-    {% endblock content %}
+</body>

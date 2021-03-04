@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<style>
+    #wbg {position: absolute;
+    width: 574px;
+    height: 592px;
+    left: 365px;
+    top: 70px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;} 
+
+    button[type="button"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        font-size: 17px;}
+</style>
+<br>
+<br>
+<div>
+  <div class="row">
+    <div class="col-3 d-flex justify-content-center">
+      &nbsp;
+    </div>
+    <div class="col-8 d-flex justify-content-right">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">รหัสสินค้า</th>
+            <th scope="col">ชื่อสินค้า</th>
+            <th scope="col">จำนวนในคลัง</th>
+            <th scope="col">จำนวนที่นับได้</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>24/1/2564</td>
+            <td>16:05</td>
+            <td>วรัญญา</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+</div>
+<a href="/checkemployee">
+  <button type="button" class="btn btn-warning" style="left: 50px;top: 650px;">ย้อนกลับ</button>
+</a>
+{% endblock %}

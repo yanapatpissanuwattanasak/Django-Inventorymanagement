@@ -1,6 +1,24 @@
-{% extends "header.html" %}
-{% block content %}
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Company</title>
+    <link rel="stylesheet"  href="{%  static  'css/mystyle.css'  %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>  
+
+</head>
+<body>
 <style>/*custom font*/
   @import url(https://fonts.googleapis.com/css?family=Montserrat);
   
@@ -203,7 +221,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-      <form id="msform" action="/" method="POST">
+      <form id="msform" action="create_account" method="POST">
         {% csrf_token %} 
           <!-- progressbar -->
           <ul id="progressbar">
@@ -217,13 +235,25 @@
               <h2 class="fs-title">Create your account</h2>
                <!--<h3 class="fs-subtitle">Tell us something more about you</h3>-->
                <h2 class="fs-subtitle d-flex justify-content-left" >Email</h2>
-              <input type="email" name="email" placeholder="Email"/>
-              <h2 class="fs-subtitle d-flex justify-content-left" >Username</h2>
-              <input type="text" name="username" placeholder="Username"/>
-              <h2 class="fs-subtitle d-flex justify-content-left" >Password</h2>
-              <input type="password" name="pass" placeholder=""/>
-              <h2 class="fs-subtitle d-flex justify-content-left" >Comfirm Password</h2>
-              <input type="password" name="com_pass" placeholder=""/>
+              <input class="form-control is-invalid" type="email" id="validationServer01" aria-describedby="validationServer01Feedback" name="email" placeholder="Email"  title="Enter Email" required/>
+              <div id="validationServer01Feedback" class="invalid-feedback d-flex justify-content-left">
+                *required
+              </div>
+              <h2 class="fs-subtitle d-flex justify-content-left" required>Username</h2>
+              <input class="form-control is-invalid" type="text" name="username" id="validationServer02" aria-describedby="validationServer02Feedback" placeholder="Username"/>
+              <div id="validationServer02Feedback" class="invalid-feedback d-flex justify-content-left">
+                *required
+              </div>
+              <h2 class="fs-subtitle d-flex justify-content-left" required>Password</h2>
+              <input class="form-control " type="password" name="pass" id="validationServer03" aria-describedby="validationServer03Feedback" placeholder=""/>
+              <div id="validationServer03Feedback" class="invalid-feedback d-flex justify-content-left">
+                *required
+              </div>
+              <h2 class="fs-subtitle d-flex justify-content-left" id="validationServer04" aria-describedby="validationServer04Feedback" required>Comfirm Password</h2>
+              <input class="form-control " type="password" name="com_pass" placeholder=""/>
+              <div id="validationServer04Feedback" class="invalid-feedback d-flex justify-content-left">
+                *required
+              </div>
               <input type="button" name="next" class="next action-button" value="Next"/>
           </fieldset>
           <fieldset>
@@ -234,7 +264,7 @@
               <h2 class="fs-subtitle d-flex justify-content-left" >หมายเลขบัตรประจำตัว</h2>
               <input type="text" name="id" placeholder="หมายเลขบัตรประจำตัว"/>
               <h2 class="fs-subtitle d-flex justify-content-left" >เบอร์โทรศพัพท์*</h2>
-              <input type="text" name="phone" placeholder="xxx-xxx-xxxx"/>
+              <input type="text" name="phone" placeholder=""/>
               <h2 class="fs-subtitle d-flex justify-content-left" >เเนบเอกสารยืนยัน(เองสารรับรองตัวตน)</h2>
               <input type="file" name="file" placeholder=""/>
               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
@@ -245,7 +275,7 @@
               <div class="row ">
                   <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >ชื่อร้าน</h2></div>
                   <div class="col-8 d-flex justify-content-left"> 
-                    <input type="text" name="email" placeholder=""/>
+                    <input type="text" name="shop" placeholder=""/>
                   </div>
               </div>
               <div class="row ">
@@ -392,4 +422,4 @@ $(".submit").click(function(){
   
 
 
-{% endblock content %}
+</body>

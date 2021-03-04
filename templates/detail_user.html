@@ -1,0 +1,58 @@
+{% extends 'header.html' %}
+
+{% block content %}
+    <style>
+        #bg{position: absolute;
+            width: 542px;
+            height: 400px;
+            left: 500px;
+            top: 170px;
+            background: #C4C4C4;
+            border: 10px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+        #code{
+            position: absolute;
+            width: 300px;
+            height: 100px;
+            left: 120px;
+            top: 200px;
+        }
+        input[type="submit"] {position: absolute;
+            width: 120px;
+            height: 50px;
+            border: 5px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            font-size: 17px;
+            left: 716px;
+            top: 540px;}
+    </style>
+    <h1 align="center">รายละเอียดผู้ใช้</h1>
+    <div align="center" id="bg" >
+        <div align="left" style="margin: 20px;">
+            <form action="/submit_user/{{user.username}}" method="POST">
+                {% csrf_token %}
+            <p style="font-size:200%;">&nbsp;Username: {{user.username}}</p>
+            <p style="font-size:200%;">&nbsp;ชื่อ-สกุล: {{user.fullname}}</p>
+            <p style="font-size:200%;">&nbsp;เลขประจำตัวประชาชน: {{user.identification}}</p>
+            <p style="font-size:200%;">&nbsp;E-mail: {{user.email}}</p>
+            <p style="font-size:200%;">&nbsp;เบอร์โทรศัพท์: {{user.phone}}</p>
+            <p style="font-size:200%;">&nbsp;เอกสารยืนยัน:</p>
+            <p style="font-size:200%;">&nbsp;rank:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="rank" value="{{user.rank}}" style="width: 250px; height: 30px;border-radius: 20px;"></p>
+            
+            <p style="font-size:200%;">&nbsp;รหัสร้านค้า:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="code" style="width: 250px; height: 30px;border-radius: 20px;"></p>
+            
+        </div>
+       <!--<div id="code"><input type="text"></div>-->
+    </div>
+    
+        <input type="submit" value="ยืนยัน" class="btn btn-warning" style="position: absolute; left: 600px; top: 600px; background-color:#2df006;">
+            </form>
+    <a href="/user_list">
+        <input type="submit" value="ปฏิเสธ" class="btn btn-warning" style="position: absolute; left: 820px; top: 600px; background-color:#ff4b44;">
+    </a>
+{% endblock %}

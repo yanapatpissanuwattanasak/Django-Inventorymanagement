@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div>
+    <style>
+        input[type=text]{
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            border: 1px solid #121213;
+            color: #050505;
+            padding-left: 10px;
+        }
+    
+        input[type=text]:focus {
+            outline: none;
+            border: 1px solid #030303;
+            color: #0b0c0c;
+        }
+    </style>
+    <h2 style="margin-left: 50px;">ให้เราช่วยอะไร</h2>
+    <h2 style="margin-left: 50px;">&nbsp;&nbsp;How can we help</h2>
+    <h5 style="margin-top: 85px;margin-left: -65px;">ติดต่อช่องทางอื่น</h5>
+    <div>
+        <div style="margin-top: 5px;margin-left: -70px;">
+            <img src="https://bit.ly/2NJGvhT" width="48" height="48" />
+            <p style="position: absolute; top: 275px;left: 105px;font-size: 135%;">Website :</p><br>
+            <img src="https://bit.ly/2Zze0pS" width="48" height="48" style="margin-top: 5px;"/>
+            <p style="position: absolute; top: 325px;left: 105px;font-size: 135%;">Line :</p><br>
+            <img src="https://bit.ly/3kdxR7l" width="48" height="48" style="margin-top: 10px;"/>
+            <p style="position: absolute; top: 385px;left: 105px;font-size: 135%;">Facebook :</p><br>
+            <img src="https://bit.ly/2ZybWhF" width="48" height="48" style="margin-top: 10px;"/>
+            <p style="position: absolute; top: 445px;left: 105px;font-size: 135%;">เบอร์โทร :</p><br>
+            <img src="https://bit.ly/37wHtVK" width="48" height="48" style="margin-top: 10px;"/>
+            <p style="position: absolute; top: 505px;left: 105px;font-size: 135%;">E-mail :</p><br>
+            <img src="https://bit.ly/3udydiW" width="48" height="48" style="margin-top: 10px;"/>
+            <p style="position: absolute; top: 560px;left: 105px;font-size: 135%;">เวลาทำการ : วันจันทร์ - วันศุกร์ เวลา 09.00 - 18.00 น.</p><br>
+        </div>
+    </div>
+    <form action="#" method="post">
+        {% csrf_token %}
+    <div class="row"></div>
+        <div class="col d-flex justify-content-left" style="position: absolute;top: 100px; left:900px">
+            <div>
+                <p>ชื่อ</p>
+                <input type="text" name="fname">
+                <p style="font-size: 80%;color: crimson;">*จำเป็น</p>
+            </div>
+            <div style="margin-left: 100px;">
+                <p>นามสกุล</p>
+                <input type="text" name="lname">
+                <p style="font-size: 80%;color: crimson;">*จำเป็น</p>
+            </div>
+        </div>
+    
+        <div style="margin-top: -400px;margin-left: 780px;">
+            <p>E-mail</p>
+            <input type="text" name="email" style="width: 485px;">
+            <p style="font-size: 80%;color: crimson;">*จำเป็น</p>
+            <p>หัวข้อ</p>
+            <input type="text" name="topic" style="width: 485px;">
+            <p style="margin-top: 20px;">รายละเอียด</p>
+            <input type="text" name="detail" style="width: 485px;height: 150px;"> 
+        </div>
+    </div>
+    <input type="submit" value="บันทึก" class="btn" style="background: rgb(236, 156, 35);margin-top: 10px;margin-left: 1200px;">
+    </form> 
+</div>
+
+{% endblock %}
