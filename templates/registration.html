@@ -21,7 +21,9 @@
 <body>
 <style>/*custom font*/
   @import url(https://fonts.googleapis.com/css?family=Montserrat);
-  
+  #input.invalid {
+  border-color: red;
+  }
   /*basic reset*/
   * {
       margin: 0;
@@ -221,7 +223,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-      <form id="msform" action="create_account" method="POST">
+      <form name ="register_form" id="msform" action="create_account" method="POST">
         {% csrf_token %} 
           <!-- progressbar -->
           <ul id="progressbar">
@@ -235,26 +237,34 @@
               <h2 class="fs-title">Create your account</h2>
                <!--<h3 class="fs-subtitle">Tell us something more about you</h3>-->
                <h2 class="fs-subtitle d-flex justify-content-left" >Email</h2>
-              <input class="form-control is-invalid" type="email" id="validationServer01" aria-describedby="validationServer01Feedback" name="email" placeholder="Email"  title="Enter Email" required/>
-              <div id="validationServer01Feedback" class="invalid-feedback d-flex justify-content-left">
-                *required
+              <input class="form-control " type="email" id="myemail"  name="email"  invalid placeholder="Email"  title="Enter Email" required/>
+              
+              <div id="emailInvalid" class="invalid-feedback d-flex justify-content-left">
+                
               </div>
-              <h2 class="fs-subtitle d-flex justify-content-left" required>Username</h2>
-              <input class="form-control is-invalid" type="text" name="username" id="validationServer02" aria-describedby="validationServer02Feedback" placeholder="Username"/>
-              <div id="validationServer02Feedback" class="invalid-feedback d-flex justify-content-left">
-                *required
+              <br>
+              <h2 class="fs-subtitle d-flex justify-content-left" >Username</h2>
+              <input class="form-control " type="text" name="username" id="username"  placeholder="Username" required/>
+              <div id="usernameInvalid" class="invalid-feedback d-flex justify-content-left">
+                
               </div>
-              <h2 class="fs-subtitle d-flex justify-content-left" required>Password</h2>
-              <input class="form-control " type="password" name="pass" id="validationServer03" aria-describedby="validationServer03Feedback" placeholder=""/>
-              <div id="validationServer03Feedback" class="invalid-feedback d-flex justify-content-left">
-                *required
+              <br>
+              
+              <h2 class="fs-subtitle d-flex justify-content-left" >Password</h2>
+              <input class="form-control " type="password" name="pass" id="password" minlength="8" placeholder="" required/>
+              <div id="passwordInvalid" class="invalid-feedback d-flex justify-content-left">
+                
               </div>
-              <h2 class="fs-subtitle d-flex justify-content-left" id="validationServer04" aria-describedby="validationServer04Feedback" required>Comfirm Password</h2>
-              <input class="form-control " type="password" name="com_pass" placeholder=""/>
-              <div id="validationServer04Feedback" class="invalid-feedback d-flex justify-content-left">
-                *required
+              <br>
+             
+              <h2 class="fs-subtitle d-flex justify-content-left" >Comfirm Password</h2>
+              <input class="form-control " type="password" name="com_pass"  id="password2" minlength="8" placeholder="" required/>
+              <div id="password2Invalid" class="invalid-feedback d-flex justify-content-left">
+                
               </div>
-              <input type="button" name="next" class="next action-button" value="Next"/>
+              <br>
+              
+              <input type="button" name="next" class="next action-button " value="Next"/>
           </fieldset>
           <fieldset>
               <h2 class="fs-title">Verifiy</h2>
@@ -327,7 +337,7 @@
               
               
               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input type="submit" name="submit" class=" action-button" value="Submit"/>
+              <input type="submit" name="submit" onclick="validate()" class=" action-button" value="Submit"/>
           </fieldset>
       </form>
       <!-- link to designify.me code snippets -->
@@ -336,6 +346,114 @@
   </div>
 </div>
 <script>
+
+
+
+
+const email = document.querySelector('#myemail');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const password2 = document.querySelector('#password2');
+
+email.addEventListener("input", () => {
+  email.setCustomValidity("");
+  email.checkValidity();
+  console.log(email.checkValidity());
+  if(email.checkValidity() == false) {
+    
+    document.getElementById("emailInvalid").innerHTML = "EmailInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("emailInvalid").innerHTML = "";
+  }
+  
+});
+
+username.addEventListener("input", () => {
+  username.setCustomValidity("");
+  username.checkValidity();
+  console.log(username.checkValidity());
+  if(username.checkValidity() == false) {
+    
+    document.getElementById("usernameInvalid").innerHTML = username.validationMessage /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("usernameInvalid").innerHTML = "";
+  }
+  
+});
+
+password.addEventListener("input", () => {
+  password.setCustomValidity("");
+  password.checkValidity();
+  console.log(password.checkValidity());
+  if(password.checkValidity() == false) {
+    
+    document.getElementById("passwordInvalid").innerHTML = password.validationMessage /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("passwordInvalid").innerHTML = "";
+  }
+  
+});
+
+password2.addEventListener("input", () => {
+  password2.setCustomValidity("");
+  password2.checkValidity();
+  console.log(password2.checkValidity());
+  if(password2.checkValidity() == false ) {
+    
+    document.getElementById("password2Invalid").innerHTML = password2.validationMessage /*email.validationMessage*/;
+  }
+  else if(document.getElementById("password2").value != document.getElementById("password").value){
+    document.getElementById("password2Invalid").innerHTML = "Password ไม่ตรงกัน" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("password2Invalid").innerHTML = "";
+  }
+  
+  
+});
+
+function validate(){
+
+const email = document.querySelector('#myemail');
+const username = document.querySelector('#username');
+const password = document.querySelector('#password');
+const password2 = document.querySelector('#password2');
+
+  if(email.checkValidity() == false) {
+    
+    document.getElementById("emailInvalid").innerHTML = "EmailInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("emailInvalid").innerHTML = "";
+  }
+  if(username.checkValidity() == false) {
+    
+    document.getElementById("usernameInvalid").innerHTML = username.validationMessage /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("usernameInvalid").innerHTML = "";
+  }
+  if(password.checkValidity() == false) {
+    
+    document.getElementById("passwordInvalid").innerHTML = password.validationMessage /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("passwordInvalid").innerHTML = "";
+  }
+  if(password2.checkValidity() == false) {
+    
+    document.getElementById("password2Invalid").innerHTML = password2.validationMessage /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("password2Invalid").innerHTML = "";
+  }
+
+}
+
+
   
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
