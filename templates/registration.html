@@ -239,10 +239,10 @@
                <h2 class="fs-subtitle d-flex justify-content-left" >Email</h2>
               <input class="form-control " type="email" id="myemail"  name="email"  invalid placeholder="Email"  title="Enter Email" required/>
               
-              <div id="emailInvalid" class="invalid-feedback d-flex justify-content-left">
+              <div id="emailInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
                 
-              </div>
-              <br>
+             
+              
               <h2 class="fs-subtitle d-flex justify-content-left" >Username</h2>
               <input class="form-control " type="text" name="username" id="username"  placeholder="Username" required/>
               <div id="usernameInvalid" class="invalid-feedback d-flex justify-content-left">
@@ -270,13 +270,20 @@
               <h2 class="fs-title">Verifiy</h2>
               <!-- <h3 class="fs-subtitle">Your presence on the social network</h3> -->
               <h2 class="fs-subtitle d-flex justify-content-left" >ชื่อ-นามสกุล</h2>
-              <input type="text" name="name" id="fullname" placeholder="ชื่อ-นามสกุล"/>
+              <input type="text" name="name" id="fullname" placeholder="ชื่อ-นามสกุล" required/>
+              <div id="fullnameInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
+
               <h2 class="fs-subtitle d-flex justify-content-left" >หมายเลขบัตรประจำตัว</h2>
-              <input type="text" name="id" id="id" placeholder="หมายเลขบัตรประจำตัว"/>
+              <input type="text" name="id" id="id" placeholder="หมายเลขบัตรประจำตัว" required/>
+              <div id="idInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
+
               <h2 class="fs-subtitle d-flex justify-content-left" >เบอร์โทรศพัพท์*</h2>
-              <input type="text" name="phone" id="phone" placeholder=""/>
+              <input type="text" name="phone" id="phone" placeholder="" required/>
+              <div id="phoneInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
+
               <h2 class="fs-subtitle d-flex justify-content-left" >เเนบเอกสารยืนยัน(เองสารรับรองตัวตน)</h2>
               <input type="file" name="file" id="" placeholder=""/>
+              
               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
               <input type="button" name="next" class="next action-button" value="Next"/>
           </fieldset>
@@ -285,49 +292,63 @@
               <div class="row ">
                   <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >ชื่อร้าน</h2></div>
                   <div class="col-8 d-flex justify-content-left"> 
-                    <input type="text" name="shop" id="shop" placeholder=""/>
+                    <input type="text" name="shop" id="shop" placeholder="" required />
+                    
                   </div>
               </div>
+              <div id="shopInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >บ้านเลขที่/หมู่ที่</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="house_number" id="house_number" placeholder=""/>
+                  <input type="text" name="house_number" id="house_number" placeholder="" required />
+                
                 </div>
               </div>
+              <div id="house_numberInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >ตำบล/เเขวง</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="t" id="t" placeholder=""/>
+                  <input type="text" name="t" id="t" placeholder="" required />
+                
                 </div>
               </div>
+              <div id="tInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >อำเภอ/เขต</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="o" id="o" placeholder=""/>
+                  <input type="text" name="o" id="o" placeholder="" required  />
+                  
                 </div>
               </div>
+              <div id="oInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >จังหวัด</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="j" id="j" placeholder=""/>
+                  <input type="text" name="j" id="j" placeholder="" required  />
+                 
                 </div>
               </div>
+              <div id="jInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >รหัสไปรษณี</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="number" name="post_id" id="post_id" placeholder=""/>
+                  <input type="number" name="post_id" id="post_id" placeholder="" required  />
+                
                 </div>
               </div>
+              <div id="post_idInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >เบอร์โทรติดต่อ</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="phone_id" id="phone_id" placeholder=""/>
+                  <input type="text" name="phone_id" id="phone_id" placeholder="" required  />
+                
                 </div>
               </div>
+              <div id="phone_idInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
               <div class="row ">
                 <div class="col-3 d-flex justify-content-left"> <h2 class="fs-subtitle " >เพิ่มเติม</h2></div>
                 <div class="col-8 d-flex justify-content-left"> 
-                  <input type="text" name="desc" id="desc" placeholder=""/>
+                  <input type="text" name="desc" id="desc" placeholder="" />
                 </div>
               </div>
              
@@ -364,7 +385,7 @@ const o = document.querySelector('#o');
 const j = document.querySelector('#j');
 const post_id = document.querySelector('#post_id');
 const phone_id = document.querySelector('#phone_id');
-const desc = document.querySelector('#desc');
+
 
 email.addEventListener("input", () => {
   email.setCustomValidity("");
@@ -426,6 +447,148 @@ password2.addEventListener("input", () => {
   
 });
 
+fullname.addEventListener("input", () => {
+  fullname.setCustomValidity("");
+  fullname.checkValidity();
+  console.log(fullname.checkValidity());
+  if(fullname.checkValidity() == false) {
+    
+    document.getElementById("fullnameInvalid").innerHTML = "fullnameInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("fullnameInvalid").innerHTML = "";
+  }
+  
+});
+
+id.addEventListener("input", () => {
+  id.setCustomValidity("");
+  id.checkValidity();
+  console.log(id.checkValidity());
+  if(id.checkValidity() == false) {
+    
+    document.getElementById("idInvalid").innerHTML = "idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("idInvalid").innerHTML = "";
+  }
+  
+});
+
+phone.addEventListener("input", () => {
+  phone.setCustomValidity("");
+  phone.checkValidity();
+  console.log(phone.checkValidity());
+  if(phone.checkValidity() == false) {
+    
+    document.getElementById("phoneInvalid").innerHTML = "phoneInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("phoneInvalid").innerHTML = "";
+  }
+  
+});
+
+shop.addEventListener("input", () => {
+  shop.setCustomValidity("");
+  shop.checkValidity();
+  console.log(shop.checkValidity());
+  if(shop.checkValidity() == false) {
+    
+    document.getElementById("shopInvalid").innerHTML = "shopInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("shopInvalid").innerHTML = "";
+  }
+  
+});
+
+house_number.addEventListener("input", () => {
+  house_number.setCustomValidity("");
+  house_number.checkValidity();
+  console.log(house_number.checkValidity());
+  if(house_number.checkValidity() == false) {
+    
+    document.getElementById("house_numberInvalid").innerHTML = "house_numberInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("house_numberInvalid").innerHTML = "";
+  }
+  
+});
+
+t.addEventListener("input", () => {
+  t.setCustomValidity("");
+  t.checkValidity();
+  console.log(t.checkValidity());
+  if(t.checkValidity() == false) {
+    
+    document.getElementById("tInvalid").innerHTML = "tInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("tInvalid").innerHTML = "";
+  }
+  
+});
+
+o.addEventListener("input", () => {
+  o.setCustomValidity("");
+  o.checkValidity();
+  console.log(o.checkValidity());
+  if(o.checkValidity() == false) {
+    
+    document.getElementById("oInvalid").innerHTML = "oInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("oInvalid").innerHTML = "";
+  }
+  
+});
+
+j.addEventListener("input", () => {
+  j.setCustomValidity("");
+  j.checkValidity();
+  console.log(j.checkValidity());
+  if(j.checkValidity() == false) {
+    
+    document.getElementById("jInvalid").innerHTML = "jInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("jInvalid").innerHTML = "";
+  }
+  
+});
+
+post_id.addEventListener("input", () => {
+  post_id.setCustomValidity("");
+  post_id.checkValidity();
+  console.log(post_id.checkValidity());
+  if(post_id.checkValidity() == false) {
+    
+    document.getElementById("post_idInvalid").innerHTML = "post_idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("post_idInvalid").innerHTML = "";
+  }
+  
+});
+
+phone_id.addEventListener("input", () => {
+  phone_id.setCustomValidity("");
+  phone_id.checkValidity();
+  console.log(phone_id.checkValidity());
+  if(phone_id.checkValidity() == false) {
+    
+    document.getElementById("phone_idInvalid").innerHTML = "phone_idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("phone_idInvalid").innerHTML = "";
+  }
+  
+});
+
+//#######################################################
+
 function validate(){
 
 const email = document.querySelector('#myemail');
@@ -460,6 +623,76 @@ const password2 = document.querySelector('#password2');
   }
   else{
     document.getElementById("password2Invalid").innerHTML = "";
+  }
+  if(fullname.checkValidity() == false) {
+    
+    document.getElementById("fullnameInvalid").innerHTML = "fullnameInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("fullnameInvalid").innerHTML = "";
+  }
+  if(id.checkValidity() == false) {
+    
+    document.getElementById("idInvalid").innerHTML = "idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("idInvalid").innerHTML = "";
+  }
+  if(phone.checkValidity() == false) {
+    
+    document.getElementById("phoneInvalid").innerHTML = "phoneInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("phoneInvalid").innerHTML = "";
+  }
+  if(shop.checkValidity() == false) {
+    
+    document.getElementById("shopInvalid").innerHTML = "shopInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("shopInvalid").innerHTML = "";
+  }
+  if(house_number.checkValidity() == false) {
+    
+    document.getElementById("house_numberInvalid").innerHTML = "house_numberInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("house_numberInvalid").innerHTML = "";
+  }
+  if(t.checkValidity() == false) {
+    
+    document.getElementById("tInvalid").innerHTML = "tInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("tInvalid").innerHTML = "";
+  }
+  if(o.checkValidity() == false) {
+    
+    document.getElementById("oInvalid").innerHTML = "oInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("oInvalid").innerHTML = "";
+  }
+  if(j.checkValidity() == false) {
+    
+    document.getElementById("jInvalid").innerHTML = "jInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("jInvalid").innerHTML = "";
+  }
+  if(post_id.checkValidity() == false) {
+    
+    document.getElementById("post_idInvalid").innerHTML = "post_idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("post_idInvalid").innerHTML = "";
+  }
+  if(phone_id.checkValidity() == false) {
+    
+    document.getElementById("phone_idInvalid").innerHTML = "phone_idInvalid" /*email.validationMessage*/;
+  }
+  else{
+    document.getElementById("phone_idInvalid").innerHTML = "";
   }
 
 }
