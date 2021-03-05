@@ -13,6 +13,52 @@ from django.db import connection
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
 
+def shelf(request):
+    return render(request, 'shelf.html')
+
+def c_d_shelf(request):
+    return render(request, 'create_delete_shelf.html')
+
+def c_shelf(request):
+    return render(request, 'create_shelf.html')
+
+def d_shelf(request):
+    data = Shelf.objects.all()
+    return render(request, 'delete_shelf.html',{'shelf':data})
+
+def addShelf(request):
+    if request.method == 'POST':
+        if request.POST.get('code1_4') and request.POST.get('code5_6') and request.POST.get('code7_9') and request.POST.get('value'):
+            shelf = Shelf()
+            shelf.code1_4 = request.POST.get('code1_4')
+            shelf.code5_6 = request.POST.get('code5_6')
+            shelf.code7_9 = request.POST.get('code7_9')
+            shelf.value = request.POST.get('value')
+            A = shelf.code1_4 + shelf.code5_6 + shelf.code7_9
+            shelf.code = A
+            shelf.save()
+
+            return render(request, 'create_delete_shelf.html')
+        else:
+            return render(request, 'create_delete_shelf.html')
+    else:
+        return render(request, 'create_delete_shelf.html')
+
+
+def deleteshelf(request,code):
+    a = Shelf.objects.get(code=code)
+    a.delete()
+    return redirect('/cdshelf')
+
+def show_zone(request):
+    return render(request, 'show_zone.html')
+
+def select_id_shelf(request):
+    return render(request, 'select_id_shelf.html')
+
+def history_move(request):
+    return render(request, 'history_move.html')
+
 def login(request,validation = True):
    
     if(localStorage.getItem("user") is not None):

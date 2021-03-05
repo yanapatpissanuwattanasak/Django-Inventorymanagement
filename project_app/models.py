@@ -58,3 +58,10 @@ class Product_output(models.Model):
     product_quantity = models.PositiveIntegerField()
     date_output = models.DateField()
 
+class Shelf(models.Model):
+    code1_4 = models.CharField(max_length=4)
+    code5_6 = models.CharField(max_length=2)
+    code7_9 = models.CharField(max_length=3)
+    code = models.TextField(max_length=50, blank=True)
+    value = models.IntegerField()
+    valueremain = models.IntegerField(default=0)

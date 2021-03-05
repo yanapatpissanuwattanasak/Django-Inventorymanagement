@@ -1,0 +1,40 @@
+{% extends 'header.html' %}
+{% block content %}
+    <style>
+    #rectangle1{
+        position: absolute;
+        width: 950px;
+        height: 525px;
+        left: 280px;
+        top: 110px;
+
+        background: #FFFFFF;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        border-radius: 50px;
+    }
+    </style>
+    <h1 align="center" style="position: absolute;width: 250px;height: 35px;left: 644px;top: 140px;">ลบ Shelf</h1>
+    <div style="position: absolute;width: 810px;height: 0px;left: 350px;top: 210px;border: 0.5px solid rgba(0, 0, 0, 5);"></div>
+    <table class="table table-bordered" style="position: absolute;width: 412px;height: 324px;left: 560px;top: 260px;border: 2px solid #000000;">
+      <thead>
+        <tr align="center">
+          <th scope="col" style="font-size: 15px;">Location code</th>
+          <th scope="col" style="font-size: 15px;">ลบ</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for s in shelf %}
+        <tr align="center">
+          <th scope="row" style="font-size: 15px;">{{ s.code1_4 }}-{{ s.code5_6 }}-{{ s.code7_9 }}</th>
+          <td>
+              <a href="/deleteshelf/{{ s.code }}">
+                  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0UwMjMwRDsiIHBvaW50cz0iNTEyLDkwLjMyNiAzNDYuMzI2LDI1NiA1MTIsNDIxLjY3NCA0OTAuMTUsNDQzLjUzNCAyMDkuODk5LDI1NiA0OTAuMTUsNjguNDc2ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGNTQ0MDsiIHBvaW50cz0iNDkwLjE1LDY4LjQ3NiAzMDIuNjE2LDI1NiA0OTAuMTUsNDQzLjUzNCA0MjEuNjc0LDUxMiAyNTYsMzQ2LjMyNiA5MC4zMjYsNTEyIDAsNDIxLjY3NCANCgkxNjUuNjc0LDI1NiAwLDkwLjMyNiA5MC4zMjYsMCAyNTYsMTY1LjY3NCA0MjEuNjc0LDAgIi8+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="
+                        style="height: 26px;width: 25px;left: 1240px;top: 250px;border-radius: 0px;"/>
+              </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'header.html' %}
+{% block content %}
+    <style>
+     #rectangle1{
+        position: absolute;
+        width: 950px;
+        height: 320px;
+        left: 280px;
+        top: 181px;
+        background: rgba(196, 196, 196, 0.35);
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+        border-radius: 50px;
+     }
+     </style>
+    <div id="rectangle1"></div>
+    <form action="addShelf" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="" style="position: absolute;width: 231px;height: 35px;left: 380px;top: 250px;font-size: 20px;line-height: 35px;">ระบุ location code</label>
+            <label for="" style="position: absolute;width: 231px;height: 35px;left: 802px;top: 250px;font-size: 20px;line-height: 35px;">-</label>
+            <label for="" style="position: absolute;width: 231px;height: 35px;left: 710px;top: 250px;font-size: 20px;line-height: 35px;">-</label>
+            <input type="text" class="form-control" name="code1_4" style="position: absolute;width: 123px;height: 34px;left: 578px;top: 254px;
+                    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), #FFFFFF;
+                    border: 1px solid #000000;
+                    box-sizing: border-box;
+                    border-radius: 20px;">
+            <input type="text" class="form-control" name="code5_6" style="position: absolute;width: 68px;height: 34px;left: 726px;top: 254px;
+                    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), #FFFFFF;
+                    border: 1px solid #000000;
+                    box-sizing: border-box;
+                    border-radius: 20px;">
+            <input type="text" class="form-control" name="code7_9" style="position: absolute;width: 107px;height: 34px;left: 818px;top: 254px;
+                    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), #FFFFFF;
+                    border: 1px solid #000000;
+                    box-sizing: border-box;
+                    border-radius: 20px;">
+            <label for="" style="position: absolute;width: 182px;height: 35px;left: 390px;top: 350px;font-size: 20px;line-height: 35px;">ปริมาณที่เก็บได้</label>
+            <input type="text" class="form-control" name="value" style="position: absolute;width: 123px;height: 34px;left: 578px;top: 354px;
+                    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), #FFFFFF;
+                    border: 1px solid #000000;
+                    box-sizing: border-box;
+                    border-radius: 20px;">
+        </div>
+        <input type="submit"value="สร้าง Shelf" style="position: absolute;width: 250px;height: 80px;left: 630px;top: 570px;
+                    background: #FFB800;border: 4px solid #000000;box-sizing: border-box;border-radius: 20px;font-size: 30px;line-height: 41px;">
+    <a>
+        <div>
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGNpcmNsZSBzdHlsZT0iZmlsbDojRjk0NjE2OyIgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjU2Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojREIyQzA5OyIgZD0iTTUxMiwyNTZjMC0xOC41NzctMS45OTctMzYuNjg2LTUuNzU1LTU0LjEzOUwzOTQsODkuNjE2TDExOC45MDUsNDA0Ljk4OGwxMDUuMDE2LDEwNS4wMTYNCglDMjM0LjQzLDUxMS4zMTcsMjQ1LjEzNSw1MTIsMjU2LDUxMkMzOTcuMzg1LDUxMiw1MTIsMzk3LjM4NSw1MTIsMjU2eiIvPg0KPHJlY3QgeD0iMTQ3IiB5PSI4OS42MiIgc3R5bGU9ImZpbGw6I0ZFQzAwNzsiIHdpZHRoPSIyNDciIGhlaWdodD0iMjk5Ii8+DQo8cmVjdCB4PSIyNTYuNTUiIHk9Ijg5LjYyIiBzdHlsZT0iZmlsbDojRkVCMjAwOyIgd2lkdGg9IjEzNy40NSIgaGVpZ2h0PSIyOTkiLz4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6I0ZFRDQ0RjsiIGN4PSIyNzgiIGN5PSIyMTkuNjIiIHI9Ijg3LjUiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNGRUQ2NDA7IiBkPSJNMjc4LDEzMi4xMTZjLTAuMDA4LDAtMC4wMTYsMC0wLjAyNCwwdjE3NC45OTljMC4wMDgsMCwwLjAxNiwwLDAuMDI0LDANCgljNDguMzI1LDAsODcuNS0zOS4xNzUsODcuNS04Ny41QzM2NS41LDE3MS4yOTEsMzI2LjMyNSwxMzIuMTE2LDI3OCwxMzIuMTE2eiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6I0ZFOUYwMDsiIGQ9Ik0xMTMuNSwzODguNjE2SDE3MXYtMjk5aC0yNy4xNzVjLTE2LjY1OSwwLTMwLjE2NiwxMy41LTMwLjE3NSwzMC4xNThMMTEzLjUsMzg4LjYxNnoiLz4NCjxjaXJjbGUgc3R5bGU9ImZpbGw6IzMwM0Y5RTsiIGN4PSIyNzgiIGN5PSIxNzMuODUiIHI9IjE5Ljk5OSIvPg0KPHBhdGggc3R5bGU9ImZpbGw6IzI4MzU5MjsiIGQ9Ik0yNzgsMTUzLjg1NGMtMC4wMDgsMC0wLjAxNiwwLjAwMS0wLjAyNCwwLjAwMXYzOS45OTVjMC4wMDgsMCwwLjAxNiwwLjAwMSwwLjAyNCwwLjAwMQ0KCWMxMS4wNDUsMCwxOS45OTktOC45NTQsMTkuOTk5LTE5Ljk5OUMyOTcuOTk5LDE2Mi44MDgsMjg5LjA0NSwxNTMuODU0LDI3OCwxNTMuODU0eiIvPg0KPHJlY3QgeD0iMjYyLjEzIiB5PSIyMDEuNzkiIHN0eWxlPSJmaWxsOiMzMDNGOUU7IiB3aWR0aD0iMzEuNzQ0IiBoZWlnaHQ9IjgzLjU5Ii8+DQo8cmVjdCB4PSIyNzcuOTgiIHk9IjIwMS43OSIgc3R5bGU9ImZpbGw6IzI4MzU5MjsiIHdpZHRoPSIxNS44OTYiIGhlaWdodD0iODMuNTkiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNGRUY1RTA7IiBkPSJNMTQxLDQxNi4xMTZoMjUzdi01NUgxNDFjLTE1LjE4OCwwLTI3LjUsMTIuMzEyLTI3LjUsMjcuNWwwLDANCglDMTEzLjUsNDAzLjgwNCwxMjUuODEyLDQxNi4xMTYsMTQxLDQxNi4xMTZ6Ii8+DQo8cmVjdCB4PSIyNTYuNTUiIHk9IjM2MS4xMiIgc3R5bGU9ImZpbGw6I0ZFREZCMTsiIHdpZHRoPSIxMzcuNDUiIGhlaWdodD0iNTUiLz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K"
+                style="position: absolute;width: 100px;height: 100px;left: 1400px;top: 600px;"/>
+        </div>
+    </a>
+{% endblock %}
