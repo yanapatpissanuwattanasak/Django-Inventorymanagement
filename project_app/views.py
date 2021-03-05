@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -63,7 +63,7 @@ def submit_user(request,user_id) :
 def output_product(request):
     if(localStorage.getItem("user") is not None):
         cursor = connection.cursor()
-        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product_output.product_quantity,project_app_product.product_selling,project_app_product.product_selling*project_app_product_output.product_quantity,project_app_product_output.date_output from project_app_product join project_app_product_output on project_app_product.product_code = project_app_product_output.product_code')
+        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product_output.product_quantity,project_app_product.product_selling,project_app_product_output.id,project_app_product.product_selling*project_app_product_output.product_quantity,project_app_product_output.date_output from project_app_product join project_app_product_output on project_app_product.product_code = project_app_product_output.product_code')
         results = cursor.fetchall()
         return render(request,'history_output.html',{'name' :localStorage.getItem("user"),'tables':results})
     else :
@@ -75,6 +75,7 @@ def sale_output_owner(request,validation = True):
             product_code = request.POST['code1']
             product_quantity = request.POST['quantity']
             date_output = request.POST['date_output']
+            print("EiEI")
             product_output = Product_output()
             product = Product.objects.get(product_code = product_code)
             product.product_balance -= int(product_quantity)
@@ -166,16 +167,16 @@ def input(request,validation = True):
             else :
                 return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : False})
     else :
-        return redirect('/input')
+        return redirect('/login')
 
 def import_product(request):
     if(localStorage.getItem("user") is not None):
         cursor = connection.cursor()
-        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_input.history_balance,project_app_product.product_cost,project_app_history_input.history_total,project_app_history_input.history_date from project_app_product join project_app_history_input on project_app_product.product_code = project_app_history_input.history_product_code')
+        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_input.history_balance,project_app_product.product_cost,project_app_history_input.id,project_app_history_input.history_total,project_app_history_input.history_date from project_app_product join project_app_history_input on project_app_product.product_code = project_app_history_input.history_product_code')
         results = cursor.fetchall()
         return render(request,'history_import.html',{'name' :localStorage.getItem("user"),'tables':results})
     else :
-        return redirect('/input')
+        return redirect('/login')
 
 
 def checkstock(request):

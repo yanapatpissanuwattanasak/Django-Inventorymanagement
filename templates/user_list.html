@@ -131,7 +131,7 @@
                 <td><a href="/detail_user/{{user.username}}">{{user.username}}</a></td>
                 <td>{{user.fullname}}</td>
                 <td>{{user.email}}</td>
-                {%if user.rank == 3 %}
+                {%if user.rank == "" %}
                   <td style="background-color:#929292"></td>
                 {%else%}
                   <td style="background-color:#06e97f"></td>
