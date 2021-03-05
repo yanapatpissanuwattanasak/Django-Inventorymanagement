@@ -7,11 +7,11 @@ class Tables(models.Model):
 
 class Personal(models.Model):
     username = models.CharField(max_length=50)
-    rank = models.IntegerField()
+    rank = models.CharField(max_length=50)
     email    = models.EmailField()
     fullname    = models.TextField()
     identification = models.CharField(max_length=30)
-    phone = models.IntegerField()
+    phone = models.TextField()
     shop_name = models.CharField(max_length=50)
     address_id = models.CharField(max_length=50)
     address_t = models.CharField(max_length=50)

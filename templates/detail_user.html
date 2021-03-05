@@ -42,9 +42,18 @@
             <p style="font-size:200%;">&nbsp;E-mail: {{user.email}}</p>
             <p style="font-size:200%;">&nbsp;เบอร์โทรศัพท์: {{user.phone}}</p>
             <p style="font-size:200%;">&nbsp;เอกสารยืนยัน:</p>
-            <p style="font-size:200%;">&nbsp;rank:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="rank" value="{{user.rank}}" style="width: 250px; height: 30px;border-radius: 20px;"></p>
+            <div class="row d-flex">
+            <p class="col" style="font-size:200%;">&nbsp;Rank : </p>
+            <p class="col" style="font-size:170%;">&nbsp;Admin </p>
+            <input class="col" name = "admin" type="checkbox" id="admin">
+            <p class="col" style="font-size:170%;">&nbsp;Owner </p>
+            <input class="col" name = "owner" type="checkbox" id="owner">
+            <p class="col" style="font-size:170%;">&nbsp;Employee </p>
+            <input class="col" name = "employee" type="checkbox" id="employee">
+            </div>
+           
             
-            <p style="font-size:200%;">&nbsp;รหัสร้านค้า:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="code" style="width: 250px; height: 30px;border-radius: 20px;"></p>
+           
             
         </div>
        <!--<div id="code"><input type="text"></div>-->
@@ -55,4 +64,39 @@
     <a href="/user_list">
         <input type="submit" value="ปฏิเสธ" class="btn btn-warning" style="position: absolute; left: 820px; top: 600px; background-color:#ff4b44;">
     </a>
+
+<script> 
+
+    const admin = document.querySelector('#admin');
+    const owner = document.querySelector('#owner');
+    const employee = document.querySelector('#employee');
+    admin.addEventListener("input", () => {
+    if(admin.checked == true) {
+        document.getElementById("owner").checked = false /*email.validationMessage*/;
+        document.getElementById("employee").checked = false /*email.validationMessage*/;
+    }
+    
+  
+    });
+
+    owner.addEventListener("input", () => {
+    if(owner.checked == true) {
+        document.getElementById("admin").checked = false /*email.validationMessage*/;
+        document.getElementById("employee").checked = false /*email.validationMessage*/;
+    }
+    
+  
+    });
+
+    employee.addEventListener("input", () => {
+    if(employee.checked == true) {
+        document.getElementById("owner").checked = false /*email.validationMessage*/;
+        document.getElementById("admin").checked = false /*email.validationMessage*/;
+    }
+    
+  
+    });
+    
+    
+</script>
 {% endblock %}

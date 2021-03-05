@@ -26,7 +26,7 @@ def login(request,validation = True):
         print(username,password)
         person = Personal.objects.get(username = username)
         print(person)
-        if(person.rank == 3) :
+        if(person.rank is None) :
                 return render(request,'login.html',{'validation':False})
         user = authenticate(username=username, password=password)
         print()
@@ -42,9 +42,22 @@ def logout(request):
     return redirect('/login')
 
 def submit_user(request,user_id) :
-    rank = request.POST['rank']
     p = Personal.objects.get(username = user_id)
-    p.rank = rank 
+    
+    try :
+        if request.POST['employee'] == "on":
+            p.rank = "employee"
+    except: pass
+    try :
+        if request.POST['owner'] == "on" :
+            p.rank = "owner"
+    except: pass
+    try :
+        if request.POST['admin'] == "on" :
+            p.rank = "admin"
+    except: pass
+    
+    
     p.save()
     return redirect('/user_list')
 def output_product(request):
@@ -125,11 +138,13 @@ def detail_user(request,user_id):
         return redirect('/login')
 
 def input(request,validation = True):
+    check = True
     if(localStorage.getItem("user") is not None):
         try:
             product_code = request.POST['code']
             product_balance = request.POST['balance']
             today = date.today()
+            check = False
             product = Product.objects.get(product_code = product_code)
             product.product_balance += int(product_balance)
             history = History_input()
@@ -146,7 +161,10 @@ def input(request,validation = True):
             return redirect('/import_product')
 
         except :
-            return render(request,'input.html',{'name' :localStorage.getItem("user")})
+            if(check) :
+                return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : True})
+            else :
+                return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : False})
     else :
         return redirect('/input')
 
@@ -230,7 +248,7 @@ def open_history(request,):
 
 def user_list(request):
     if(localStorage.getItem("user") is not None):
-        list_user = Personal.objects.all().filter(rank = 3)
+        list_user = Personal.objects.all().filter(rank = "")
         return render(request,'user_list.html',{'name' :localStorage.getItem("user"),'list_user':list_user})
     else :
         
