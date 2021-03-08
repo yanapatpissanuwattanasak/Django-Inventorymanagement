@@ -393,7 +393,7 @@ email.addEventListener("input", () => {
   console.log(email.checkValidity());
   if(email.checkValidity() == false) {
     
-    document.getElementById("emailInvalid").innerHTML = "EmailInvalid" /*email.validationMessage*/;
+    document.getElementById("emailInvalid").innerHTML = email.validationMessage;
   }
   else{
     document.getElementById("emailInvalid").innerHTML = "";
@@ -407,7 +407,7 @@ username.addEventListener("input", () => {
   console.log(username.checkValidity());
   if(username.checkValidity() == false) {
     
-    document.getElementById("usernameInvalid").innerHTML = username.validationMessage /*email.validationMessage*/;
+    document.getElementById("usernameInvalid").innerHTML = username.validationMessage;
   }
   else{
     document.getElementById("usernameInvalid").innerHTML = "";
@@ -421,7 +421,7 @@ password.addEventListener("input", () => {
   console.log(password.checkValidity());
   if(password.checkValidity() == false) {
     
-    document.getElementById("passwordInvalid").innerHTML = password.validationMessage /*email.validationMessage*/;
+    document.getElementById("passwordInvalid").innerHTML = password.validationMessage;
   }
   else{
     document.getElementById("passwordInvalid").innerHTML = "";

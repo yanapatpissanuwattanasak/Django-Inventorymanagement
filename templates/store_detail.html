@@ -1,0 +1,87 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<style>
+    #ybg {position: absolute;
+    width: 536px;
+    height: 570px;
+    left: 705px;
+    top: 130px;
+    background: #F8EAB9;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;}
+
+    input.largerCheckbox {
+        width: 25px;
+        height: 25px;
+    }
+    #wbg {width: 458px;
+    height: 180px;
+    left: 739px;
+    top: 746px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;}
+    button[type="button"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        font-size: 17px;}
+    div.bt{
+        position: absolute;
+        left: 80px;
+        top: 600px;
+
+    }
+</style>
+<div id = "ybg">
+    <font size=5>
+    <div style = "margin: 50px">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">รหัสสินค้า : {{product.product_code}}</div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">ชื่อสินค้า :  {{product.product_name}}</div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">ประเภทสินค้า : {{product.product_type}}</div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-2 d-flex justify-content-center">Size:</div>
+        
+        <div class="col-3 d-flex justify-content-left">{{product.product_size}}</div>
+    </div>
+    <div class="row">
+        <div class="col-5 d-flex justify-content-left">กลุ่มสินค้า : A</div>
+        <div class="col-7 d-flex justify-content-left">ระยะเวลาจัดส่ง : {{product.product_send_time}} วัน</div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">ราคาต้นทุน : {{product.product_cost}} </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">ราคาต้นขาย : {{product.product_selling}}</div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left">คำอธิบาย : </div>
+    </div>
+    <div id = "wbg">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-left" style = "margin: 10px">{{product.product_desc}}</div>
+        </div>
+    </div>
+    </div>
+    </font>
+</div>
+<a href="/">
+    <button type="button" class="btn btn-warning" style="left: 80px;top: 600px;">ย้อนกลับ</button>
+</a>
+{% endblock %}

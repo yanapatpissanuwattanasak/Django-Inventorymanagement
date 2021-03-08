@@ -1,0 +1,132 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<div >
+    <style>
+
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width:auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+
+        #wbg {position: absolute;
+            width: 574px;
+            height: 450px;
+            left: 500px;
+            top: 130px;
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 20px;}
+
+        input[type="submit"] {position: absolute;
+            width: 120px;
+            height: 50px;
+            background: #FFB800;
+            border: 5px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            font-size: 17px;
+            left: 716px;
+            top: 540px;}
+        
+        button[type="button"] {position: absolute;
+            width: 140px;
+            height: 50px;
+            background: #FFB800;
+            border: 5px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            font-size: 17px;}
+    </style>
+    
+  
+    {% if validate == False %}
+    
+      
+    {%endif%}
+    
+    <div id="wbg"><h2 align="center" style="margin: 50px;">คำร้องเพิ่มจำนวนสินค้า</h2>
+        <form action="input" method="POST">
+            {% csrf_token %} 
+        <div style="margin-left: 100px;margin-top: 50px;">
+            
+            <p style="">รหัสสินค้า</p>
+            <input type="text" name="code" placeholder="code" id="code" style="width: 350px; height: 30px;" required>
+            <div id="codeInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
+            <p>จำนวน</p>
+            <input type="number" name="balance" placeholder="amount" id="amount" style="width: 350px; height: 30px;" required/>
+            <div id="amountInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
+            
+        </div>
+        <div>
+            <input type="submit" value="บันทึก" class="btn btn-warning"  style="position: absolute; left: 260px; top: 350px;">
+            <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PHBhdGggZD0ibTQ5NSAxNDR2MzM4YzAgMTYuNTQtMTMuNDYgMzAtMzAgMzBoLTQxOGMtMTYuNTQgMC0zMC0xMy40Ni0zMC0zMHYtNDUyYzAtMTYuNTQgMTMuNDYtMzAgMzAtMzBoOThjMzguNyAxNy4zMiA3Ny4xOSAyMy43MSAxMTEgMjQuNjUgNjMuODggMS43OSAxMTEtMTUuODQgMTExLTE1Ljg0bDEyMy42NSAxMjQuNjJjMi43OSAyLjgxIDQuMzUgNi42MSA0LjM1IDEwLjU3eiIgZmlsbD0iIzRkNTc4OCIvPjxwYXRoIGQ9Im00OTUgMTQ0djMzOGMwIDE2LjU0LTEzLjQ2IDMwLTMwIDMwaC0yMDl2LTQ4Ny4zNWM2My44OCAxLjc5IDExMS0xNS44NCAxMTEtMTUuODRsMTIzLjY1IDEyNC42MmMyLjc5IDIuODEgNC4zNSA2LjYxIDQuMzUgMTAuNTd6IiBmaWxsPSIjMzEzYTZiIi8+PHBhdGggZD0ibTM2NyA4LjgxdjE1MS4xOWMwIDguMjgtNi43MiAxNS0xNSAxNWgtMTkyYy04LjI4IDAtMTUtNi43Mi0xNS0xNXYtMTYwaDIwN2M0IDAgNy44MyAxLjYgMTAuNjUgNC40M3oiIGZpbGw9IiNmM2Q2NTIiLz48cGF0aCBkPSJtMzY3IDguODF2MTUxLjE5YzAgOC4yOC02LjcyIDE1LTE1IDE1aC05NnYtMTc1aDk2YzQgMCA3LjgzIDEuNiAxMC42NSA0LjQzeiIgZmlsbD0iI2U5YmMzZSIvPjxwYXRoIGQ9Im0zMDMgMHY5NmMwIDguMjgtNi43MiAxNS0xNSAxNXMtMTUtNi43Mi0xNS0xNXYtOTZ6IiBmaWxsPSIjZGM0NTViIi8+PHBhdGggZD0ibTQzMSAyNTZ2MTc2YzAgOC4yOC02LjcyIDE1LTE1IDE1aC0zMjBjLTguMjggMC0xNS02LjcyLTE1LTE1di0xNzZjMC04LjI4IDYuNzItMTUgMTUtMTVoMzIwYzguMjggMCAxNSA2LjcyIDE1IDE1eiIgZmlsbD0iI2RmZTVmMiIvPjxwYXRoIGQ9Im00MzEgMjU2djE3NmMwIDguMjgtNi43MiAxNS0xNSAxNWgtMTYwdi0yMDZoMTYwYzguMjggMCAxNSA2LjcyIDE1IDE1eiIgZmlsbD0iI2M3Y2RkZSIvPjxwYXRoIGQ9Im0yMDggMzM1aC00OGMtOC4yODQgMC0xNS02LjcxNi0xNS0xNXM2LjcxNi0xNSAxNS0xNWg0OGM4LjI4NCAwIDE1IDYuNzE2IDE1IDE1cy02LjcxNiAxNS0xNSAxNXoiIGZpbGw9IiMzMTNhNmIiLz48L2c+PC9zdmc+" 
+            style="position: absolute;
+            height: 70px;
+            width: 65.3515625px;
+            left: 230px;
+            top: 340px;
+            border-radius: 0px;">
+        </div>
+    </form>
+        <!--<div class="row">
+        <div class="col-6 d-flex justify-content-left"><a href="#">แก้ไขสินค้า</a></div>
+        <div class="col-6 d-flex justify-content-left" align="right"><a href="#">เพิ่มสินค้าใหม่</a></div>
+        </div> --> 
+
+    </div>
+    <div>
+        <a href="#">
+            <button type="button" class="btn btn-warning" style="top: 640px;left: 1360px;">ย้อนกลับ</button>
+        </a>
+    </div>
+</div>
+<script> 
+
+
+
+
+
+
+function start(){
+    alert("StackOverflow.com must help me!");
+}
+const code = document.querySelector('#code');
+const amount = document.querySelector('#amount');
+code.addEventListener("input", () => {
+code.setCustomValidity("");
+code.checkValidity();
+console.log(code.checkValidity());
+if(code.checkValidity() == false) {
+    
+    document.getElementById("codeInvalid").innerHTML = code.validationMessage;
+}
+else{
+    document.getElementById("codeInvalid").innerHTML = "";
+}
+  
+});
+
+amount.addEventListener("input", () => {
+amount.setCustomValidity("");
+amount.checkValidity();
+console.log(amount.checkValidity());
+if(amount.checkValidity() == false) {
+    
+    document.getElementById("amountInvalid").innerHTML = amount.validationMessage;
+}
+else{
+    document.getElementById("amountInvalid").innerHTML = "";
+}
+  
+});
+</script>
+{% endblock%}

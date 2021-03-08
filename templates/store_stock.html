@@ -69,7 +69,6 @@
         <th scope="col">ราคาต้นทุน</th>
         <th scope="col">ราคาขาย</th>
         <th scope="col">ไซด์</th>
-        <th scope="col">เชลฟ์</th>
         <th scope="col">จำนวน</th>
         <th scope="col">สถานะ</th>
         <th scope="col"> </th>
@@ -104,7 +103,44 @@
   </table>
   <br>
   <br>
-  
+  <table class="table table-bordered ">
+    <thead class="text-center">
+      <tr >
+        <th scope="col ">Number</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+     
+      
+        {% for list in lists %}
+        
+         
+        
+        
+        
+     
+      <tr>
+        
+        <td>{{forloop.counter}}</td>
+        <td>{{list.name}}</td>
+        <td>{{list.desc}}</td>
+        <td><a href="update/{{list.id}}"><button class="btn-success"> Update </button></a></td>
+        <td><a href="delete/{{list.id}}"><button class="btn-danger"> Delete </button></a></td>
+      </tr>
+      
+      {% endfor %}
+     
+     
+      
+      
+      
+    </tbody>
+  </table>
   
     
     

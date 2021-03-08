@@ -65,6 +65,14 @@ urlpatterns = [
     path('historymove/',views.history_move),
     path('select_id_shelf/',views.select_id_shelf),
     path('deleteshelf/<str:code>',views.deleteshelf),
+    path('cancleImport/<int:id>',views.cancleImport),
+    path('store_stock',views.store_stock),
+    path('store_receiving',views.store_receiving),
+    path('store_preorder',views.store_preorder),
+    path('store_detail',views.store_detail),
+    path('store_analysis',views.store_analysis),
+    path('check_detail',views.check_detail),
+    path('analysis',views.analysis),
 
 
 ]

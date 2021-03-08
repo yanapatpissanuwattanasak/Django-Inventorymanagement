@@ -13,6 +13,27 @@ from django.db import connection
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
 
+def store_stock(request):
+    return render(request, 'store_stock.html')
+
+def store_detail(request):
+    return render(request, 'store_detail.html')
+
+def store_receiving(request):
+    return render(request, 'store_receiving.html')
+
+def store_preorder(request):
+    return render(request, 'store_preorder.html')
+
+def store_analysis(request):
+    return render(request, 'store_analysis.html')
+
+def analysis(request):
+    return render(request, 'analysis.html')
+
+def check_detail(request):
+    return render(request, 'check_detail.html')
+
 def shelf(request):
     return render(request, 'shelf.html')
 
@@ -58,6 +79,15 @@ def select_id_shelf(request):
 
 def history_move(request):
     return render(request, 'history_move.html')
+
+
+def cancleImport(request,id):
+    a = History_input.objects.get(id = id) 
+    product = Product.objects.get(product_code= a.history_product_code)
+    a.delete()
+    product.product_balance -= a.history_balance
+    product.save()
+    return redirect('/import_product')
 
 def login(request,validation = True):
    
