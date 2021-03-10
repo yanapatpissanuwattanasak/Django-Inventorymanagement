@@ -189,25 +189,75 @@ def go_login(request):
     return redirect(url)
 def stock(request,manufact = None):
     if(localStorage.getItem("user") is not None):
+        username = localStorage.getItem("user")
+        user = Personal.objects.get(username=username)
+
+        
         try :
             search_words = "%%"+request.GET['search']+"%%"
             print(search_words)
-            
-            if(search_words == ""):
-                products = Product.objects.all()
+                
+            if(user.rank == 'admin') :
+                if(search_words == "%%%%"):
+                        results = Product.objects.all()
+                else :
+                        cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                        results = results = cursor.fetchall()
+                return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
+                print("2")
+            else:
+                
+                print("2")
+                #cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.type,project_app_product.cost,project_app_product.selling,project_app_product.size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code ) WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"'')
+                
+                if(search_words == "%%%%"):
+                    
+                    cursor = connection.cursor()
+                    print("asdas")
+                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                     
+                    results = cursor.fetchall()
+                    print("1")
+                    
+                    
+                else :
+                    print("EiEi")
+                    cursor = connection.cursor()
+                    
+                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE  (project_app_store_stock.product_code LIKE "'+search_words+'" OR  project_app_product.product_name LIKE "'+search_words+'") AND project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                    results = cursor.fetchall()
+                    
+                    #results = results.objects.raw('select * from (select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code) WHERE  project_app_store_stock.product_code LIKE "'+search_words+'" OR  project_app_product.product_name LIKE "'+search_words+'"')
+                   
+                    print("EiEi")
+                    #cursor.execute('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
+                    
+                    #products = results.objects.raw('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
+                    print("EiEi")
+                return render(request,'store_stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
+
+        except:
+            print("2")
+            if(user.rank == 'admin') :
+                cursor = connection.cursor()
+                  
+                cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                     
+                results = cursor.fetchall()
+                   
+                return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
             else :
-                products = Product.objects.raw('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
-                #products = Product.objects.filter(product_name = searchs).filter(product_code = searchs)
+                cursor = connection.cursor()
+                print("asdas")
+                cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                     
+                results = cursor.fetchall()
+                   
+                return render(request,'store_stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
             
-            print(products)
-        except :
+       
         
-            
-            products = Product.objects.all()
-            
-        lists = Tables.objects.all()
-        
-        return render(request,'stock.html',{'name' :localStorage.getItem("user"),'lists':lists,'manufact':manufact,'products':products})
+        return redirect('/')
     else :
         return redirect('/login')
 def detail(request,product_id):

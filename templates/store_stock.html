@@ -79,14 +79,14 @@
       {%for product in products%}
 
       <tr>
-        <td><p style="margin-top: 10%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.product_code}}</a></p></td>
-        <td><p style="margin-top: 5%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.product_name}}</a></p></td>
-        <td><p style="margin-top: 10%;">{{product.product_type}}</p></td>
-        <td class="text-center "  ><p style="margin-top: 10%;">{{product.product_cost}}</p></td>
-        <td class="text-center" ><p style="margin-top: 10%;">{{product.product_selling}}</p></td>
-        <td class="text-center"  ><p style="margin-top: 17%;">{{product.product_size}}</p></td>
+        <td><p style="margin-top: 10%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.1}}</a></p></td>
+        <td><p style="margin-top: 5%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.2}}</a></p></td>
+        <td><p style="margin-top: 10%;">{{product.3}}</p></td>
+        <td class="text-center "  ><p style="margin-top: 10%;">{{product.4}}</p></td>
+        <td class="text-center" ><p style="margin-top: 10%;">{{product.5}}</p></td>
+        <td class="text-center"  ><p style="margin-top: 17%;">{{product.6}}</p></td>
         <td  ><button style="margin-block: 5%;margin-inline: 25%;" type="button" class="btn btn-secondary d-flex justify-content-center">Go to Shelf</button></td>
-        <td>{{product.product_balance}}</td>
+        <td>{{product.7}}</td>
         {% if product.prodect_status == "good"  %}
         <td style = "background-color : #00ff19"> </td>
         {% else %}
