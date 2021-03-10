@@ -76,3 +76,19 @@ class Basket(models.Model):
     product_code = models.CharField(max_length=20)
     qty = models.IntegerField()
     employee = models.CharField(max_length=50)
+
+class store_stock(models.Model) :
+    store_id = models.CharField(max_length=20)
+    product_code = models.CharField(max_length=20)
+    qty = models.IntegerField()
+
+class Store(models.Model):
+    store_name = models.CharField(max_length=50)
+    store_id = models.CharField(max_length=20)
+    store_t = models.TextField()
+    store_a = models.TextField()
+    store_city = models.TextField()
+    store_post = models.CharField(max_length=20)
+    store_email = models.EmailField()
+    store_phone = models.CharField(max_length=20)
+    store_desc = models.TextField()
