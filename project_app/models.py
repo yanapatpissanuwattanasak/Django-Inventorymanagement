@@ -40,7 +40,7 @@ class Product(models.Model):
     product_send_time = models.IntegerField()
     product_cost = models.IntegerField()
     product_selling = models.IntegerField()
-    product_balance = models.IntegerField()
+    product_balance = models.IntegerField(default=0)
     product_image = models.FileField()
     product_desc = models.TextField()
     prodect_status = models.CharField(max_length=50)
@@ -65,3 +65,14 @@ class Shelf(models.Model):
     code = models.TextField(max_length=50, blank=True)
     value = models.IntegerField()
     valueremain = models.IntegerField(default=0)
+
+class preorder(models.Model):
+    product_code = models.CharField(max_length=20)
+    balance = models.IntegerField()
+    employee = models.CharField(max_length=50)
+    date = models.DateField()
+
+class Basket(models.Model):
+    product_code = models.CharField(max_length=20)
+    qty = models.IntegerField()
+    employee = models.CharField(max_length=50)

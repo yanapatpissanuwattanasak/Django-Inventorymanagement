@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -89,6 +89,17 @@ def cancleImport(request,id):
     product.save()
     return redirect('/import_product')
 
+def owner_preorder(request):
+    if  request.POST['code'] and request.POST['balance'] :
+        Preorder = preorder()
+        Preorder.product_code = request.POST['code']
+        Preorder.balance = request.POST['balance'] 
+        Preorder.employee = localStorage.getItem("user")
+        Preorder.date =  date.today()
+        Preorder.save()
+        return redirect('/')
+    return redirect('')
+
 def login(request,validation = True):
    
     if(localStorage.getItem("user") is not None):
@@ -102,7 +113,7 @@ def login(request,validation = True):
         print(username,password)
         person = Personal.objects.get(username = username)
         print(person)
-        if(person.rank is None) :
+        if(person.rank == "") :
                 return render(request,'login.html',{'validation':False})
         user = authenticate(username=username, password=password)
         print()

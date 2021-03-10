@@ -73,6 +73,7 @@ urlpatterns = [
     path('store_analysis',views.store_analysis),
     path('check_detail',views.check_detail),
     path('analysis',views.analysis),
+    path('owner_preorder',views.owner_preorder),
 
 
 ]
