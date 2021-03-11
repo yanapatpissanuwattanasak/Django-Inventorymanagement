@@ -74,6 +74,15 @@ urlpatterns = [
     path('check_detail',views.check_detail),
     path('analysis',views.analysis),
     path('owner_preorder',views.owner_preorder),
+    path('Request1_owner/',views.Request1_owner),
+    path('Request1_owner/Request_value',views.Request_value),
+    path('Request1_owner/Request_list',views.Request_list),
+    path('submit_request',views.submit_request),
+    path('Request1_owner_error/',views.Request1_owner_error),
+    path('cancleRequest/<int:id>',views.cancleRequest),
+    path('order_product',views.order_product),
+    path('received',views.received),
+    
 
 
 ]

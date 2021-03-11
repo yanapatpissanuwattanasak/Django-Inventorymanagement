@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -12,6 +12,15 @@ from django.db import connection
 
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
+
+def received(request):
+        order_id = request.POST.get('order_id')
+        
+        order = Order.objects.get(order_id=order_id)
+        order.date_sended = request.POST.get('date_receive')
+        order.status = "Success"
+        order.save()
+        return redirect('/store_receiving')
 
 def store_stock(request):
     return render(request, 'store_stock.html')
@@ -88,6 +97,13 @@ def cancleImport(request,id):
     product.product_balance -= a.history_balance
     product.save()
     return redirect('/import_product')
+def cancleRequest(request,id):
+    
+    a = Basket.objects.get(id = id) 
+    a.delete()
+    
+    
+    return redirect('/Request1_owner/Request_list')
 
 def owner_preorder(request):
     if  request.POST['code'] and request.POST['balance'] :
@@ -178,6 +194,48 @@ def sale_output_owner(request,validation = True):
     else :
         return redirect('/login')
 
+
+def Request1_owner(request):
+    return render(request, 'Request1_owner.html',{'validate' : True})
+def Request1_owner_error(request):
+    return render(request, 'Request1_owner.html',{'validate' : False})
+
+def Request_value(request,validate = True):
+    if request.POST['code'] :
+        product_code = request.POST['code']
+        try :
+            product = Product.objects.get(product_code=product_code)
+        except :
+            return redirect('/Request1_owner_error')
+
+        return render(request, 'Request_value.html',{'product':product})
+    else:
+        return redirect('/Request1_owner/Request_list')
+
+def Request_list(request):
+    user = Personal.objects.get(username=localStorage.getItem("user"))
+    cursor = connection.cursor()
+    cursor.execute('select project_app_basket.id,project_app_product.product_code,project_app_product.product_name,project_app_basket.qty,project_app_basket.status from project_app_product join project_app_basket on project_app_product.product_code = project_app_basket.product_code WHERE project_app_basket.employee ="'+user.username+'" AND project_app_basket.status = "waiting" ')
+    results = cursor.fetchall()
+    print(results)
+    return render(request, 'Request_list.html',{'user':user,'results':results})
+
+def order_product(request):
+    orders = Basket.objects.get(employee=localStorage.getItem("user") ,status="waiting")
+    
+    
+    num = len(Order.objects.all())
+    orders.status = num+1
+    orders.save()
+    order = Order()
+    order.order_id = num+1
+    order.employee = localStorage.getItem("user")
+    order.shop_name = Personal.objects.get(username=localStorage.getItem("user")).shop_name
+    order.date = date.today()
+    order.status = "Sending"
+    order.save()
+    return redirect('/Request1_owner/Request_list')
+
 def go_login(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -187,6 +245,27 @@ def go_login(request):
     query_string =  urlencode({'username': username,'pwd' : password})
     url = '{}?{}'.format('/', query_string)
     return redirect(url)
+
+def submit_request(request):
+    print(request.POST['code'])
+    if request.POST['code'] and request.POST['amount'] :
+        try :
+            item = Basket.objects.get(product_code = request.POST['code'] and status != "waiting")
+            item.qty = item.qty + int(request.POST['amount'])
+            if(item.qty > Product.objects.get(product_code=request.POST['code']).product_balance) :
+                item.qty = Product.objects.get(product_code=request.POST['code']).product_balance
+            item.save()
+        except:
+            item = Basket()
+            item.product_code = request.POST['code']
+            item.qty = int(request.POST['amount'])
+            if(item.qty > Product.objects.get(product_code=request.POST['code']).product_balance) :
+                item.qty = Product.objects.get(product_code=request.POST['code']).product_balance
+            item.employee = localStorage.getItem("user")
+            item.status = "waiting"
+            item.save()
+        return redirect('/Request1_owner/Request_list')
+
 def stock(request,manufact = None):
     if(localStorage.getItem("user") is not None):
         username = localStorage.getItem("user")
@@ -201,8 +280,9 @@ def stock(request,manufact = None):
                 if(search_words == "%%%%"):
                         results = Product.objects.all()
                 else :
-                        cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
-                        results = results = cursor.fetchall()
+                      
+                        results = Product.objects.raw('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
+                        
                 return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
                 print("2")
             else:
@@ -239,11 +319,7 @@ def stock(request,manufact = None):
         except:
             print("2")
             if(user.rank == 'admin') :
-                cursor = connection.cursor()
-                  
-                cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
-                     
-                results = cursor.fetchall()
+                results = Product.objects.all()
                    
                 return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
             else :
@@ -324,16 +400,17 @@ def checkstock(request):
         return redirect('/login')
 
 def status_send(request):
+    
     if(localStorage.getItem("user") is not None):
-       
+        orders = Order.objects.all()
         return render(request,'status_send.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
 def status_request_send(request):
     if(localStorage.getItem("user") is not None):
-       
-        return render(request,'status_request_send.html',{'name' :localStorage.getItem("user")})
+        orders = Order.objects.all()
+        return render(request,'status_request_send.html',{'name' :localStorage.getItem("user"),'orders':orders})
     else :
         return redirect('/login')
 
@@ -490,7 +567,7 @@ def create_account(request):
 
                     personal = Personal()
                     personal.username = username
-                    personal.rank = 3
+                    personal.rank = ""
                     personal.email = email
                     personal.fullname = request.POST['name']
                     personal.identification = request.POST['id']

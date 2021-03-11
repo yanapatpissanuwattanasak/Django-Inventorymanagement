@@ -54,12 +54,12 @@
     {%endif%}
     
     <div id="wbg"><h2 align="center" style="margin: 50px;">ยืนยันการรับสินค้า</h2>
-        <form action="input" method="POST">
+        <form action="received" method="POST">
             {% csrf_token %} 
         <div style="margin-left: 100px;margin-top: 50px;">
             
             <p style="">รหัสคำสั่งซื้อ *</p>
-            <input type="text" name="order_code" placeholder="code" id="code" style="width: 350px; height: 30px;" required>
+            <input type="text" name="order_id" placeholder="order_id" id="code" style="width: 350px; height: 30px;" required>
             <div id="codeInvalid" class="invalid-feedback d-flex justify-content-left"> </div><br>
             <p>วันที่ได้รับสินค้า *</p>
             <input type="date" name="date_receive" id="date" style="width: 350px; height: 30px;" required/>

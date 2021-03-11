@@ -76,6 +76,7 @@ class Basket(models.Model):
     product_code = models.CharField(max_length=20)
     qty = models.IntegerField()
     employee = models.CharField(max_length=50)
+    status = models.CharField(max_length=50)
 
 class store_stock(models.Model) :
     store_id = models.CharField(max_length=20)
@@ -92,3 +93,11 @@ class Store(models.Model):
     store_email = models.EmailField()
     store_phone = models.CharField(max_length=20)
     store_desc = models.TextField()
+
+class Order(models.Model):
+    order_id = models.CharField(max_length=50)
+    shop_name = models.CharField(max_length=50)
+    employee = models.CharField(max_length=50)
+    date = models.DateField()
+    date_sended = models.DateField(default=None, blank=True)
+    status = models.CharField(max_length=50)

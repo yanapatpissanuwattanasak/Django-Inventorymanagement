@@ -1,0 +1,55 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<style>
+    input[type="submit"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+        font-size: 20px;
+        left: 710px;
+        top: 440px;}
+    button[type="button"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+        font-size: 17px;}   
+#rect1{
+    position: absolute;width: 532px;height: 442px;left: 500px;top: 160px;
+    background: #FFFFFF;border: 1px solid #000000;box-sizing: border-box;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+    
+</style>
+    <div id="rect1"></div>
+    <h2 align="center" style="position: absolute;width: 250px;height: 35px;left: 644px;top: 190px;">Request</h2>
+    <h2 align="center" style="position: absolute;width: 250px;height: 35px;left: 644px;top: 230px;">ระบุสินค้าที่ต้องการ</h2>
+    <form action="/Request1_owner/Request_value" method="POST">
+        {% csrf_token %}
+        <div>
+            
+               
+          
+        
+            <label for="" style="position: absolute;width: 100px;height: 23px;left: 520px;top: 330px;
+                font-family: Roboto;font-style: normal;font-weight: normal;font-size: 20px;line-height: 23px;color: #000000;">รหัสสินค้า *</label>
+                {% if validate == False%}
+            <label for="" style="position: absolute;height: 12px;width: 120px;left: 650px;top: 370px;font-size: 10px;
+                line-height: 12px; color: #f50303;">Not Found</label>
+                    {% endif %}
+            <input type="text" class="form-control" name="code" style="position: absolute;width: 343px;height: 25px;left: 640px;top: 330px;
+                background: #FFFFFF;border: 1px solid #000000;box-sizing: border-box;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 20px;;">
+        </div>
+        <div>
+            <input type="submit"value="ยืนยัน" class="btn btn-warning">
+        </div>
+
+        
+{% endblock %}

@@ -13,33 +13,28 @@
         font-size: 17px;}
 </style>
     <h2 align="center" style="position: absolute;width: 250px;height: 35px;left: 644px;top: 120px;">สถานะการส่งสินค้า</h2>
-    <table class="table table-bordered" style="position: absolute;width: 1002px;height: 510px;left: 219px;top: 180px;">
+    <table class="table table-bordered" style="position: absolute;width: 1002px;left: 219px;top: 180px;">
       <thead>
         <tr align="center">
-          <th scope="col">รหัสสินค้า</th>
-          <th scope="col">ชื่อสินค้า</th>
-          <th scope="col">ปริมาณที่ต้องการ</th>
-          <th scope="col">สถานะ</th>
-          <th scope="col"></th>
+          <th scope="col">ลำดับ Order</th>
+          <th scope="col">ชื่อร้าน</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date</th>
+      
         </tr>
       </thead>
       <tbody>
+        {% for order in orders%}
         <tr align="center">
-          <th scope="row">e652a</th>
-          <td>เสื้อแขนสั้นสีแดง</td>
-          <td>20</td>
-          <td>รอการจัดส่ง</td>
-          <td>
-              <a herf="">
-                  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTExLjk5OSA1MTEuOTk5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTEuOTk5IDUxMS45OTk7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIHN0eWxlPSJmaWxsOiM4Q0E4MkY7IiBkPSJNNTEwLjExNCwxMDguNDQ4bC0xNy41MzEtMTcuNTMxTDE0Ny42OTcsMzgzLjc1OHY1Mi4wNDVsMTcuNTMxLDE3LjUzMQ0KCWMyLjUxMywyLjUxMyw2LjU4NywyLjUxMyw5LjEwMSwwbDMzNS43ODctMzM1Ljc4N0M1MTIuNjI3LDExNS4wMzUsNTEyLjYyNywxMTAuOTYxLDUxMC4xMTQsMTA4LjQ0OHoiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNBNUMyNDQ7IiBkPSJNNDUxLjIzMiw1OC42NjVMMTY5Ljc3OCwzNDAuMTE5TDYwLjc2NywyMzEuMTA4Yy0yLjUxMy0yLjUxMy02LjU4Ny0yLjUxMy05LjEwMSwwTDEuODg1LDI4MC44OTENCgljLTIuNTEzLDIuNTEzLTIuNTEzLDYuNTg3LDAsOS4xbDE0NS44MTIsMTQ1LjgxMkw0OTIuNTgzLDkwLjkxN2wtMzIuMjUxLTMyLjI1MUM0NTcuODE5LDU2LjE1Miw0NTMuNzQ1LDU2LjE1Miw0NTEuMjMyLDU4LjY2NXoiLz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K"
-                  style="height: 30px;width: 30px;left: 1236px;top: 494px;border-radius: 0px;"/>
-              </a>
-              <a href="">
-                  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0UwMjMwRDsiIHBvaW50cz0iNTEyLDkwLjMyNiAzNDYuMzI2LDI1NiA1MTIsNDIxLjY3NCA0OTAuMTUsNDQzLjUzNCAyMDkuODk5LDI1NiA0OTAuMTUsNjguNDc2ICIvPg0KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0ZGNTQ0MDsiIHBvaW50cz0iNDkwLjE1LDY4LjQ3NiAzMDIuNjE2LDI1NiA0OTAuMTUsNDQzLjUzNCA0MjEuNjc0LDUxMiAyNTYsMzQ2LjMyNiA5MC4zMjYsNTEyIDAsNDIxLjY3NCANCgkxNjUuNjc0LDI1NiAwLDkwLjMyNiA5MC4zMjYsMCAyNTYsMTY1LjY3NCA0MjEuNjc0LDAgIi8+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg=="
-                  style="height: 20px;width: 21px;left: 1297px;top: 499px;border-radius: 0px;"/>
-              </a>
-          </td>
+         
+         <th scope="col">{{order.order_id}}</th>
+         <th scope="col">{{order.shop_name}}</th>
+         <th scope="col">{{order.status}}</th>
+         <th scope="col">{{order.date}}</th>
+        
+         
         </tr>
+        {% endfor %}
       </tbody>
     </table>
     <div>
