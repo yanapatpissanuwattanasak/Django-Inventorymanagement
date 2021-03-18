@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -12,6 +12,7 @@ from django.db import connection
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
 
+
 def received(request):
         order_id = request.POST.get('order_id')
         
@@ -19,10 +20,34 @@ def received(request):
         order.date_sended = request.POST.get('date_receive')
         order.status = "Success"
         order.save()
+        
+        busket = Basket.objects.filter(status=order_id)
+        for i in busket:
+            try:
+                store = store_stock.objects.get(product_code=i.product_code)
+                store.qty += int(i.qty)
+                product = Product.objects.get(product_code= i.product_code)
+                product.product_balance -= int(i.qty)
+                print(product.product_balance)
+                product.save()
+                store.save()
+            except:
+                store = store_stock()
+                store.product_code = i.product_code
+                store.qty = i.qty
+                user = Personal.objects.get(username=i.employee)
+                store.store_id = user.shop_name
+
+                product = Product.objects.get(product_code= i.product_code)
+                product.product_balance -= int(i.qty)
+                print(product.product_balance)
+                product.save()
+                store.save()
+        
+        
         return redirect('/store_receiving')
 
-def store_stock(request):
-    return render(request, 'store_stock.html')
+
 
 def store_detail(request):
     return render(request, 'store_detail.html')
@@ -174,19 +199,16 @@ def output_product(request):
 def sale_output_owner(request,validation = True):
     if(localStorage.getItem("user") is not None):
         try:
+            user = Personal.objects.get(username=localStorage.getItem("user"))
             product_code = request.POST['code1']
             product_quantity = request.POST['quantity']
             date_output = request.POST['date_output']
-            print("EiEI")
-            product_output = Product_output()
-            product = Product.objects.get(product_code = product_code)
-            product.product_balance -= int(product_quantity)
-            product_output.product_code = product_code
-            product_output.product_quantity = product_quantity
-            product_output.date_output = date_output
-            product_output.save()
-            product.save()
-            #manufact.save()
+            store = store_stock.objects.get(product_code=product_code,store_id=user.shop_name)
+            store.qty -= int(product_quantity)
+            store.save()
+            print("EiEI Sale raw")
+            
+            
             return redirect('/output')
         except:
             return render(request,'sale_output_owner.html',{'name' :localStorage.getItem("user")})
@@ -220,12 +242,13 @@ def Request_list(request):
     return render(request, 'Request_list.html',{'user':user,'results':results})
 
 def order_product(request):
-    orders = Basket.objects.get(employee=localStorage.getItem("user") ,status="waiting")
-    
-    
+    orderss = Basket.objects.filter(employee=localStorage.getItem("user") ,status="waiting")
     num = len(Order.objects.all())
-    orders.status = num+1
-    orders.save()
+    for i in orderss:
+        orders = Basket.objects.get(id = i.id)
+        
+        orders.status = num+1
+        orders.save()
     order = Order()
     order.order_id = num+1
     order.employee = localStorage.getItem("user")
@@ -382,12 +405,27 @@ def input(request,validation = True):
     else :
         return redirect('/login')
 
-def import_product(request):
+def order_detail(request,id):
     if(localStorage.getItem("user") is not None):
         cursor = connection.cursor()
-        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_input.history_balance,project_app_product.product_cost,project_app_history_input.id,project_app_history_input.history_total,project_app_history_input.history_date from project_app_product join project_app_history_input on project_app_product.product_code = project_app_history_input.history_product_code')
+        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_basket.qty from project_app_product join project_app_basket on project_app_product.product_code = project_app_basket.product_code WHERE project_app_basket.status = "'+id+'"')
         results = cursor.fetchall()
-        return render(request,'history_import.html',{'name' :localStorage.getItem("user"),'tables':results})
+        return render(request,'order_detail.html',{'name' :localStorage.getItem("user"),'tables':results})
+    else:
+        return redirect('/login')
+
+def import_product(request):
+    if(localStorage.getItem("user") is not None):
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank != 'admin'):
+            results =Order.objects.filter(shop_name=user.shop_name)
+            return render(request,'history_import_owner.html',{'name' :localStorage.getItem("user"),'tables':results,'fullname':user.fullname})
+        else :
+            cursor = connection.cursor()
+            cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_input.history_balance,project_app_product.product_cost,project_app_history_input.id,project_app_history_input.history_total,project_app_history_input.history_date from project_app_product join project_app_history_input on project_app_product.product_code = project_app_history_input.history_product_code')
+            results = cursor.fetchall()
+            return render(request,'history_import.html',{'name' :localStorage.getItem("user"),'tables':results})
+            
     else :
         return redirect('/login')
 
@@ -454,8 +492,11 @@ def insert(request):
 
 def open_history(request,):
     if(localStorage.getItem("user") is not None):
-        
-        return render(request,'select_history.html',{'name' :localStorage.getItem("user")})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == 'admin'):
+            return render(request,'select_history.html',{'name' :localStorage.getItem("user")})
+        else :
+             return render(request,'select_history_owner.html',{'name' :localStorage.getItem("user")})
     else :
         
         return redirect('/login')
@@ -471,7 +512,11 @@ def user_list(request):
 
 def Transmission_history(request):
     if(localStorage.getItem("user") is not None):
-        return render(request,'Transmission_history.html',{'name' :localStorage.getItem("user")})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == admin) :
+            return render(request,'Transmission_history.html',{'name' :localStorage.getItem("user")})
+        else :
+            return redirect('/login')
     else :
         
         return redirect('/login')

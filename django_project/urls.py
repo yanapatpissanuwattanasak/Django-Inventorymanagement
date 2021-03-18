@@ -66,7 +66,6 @@ urlpatterns = [
     path('select_id_shelf/',views.select_id_shelf),
     path('deleteshelf/<str:code>',views.deleteshelf),
     path('cancleImport/<int:id>',views.cancleImport),
-    path('store_stock',views.store_stock),
     path('store_receiving',views.store_receiving),
     path('store_preorder',views.store_preorder),
     path('store_detail',views.store_detail),
@@ -82,6 +81,7 @@ urlpatterns = [
     path('cancleRequest/<int:id>',views.cancleRequest),
     path('order_product',views.order_product),
     path('received',views.received),
+    path('order_detail/<slug:id>',views.order_detail),
     
 
 
