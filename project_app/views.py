@@ -232,6 +232,7 @@ def order_product(request):
     order.employee = localStorage.getItem("user")
     order.shop_name = Personal.objects.get(username=localStorage.getItem("user")).shop_name
     order.date = date.today()
+    order.date_sended = date.today()
     order.status = "Sending"
     order.save()
     return redirect('/Request1_owner/Request_list')
@@ -250,7 +251,7 @@ def submit_request(request):
     print(request.POST['code'])
     if request.POST['code'] and request.POST['amount'] :
         try :
-            item = Basket.objects.get(product_code = request.POST['code'] and status != "waiting")
+            item = Basket.objects.get(product_code = request.POST['code'] , status = "waiting")
             item.qty = item.qty + int(request.POST['amount'])
             if(item.qty > Product.objects.get(product_code=request.POST['code']).product_balance) :
                 item.qty = Product.objects.get(product_code=request.POST['code']).product_balance
