@@ -8,8 +8,7 @@ from localStoragePy import localStoragePy
 from datetime import date
 from django.db import connection
 
-
-
+#asdasd
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
 
