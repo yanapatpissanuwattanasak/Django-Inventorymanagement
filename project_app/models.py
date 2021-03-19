@@ -101,3 +101,11 @@ class Order(models.Model):
     date = models.DateField()
     date_sended = models.DateField(default=None, blank=True)
     status = models.CharField(max_length=50)
+
+class saled(models.Model):
+    product_code = models.CharField(max_length=20)
+    shop_name = models.CharField(max_length=50)
+    employee = models.CharField(max_length=50)
+    date = models.DateField()
+    qty = models.IntegerField()
+    total = models.IntegerField()

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -190,7 +190,8 @@ def submit_user(request,user_id) :
 def output_product(request):
     if(localStorage.getItem("user") is not None):
         cursor = connection.cursor()
-        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product_output.product_quantity,project_app_product.product_selling,project_app_product_output.id,project_app_product.product_selling*project_app_product_output.product_quantity,project_app_product_output.date_output from project_app_product join project_app_product_output on project_app_product.product_code = project_app_product_output.product_code')
+        shop_id = Personal.objects.get(username= localStorage.getItem("user")).shop_name
+        cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_saled.qty,project_app_saled.total,project_app_saled.date from project_app_product join project_app_saled on project_app_product.product_code = project_app_saled.product_code WHERE project_app_saled.shop_name = "'+shop_id+'"')
         results = cursor.fetchall()
         return render(request,'history_output.html',{'name' :localStorage.getItem("user"),'tables':results})
     else :
@@ -206,6 +207,15 @@ def sale_output_owner(request,validation = True):
             store = store_stock.objects.get(product_code=product_code,store_id=user.shop_name)
             store.qty -= int(product_quantity)
             store.save()
+
+            sale = saled()
+            sale.product_code = product_code
+            sale.shop_name = user.shop_name
+            sale.employee = user.username
+            sale.date =  date_output
+            sale.qty = int(product_quantity)
+            sale.total = Product.objects.get(product_code=product_code).product_selling * int(product_quantity)
+            sale.save()
             print("EiEI Sale raw")
             
             
