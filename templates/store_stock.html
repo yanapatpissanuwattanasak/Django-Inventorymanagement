@@ -1,6 +1,8 @@
 {% extends 'header_owner.html' %}
 
 {% block content %}
+
+
   <div class=" row container-fluid d-flex justify-content-center">
     <div class="col-10 "> 
   <h3 align = "center">ยอดคงเหลือสินค้า</Frame></align></h3>
@@ -63,7 +65,7 @@
   <table class="table table-bordered">
     <thead class="text-center"> 
       <tr bgcolor="FFB800">
-        <th scope="col">รหัสสินค้า</th>
+        <th scope="col"  style="font-family: montserrat;">รหัสสินค้า</th>
         <th scope="col">ชื่อสินค้า</th>
         <th scope="col">ประเภท</th>
         <th scope="col">ราคาต้นทุน</th>
@@ -79,8 +81,8 @@
       {%for product in products%}
 
       <tr>
-        <td><p style="margin-top: 10%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.1}}</a></p></td>
-        <td><p style="margin-top: 5%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.2}}</a></p></td>
+        <td><p style="margin-top: 10%;"><a href="/detail/{{product.1}}"style="color:black;text-decoration:none">{{product.1}}</a></p></td>
+        <td><p style="margin-top: 5%;"><a href="/detail/{{product.1}}"style="color:black;text-decoration:none">{{product.2}}</a></p></td>
         <td><p style="margin-top: 10%;">{{product.3}}</p></td>
         <td class="text-center "  ><p style="margin-top: 10%;">{{product.4}}</p></td>
         <td class="text-center" ><p style="margin-top: 10%;">{{product.5}}</p></td>

@@ -23,6 +23,7 @@ def received(request):
         
         busket = Basket.objects.filter(status=order_id)
         for i in busket:
+            print("eiei1")
             try:
                 store = store_stock.objects.get(product_code=i.product_code)
                 store.qty += int(i.qty)
@@ -31,6 +32,7 @@ def received(request):
                 print(product.product_balance)
                 product.save()
                 store.save()
+                print("eiei2")
             except:
                 store = store_stock()
                 store.product_code = i.product_code
@@ -43,6 +45,7 @@ def received(request):
                 print(product.product_balance)
                 product.save()
                 store.save()
+                print("eiei3")
         
         
         return redirect('/store_receiving')
@@ -68,7 +71,11 @@ def check_detail(request):
     return render(request, 'check_detail.html')
 
 def shelf(request):
-    return render(request, 'shelf.html')
+    user = Personal.objects.get(username=localStorage.getItem("user"))
+    if(user.rank == "admin") :
+        return render(request, 'shelf.html')
+    else :
+        return render(request, 'error.html')
 
 def c_d_shelf(request):
     return render(request, 'create_delete_shelf.html')
@@ -130,14 +137,18 @@ def cancleRequest(request,id):
     return redirect('/Request1_owner/Request_list')
 
 def owner_preorder(request):
-    if  request.POST['code'] and request.POST['balance'] :
-        Preorder = preorder()
-        Preorder.product_code = request.POST['code']
-        Preorder.balance = request.POST['balance'] 
-        Preorder.employee = localStorage.getItem("user")
-        Preorder.date =  date.today()
-        Preorder.save()
-        return redirect('/')
+    user = Personal.objects.get(username=localStorage.getItem("user"))
+    if(user.rank != "admin") :
+        if  request.POST['code'] and request.POST['balance'] :
+            Preorder = preorder()
+            Preorder.product_code = request.POST['code']
+            Preorder.balance = request.POST['balance'] 
+            Preorder.employee = localStorage.getItem("user")
+            Preorder.date =  date.today()
+            Preorder.save()
+            return redirect('/')
+    else :
+         return render(request,'error.html',{'name' :localStorage.getItem("user")})
     return redirect('')
 
 def login(request,validation = True):
@@ -245,11 +256,15 @@ def Request_value(request,validate = True):
 
 def Request_list(request):
     user = Personal.objects.get(username=localStorage.getItem("user"))
-    cursor = connection.cursor()
-    cursor.execute('select project_app_basket.id,project_app_product.product_code,project_app_product.product_name,project_app_basket.qty,project_app_basket.status from project_app_product join project_app_basket on project_app_product.product_code = project_app_basket.product_code WHERE project_app_basket.employee ="'+user.username+'" AND project_app_basket.status = "waiting" ')
-    results = cursor.fetchall()
-    print(results)
-    return render(request, 'Request_list.html',{'user':user,'results':results})
+    if(user.rank == "admin") :
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        cursor = connection.cursor()
+        cursor.execute('select project_app_basket.id,project_app_product.product_code,project_app_product.product_name,project_app_basket.qty,project_app_basket.status from project_app_product join project_app_basket on project_app_product.product_code = project_app_basket.product_code WHERE project_app_basket.employee ="'+user.username+'" AND project_app_basket.status = "waiting" ')
+        results = cursor.fetchall()
+        print(results)
+        return render(request, 'Request_list.html',{'user':user,'results':results})
+    else :
+        return render(request, 'error.html',{'user':user})
 
 def order_product(request):
     orderss = Basket.objects.filter(employee=localStorage.getItem("user") ,status="waiting")
@@ -378,40 +393,47 @@ def detail(request,product_id):
         return redirect('/login')
 def detail_user(request,user_id):
     if(localStorage.getItem("user") is not None):
-        
-        user = Personal.objects.get(username = user_id)
-        return render(request,'detail_user.html',{'name' :localStorage.getItem("user"),'user':user})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            user = Personal.objects.get(username = user_id)
+            return render(request,'detail_user.html',{'name' :localStorage.getItem("user"),'user':user})
+        else :
+             return render(request,'error.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
 def input(request,validation = True):
     check = True
     if(localStorage.getItem("user") is not None):
-        try:
-            product_code = request.POST['code']
-            product_balance = request.POST['balance']
-            today = date.today()
-            check = False
-            product = Product.objects.get(product_code = product_code)
-            product.product_balance += int(product_balance)
-            history = History_input()
-            history.history_product_code = product_code
-            history.history_balance = product_balance
-            print(product.product_cost)
-            print(product_balance)
-            history.history_total = product.product_cost * int(product_balance)
-            print(history.history_total)
-            history.history_date = today
-            history.history_user = localStorage.getItem("user")
-            history.save()
-            product.save()
-            return redirect('/import_product')
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            try:
+                product_code = request.POST['code']
+                product_balance = request.POST['balance']
+                today = date.today()
+                check = False
+                product = Product.objects.get(product_code = product_code)
+                product.product_balance += int(product_balance)
+                history = History_input()
+                history.history_product_code = product_code
+                history.history_balance = product_balance
+                print(product.product_cost)
+                print(product_balance)
+                history.history_total = product.product_cost * int(product_balance)
+                print(history.history_total)
+                history.history_date = today
+                history.history_user = localStorage.getItem("user")
+                history.save()
+                product.save()
+                return redirect('/import_product')
 
-        except :
-            if(check) :
-                return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : True})
-            else :
-                return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : False})
+            except :
+                if(check) :
+                    return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : True})
+                else :
+                    return render(request,'input.html',{'name' :localStorage.getItem("user"),'validate' : False})
+        else :
+            return render(request,'error.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
@@ -442,23 +464,36 @@ def import_product(request):
 
 def checkstock(request):
     if(localStorage.getItem("user") is not None):
-       
-        return render(request,'checkstock.html',{'name' :localStorage.getItem("user")})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            return render(request,'checkstock.html',{'name' :localStorage.getItem("user")})
+        else :
+            return render(request,'error.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
 def status_send(request):
     
     if(localStorage.getItem("user") is not None):
-        orders = Order.objects.all()
-        return render(request,'status_send.html',{'name' :localStorage.getItem("user")})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            orders = Order.objects.all()
+            return render(request,'status_send.html',{'name' :localStorage.getItem("user")})
+        else :
+            orders = Order.objects.all()
+            return render(request,'status_send.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
 def status_request_send(request):
     if(localStorage.getItem("user") is not None):
-        orders = Order.objects.all()
-        return render(request,'status_request_send.html',{'name' :localStorage.getItem("user"),'orders':orders})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            orders = Order.objects.all()
+            return render(request,'status_request_send.html',{'name' :localStorage.getItem("user"),'orders':orders})
+        else :
+            orders = Order.objects.all()
+            return render(request,'status_request_send.html',{'name' :localStorage.getItem("user"),'orders':orders})
     else :
         return redirect('/login')
 
@@ -514,8 +549,13 @@ def open_history(request,):
 
 def user_list(request):
     if(localStorage.getItem("user") is not None):
-        list_user = Personal.objects.all().filter(rank = "")
-        return render(request,'user_list.html',{'name' :localStorage.getItem("user"),'list_user':list_user})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            list_user = Personal.objects.all().filter(rank = "")
+            return render(request,'user_list.html',{'name' :localStorage.getItem("user"),'list_user':list_user})
+        else :
+            return render(request,'error.html',{'name' :localStorage.getItem("user")})
+        
     else :
         
         return redirect('/login')
@@ -662,15 +702,20 @@ def sumarize(request):
 
 def contact(request):
     if(localStorage.getItem("user") is not None):
-       
-        return render(request,'contact.html',{'name' :localStorage.getItem("user")})
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            return render(request,'contact.html',{'name' :localStorage.getItem("user")})
+        else :
+            #return render(request,'error.html',{'name' :localStorage.getItem("user")})
+           return render(request,'contact_owner.html',{'name' :localStorage.getItem("user")})
     else :
         return redirect('/login')
 
 def lost_item(request):
     if(localStorage.getItem("user") is not None):
-       
         return render(request,'lost_item.html',{'name' :localStorage.getItem("user")})
+        
+        
     else :
         return redirect('/login')
 
