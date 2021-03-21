@@ -7,10 +7,33 @@ from urllib.parse import urlencode
 from localStoragePy import localStoragePy
 from datetime import date
 from django.db import connection
-
+from datetime import  timedelta
 #asdasd
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
+
+def update_status():
+    product = Product.objects.all()
+    for i in product :
+        print(i.product_code)
+        output = Product_output.objects.filter(product_code=i.product_code)
+        qty = 0
+        for j in output :
+            if(j.date_output > date.today() - timedelta(days=30)):
+                print(j.date_output)
+                qty += j.product_quantity
+        print(qty)
+        if(((qty/30)*i.product_send_time)+1 >= i.product_balance or i.product_balance == 0):
+                pro = Product.objects.get(product_code=i.product_code)
+                pro.prodect_status = "Low"
+                pro.save()
+                print(i.product_code)
+        else :
+                pro = Product.objects.get(product_code=i.product_code)
+                pro.prodect_status = "good"
+                pro.save()
+        print(((qty/30)*i.product_send_time)+1)
+            
 
 
 def received(request):
@@ -256,7 +279,7 @@ def Request_value(request,validate = True):
 
 def Request_list(request):
     user = Personal.objects.get(username=localStorage.getItem("user"))
-    if(user.rank == "admin") :
+    if(user.rank != "admin") :
         user = Personal.objects.get(username=localStorage.getItem("user"))
         cursor = connection.cursor()
         cursor.execute('select project_app_basket.id,project_app_product.product_code,project_app_product.product_name,project_app_basket.qty,project_app_basket.status from project_app_product join project_app_basket on project_app_product.product_code = project_app_basket.product_code WHERE project_app_basket.employee ="'+user.username+'" AND project_app_basket.status = "waiting" ')
@@ -316,6 +339,7 @@ def submit_request(request):
 
 def stock(request,manufact = None):
     if(localStorage.getItem("user") is not None):
+        update_status()
         username = localStorage.getItem("user")
         user = Personal.objects.get(username=username)
 

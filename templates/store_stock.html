@@ -87,7 +87,7 @@
         <td class="text-center "  ><p style="margin-top: 10%;">{{product.4}}</p></td>
         <td class="text-center" ><p style="margin-top: 10%;">{{product.5}}</p></td>
         <td class="text-center"  ><p style="margin-top: 17%;">{{product.6}}</p></td>
-        <td  ><button style="margin-block: 5%;margin-inline: 25%;" type="button" class="btn btn-secondary d-flex justify-content-center">Go to Shelf</button></td>
+       
         <td>{{product.7}}</td>
         {% if product.prodect_status == "good"  %}
         <td style = "background-color : #00ff19"> </td>
@@ -105,44 +105,7 @@
   </table>
   <br>
   <br>
-  <table class="table table-bordered ">
-    <thead class="text-center">
-      <tr >
-        <th scope="col ">Number</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-     
-      
-        {% for list in lists %}
-        
-         
-        
-        
-        
-     
-      <tr>
-        
-        <td>{{forloop.counter}}</td>
-        <td>{{list.name}}</td>
-        <td>{{list.desc}}</td>
-        <td><a href="update/{{list.id}}"><button class="btn-success"> Update </button></a></td>
-        <td><a href="delete/{{list.id}}"><button class="btn-danger"> Delete </button></a></td>
-      </tr>
-      
-      {% endfor %}
-     
-     
-      
-      
-      
-    </tbody>
-  </table>
+  
   
     
     
