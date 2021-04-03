@@ -26,25 +26,18 @@
           <tr>
             <th scope="col">รหัสสินค้า</th>
             <th scope="col">ชื่อสินค้า</th>
+            <th scope="col">คลังที่อยู่</th>
             <th scope="col">ปริมาณที่คาดเคลื่อน</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>fwr81</td>
-            <td>&nbsp;</td>
-            <td>+1</td>
-          </tr>
-          <tr>
-            <td>hud71</td>
-            <td>&nbsp;</td>
-            <td>-5</td>
-          </tr>
-          <tr>
-            <td>uit56</td>
-            <td>&nbsp;</td>
-            <td>-2</td>
-          </tr>
+            {% for item in results %}
+              <td>{{item.0}}</td>
+              <td>{{item.1}}</td>
+              <td>{{item.2}}</td>
+              <td>{{item.3}}</td>
+
+            {% endfor %}
         </tbody>
       </table>
     </div>

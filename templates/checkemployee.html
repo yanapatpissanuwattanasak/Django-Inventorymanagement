@@ -26,23 +26,33 @@
 <br>
 <div>
   <div class="row">
-    <div class="col-3 d-flex justify-content-center">
+    <div class="col-2 d-flex justify-content-center">
       &nbsp;
     </div>
     <div class="col-8 d-flex justify-content-right">
     <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">ว/ด/ป</th>
-            <th scope="col">เวลา</th>
+            <th scope="col">รหัสสินค้า</th>
+            <th scope="col">ชื่อสินค้า</th>
+            <th scope="col">ตำเเหน่งคลัง</th>
+            <th scope="col">จำนวนที่ตรวจพบ</th>
+            <th scope="col">วันที่บันทึก</th>
+            <th scope="col">เวลาที่บันทึก</th>
             <th scope="col">ผู้ตรวจเช็ค</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>24/1/2564</td>
-            <td>16:05</td>
-            <td>วรัญญา</td>
+           {%for item in results %}
+              <td>{{item.0}}</td>
+              <td>{{item.1}}</td>
+              <td>{{item.2}}</td>
+              <td>{{item.3}}</td>
+              <td>{{item.4}}</td>
+              <td>{{item.5}}</td>
+              <td>{{item.6}}</td>
+           {% endfor %}
           </tr>
         </tbody>
       </table>

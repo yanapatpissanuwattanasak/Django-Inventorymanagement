@@ -34,6 +34,8 @@
         border-radius: 10px;
         font-size: 17px;}
 </style>
+<form action="add_check" method="POST">
+    {% csrf_token %}
 <div id="wbg">
     <div style = "margin: 50px">
     <div class="row">
@@ -43,11 +45,19 @@
     <br>
     <br>
     <div class="row">
+        <div class="col-5 d-flex justify-content-left">รหัสคลังสินค้า</div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-left"><input type="text" class="form-control" name="shelf_id"></div>
+    </div>
+    <br/>
+    <div class="row">
         <div class="col-5 d-flex justify-content-left">รหัสสินค้า</div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-left"><input type="text" class="form-control" name="Id"></div>
+        <div class="col-12 d-flex justify-content-left"><input type="text" class="form-control" name="product_id"></div>
     </div>
+    
     <div class="row">
         <font size=1 color="red">
         <div class="col-12 d-flex justify-content-left">กรุณากรอกข้อมูลในช่องนี้</div>
@@ -58,7 +68,7 @@
         <div class="col-5 d-flex justify-content-left">จำนวน</div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-left"><input type="text" class="form-control" name="Id"></div>
+        <div class="col-12 d-flex justify-content-left"><input type="number" class="form-control" name="qty"></div>
     </div>
     <div class="row">
         <font size=1 color="red">
@@ -79,10 +89,11 @@
         
     </div>
 </div>
+</form>
 <a href="/checkemployee">
     <button type="button" class="btn btn-warning" style="left: 880px;top: 520px;">ประวัติ</button>
 </a>
-<a href="/sumarize">
+<a href="/sum_lost">
     <button type="button" class="btn btn-warning" style="left: -450px;top: 520px;">สรุปผล</button>
 </a>
 {% endblock %}

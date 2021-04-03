@@ -89,8 +89,10 @@
         <td class="text-center"  ><p style="margin-top: 17%;">{{product.6}}</p></td>
        
         <td>{{product.7}}</td>
-        {% if product.prodect_status == "good"  %}
+        {% if product.8 == "good"  %}
         <td style = "background-color : #00ff19"> </td>
+        {% elif product.8 == "Low"  %}
+        <td style = "background-color : #ffa600"> </td>
         {% else %}
         <td style = "background-color : #ff0000"> </td>
         {% endif %}
@@ -106,7 +108,7 @@
   <br>
   <br>
   
-  
+
     
     
 

@@ -1,39 +1,122 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled,Shelf,product_shelf,check,lost_list
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
 from urllib.parse import urlencode
 from localStoragePy import localStoragePy
-from datetime import date
+from datetime import date ,datetime
 from django.db import connection
 from datetime import  timedelta
 #asdasd
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
 
+def sum_lost(request):
+    lost_list.objects.all().delete()
+
+    
+
+    list_product = product_shelf.objects.all()
+    for p in list_product :
+        try :
+            pro_check = check.objects.get(product_code=p.product_code,shelf_id=p.shelf_id)
+            if(p.qty > pro_check.qty):
+                item = lost_list()
+                item.product_code = p.product_code
+                item.shelf_id = p.shelf_id
+                item.qty = int(p.qty) - int(pro_check.qty)
+                item.save()
+            else :
+                pass
+        except :
+            pass
+    return redirect('/sumarize')
+
+def add_check(request):
+    if request.POST.get('shelf_id') and request.POST.get('product_id') and request.POST.get('qty') :
+        shelf_id = request.POST.get('shelf_id')
+        product_id = request.POST.get('product_id')
+        qty = request.POST.get('qty')
+
+        try :
+            pros = Product.objects.get(product_code=product_id)
+            shelfs = product_shelf.objects.get(shelf_id=shelf_id)
+        except :
+            print("exit")
+            return redirect('/checkstock')
+        try :
+            obj = check.objects.get(product_code=product_id,shelf_id=shelf_id)
+            obj.qty = qty
+            obj.save()
+        except :
+            obj = check()
+            obj.product_code = product_id
+            obj.shelf_id = shelf_id
+            obj.qty = qty
+            obj.employee = localStorage.getItem("user")
+            obj.date = date.today()
+            obj.time = datetime.now()
+            obj.save()
+            return redirect('/checkstock')
+    return redirect('/checkstock')
+
 def update_status():
     product = Product.objects.all()
     for i in product :
-        print(i.product_code)
+        
         output = Product_output.objects.filter(product_code=i.product_code)
         qty = 0
         for j in output :
             if(j.date_output > date.today() - timedelta(days=30)):
-                print(j.date_output)
+            
                 qty += j.product_quantity
-        print(qty)
-        if(((qty/30)*i.product_send_time)+1 >= i.product_balance or i.product_balance == 0):
-                pro = Product.objects.get(product_code=i.product_code)
-                pro.prodect_status = "Low"
-                pro.save()
-                print(i.product_code)
+        if(i.product_balance == 0) :
+            pro = Product.objects.get(product_code=i.product_code)
+            pro.prodect_status = "Empty"
+            pro.save()
+
+        elif(((qty/30)*i.product_send_time)+1 >= i.product_balance):
+            pro = Product.objects.get(product_code=i.product_code)
+            pro.prodect_status = "Low"
+            pro.save()
+        
         else :
                 pro = Product.objects.get(product_code=i.product_code)
                 pro.prodect_status = "good"
                 pro.save()
-        print(((qty/30)*i.product_send_time)+1)
+        
+def update_status_owner():
+    store = store_stock.objects.all()
+    user = Personal.objects.get(username=localStorage.getItem("user"))
+    
+    for i in store :
+        output = saled.objects.filter(product_code=i.product_code,shop_name=user.shop_name)
+        qty = 0
+        for j in output :
+            if(j.date > date.today() - timedelta(days=30)):
+                qty += j.qty
+        
+        if(int(i.qty) == 0) :
+            print("EiEi1")
+            st = store_stock.objects.get(product_code=i.product_code,store_id=i.store_id)
+            st.status = "Empty"
+            st.save()
+        elif(((qty/30)*2) >= int(i.qty)):
+            print("EiEi2")
+            st = store_stock.objects.get(product_code=i.product_code,store_id=i.store_id)
+            st.status = "Low"
+            st.save()
+        else :
+            print("EiEi3")
+            st = store_stock.objects.get(product_code=i.product_code,store_id=i.store_id)
+            st.status = "good"
+            st.save()
+
             
+
+
+    
 
 
 def received(request):
@@ -139,6 +222,8 @@ def show_zone(request):
 
 def select_id_shelf(request):
     return render(request, 'select_id_shelf.html')
+
+
 
 def history_move(request):
     return render(request, 'history_move.html')
@@ -339,7 +424,7 @@ def submit_request(request):
 
 def stock(request,manufact = None):
     if(localStorage.getItem("user") is not None):
-        update_status()
+        
         username = localStorage.getItem("user")
         user = Personal.objects.get(username=username)
 
@@ -354,7 +439,7 @@ def stock(request,manufact = None):
                 else :
                       
                         results = Product.objects.raw('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
-                        
+                update_status()
                 return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
                 print("2")
             else:
@@ -366,7 +451,7 @@ def stock(request,manufact = None):
                     
                     cursor = connection.cursor()
                     print("asdas")
-                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty,project_app_store_stock.status from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
                      
                     results = cursor.fetchall()
                     print("1")
@@ -376,31 +461,32 @@ def stock(request,manufact = None):
                     print("EiEi")
                     cursor = connection.cursor()
                     
-                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE  (project_app_store_stock.product_code LIKE "'+search_words+'" OR  project_app_product.product_name LIKE "'+search_words+'") AND project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                    cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty,project_app_store_stock.status from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE  (project_app_store_stock.product_code LIKE "'+search_words+'" OR  project_app_product.product_name LIKE "'+search_words+'") AND project_app_store_stock.store_id = "'+user.shop_name+'" ')
                     results = cursor.fetchall()
                     
                     #results = results.objects.raw('select * from (select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code) WHERE  project_app_store_stock.product_code LIKE "'+search_words+'" OR  project_app_product.product_name LIKE "'+search_words+'"')
                    
-                    print("EiEi")
+                    
                     #cursor.execute('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
                     
                     #products = results.objects.raw('select * from project_app_product WHERE  product_code LIKE "'+search_words+'" OR  product_name LIKE "'+search_words+'"')
-                    print("EiEi")
+                    
+                update_status_owner()
                 return render(request,'store_stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
 
         except:
             print("2")
             if(user.rank == 'admin') :
                 results = Product.objects.all()
-                   
+                update_status()
                 return render(request,'stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
             else :
                 cursor = connection.cursor()
                 print("asdas")
-                cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
+                cursor.execute('select project_app_store_stock.store_id,project_app_store_stock.product_code,project_app_product.product_name,project_app_product.product_type,project_app_product.product_cost,project_app_product.product_selling,project_app_product.product_size,project_app_store_stock.qty,project_app_store_stock.status from project_app_store_stock join project_app_product on project_app_store_stock.product_code = project_app_product.product_code WHERE project_app_store_stock.store_id = "'+user.shop_name+'" ')
                      
                 results = cursor.fetchall()
-                   
+                update_status_owner()
                 return render(request,'store_stock.html',{'name' :localStorage.getItem("user"),'manufact':manufact,'products':results})
             
        
@@ -699,6 +785,17 @@ def create_account(request):
                     personal.address_post = request.POST['post_id']
                     personal.address_desc = request.POST['desc']
                     personal.save()
+                    print(personal.fullname)
+                    print(pwd)
+                    print(personal.identification)
+                    print(personal.phone)
+                    print(personal.address_id)
+                    print(personal.address_t)
+                    print(personal.address_a)
+                    print(personal.address_city)
+                    print(personal.address_post)
+                    
+
                     user.save()
                     return redirect('/')
                 else:
@@ -712,15 +809,19 @@ def create_account(request):
     return redirect('/')
 def checkemployee(request):
     if(localStorage.getItem("user") is not None):
-       
-        return render(request,'checkemployee.html',{'name' :localStorage.getItem("user")})
+        cursor = connection.cursor()
+        cursor.execute('select project_app_check.product_code,project_app_product.product_name,project_app_check.shelf_id,project_app_check.qty,project_app_check.date,project_app_check.time,project_app_check.employee from project_app_check join project_app_product on project_app_check.product_code = project_app_product.product_code')
+        results = cursor.fetchall()
+        return render(request,'checkemployee.html',{'name' :localStorage.getItem("user"),'results':results})
     else :
         return redirect('/login')
 
 def sumarize(request):
     if(localStorage.getItem("user") is not None):
-       
-        return render(request,'sumarize.html',{'name' :localStorage.getItem("user")})
+        cursor = connection.cursor()
+        cursor.execute('select project_app_lost_list.product_code,project_app_product.product_name,project_app_lost_list.shelf_id,project_app_lost_list.qty from project_app_product join project_app_lost_list on project_app_product.product_code = project_app_lost_list.product_code')
+        results = cursor.fetchall()
+        return render(request,'sumarize.html',{'name' :localStorage.getItem("user"),'results':results})
     else :
         return redirect('/login')
 

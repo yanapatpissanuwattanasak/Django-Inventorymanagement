@@ -82,6 +82,7 @@ class store_stock(models.Model) :
     store_id = models.CharField(max_length=20)
     product_code = models.CharField(max_length=20)
     qty = models.IntegerField()
+    status = models.CharField(max_length=20)
 
 class Store(models.Model):
     store_name = models.CharField(max_length=50)
@@ -109,3 +110,22 @@ class saled(models.Model):
     date = models.DateField()
     qty = models.IntegerField()
     total = models.IntegerField()
+
+class product_shelf(models.Model):
+    product_code = models.CharField(max_length=20)
+    shelf_id = models.TextField(max_length=50, blank=True)
+    qty = models.IntegerField()
+    status = models.CharField(max_length=50)
+    
+class check(models.Model):
+    product_code = models.CharField(max_length=20)
+    shelf_id = models.TextField(max_length=50, blank=True)
+    qty = models.IntegerField()
+    employee = models.CharField(max_length=50)
+    date = models.DateField()
+    time = models.TimeField()
+class lost_list(models.Model) :
+    product_code = models.CharField(max_length=20)
+    shelf_id = models.TextField(max_length=50, blank=True)
+    qty = models.IntegerField()
+
