@@ -1,0 +1,450 @@
+<html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <title>Menu</title>
+            <meta name="description" content="Figma htmlGenerator">
+            <meta name="author" content="htmlGenerator">
+            <meta name="viewport" content="width=1080px, height=2280px">
+            <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">            
+
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+            <scrip src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+            <link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css" />
+            <link rel="stylesheet" href="/path/to/bootstrap-steps.min.css" />
+
+            <scrip src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scrip>
+            <scrip src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scrip>
+
+
+            
+           
+
+            <style>
+                .flex-container {
+                    display: flex;
+                    {% comment %} background-color: DodgerBlue; {% endcomment %}
+                    height : 100% ;
+                    flex-direction:column;
+                }
+                
+                .popup .overlay {
+                position:fixed;
+                top:0px;
+                left:0px;
+                width:100vw;
+                height:100vh;
+                background:rgba(0,0,0,0.7);
+                z-index:1;
+                display:none;
+                }
+                
+                .popup .content {
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%) scale(0);
+                background:#fff;
+                width:400px;
+                height:450px;
+                z-index:2;
+                text-align:center;
+                padding:20px;
+                box-sizing:border-box;
+                font-family:"Open Sans",sans-serif;
+                }
+                
+                .popup .close-btn {
+                cursor:pointer;
+                position:absolute;
+                right:20px;
+                top:20px;
+                width:30px;
+                height:30px;
+                background:#222;
+                color:#fff;
+                font-size:25px;
+                font-weight:600;
+                line-height:30px;
+                text-align:center;
+                border-radius:50%;
+                }
+                
+                .popup.active .overlay {
+                display:block;
+                }
+                
+                .popup.active .content {
+                transition:all 300ms ease-in-out;
+                transform:translate(-50%,-50%) scale(1);
+                }
+            </style>
+          
+        </head>
+          
+        <body>
+            <div class="flex-container">
+                
+                <!-- popup SUCCESS -->
+                <div class="popup" id="popup_success">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:20%; weight:80%;">
+                        <div style="height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="height : 60% ; display:flex; flex-direction : row ;">
+                                <div style="width : 37.5% ; "></div>
+                                <div style="width : 25% ; ">
+                                    <img src="https://cdn.discordapp.com/attachments/807134152011939850/817306853586632714/success.png" width= 80% height=100% >
+                                </div>
+                                <div style="width : 37.5% ; "></div>
+                            </div>
+                            <div style=" height : 40% ; margin-top : -3% ;">
+                                <h1 style="font-family:Baloo;color : #464645; ">Successful !</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_success()" style="margin-top: 2%;margin-left:25%;;border-radius: 15px; width:50%; background-color : green; border:none; font-size:13px;font-weight: bold;" >Success</button>
+                
+                <script>
+                function togglePopup_success(){
+                document.getElementById("popup_success").classList.toggle("active");
+                setTimeout(function(){document.getElementById("popup_success").classList.toggle("active");}, 800);
+                }
+            </script>
+            <!-- endpopup SUCCESS -->
+
+            <!-- **************************************************************************************************************************************** -->
+
+            <!-- popup Delete -->
+                <div class="popup" id="popup_Delete">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:25%; weight:100%;">
+                        <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="; height : 40% ; text-align : center ;">
+                                <h1 style="font-family:Baloo;color : #C00B0B ; ">Delete</h1>
+                            </div>
+                            <div style=" height : 30% ;  ">
+                                <span style="font-family:Baloo;color : #464645 ; font-size : 16px ; ">Are you  sure you want to Delete this Product  ?</span>
+                            </div>
+                            <div style=" height : 30% ; display:flex; flex-direction : row ; ">
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #464645;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                            onclick="togglePopup_Delete()"
+                                    >Cancle</button>
+                                </div>
+                                <div style="   width : 25% ; "></div>
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #C31F1F ;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                    >Delete</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                                        
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Delete()" style="margin-top: 2%;margin-left:25%;;border-radius: 15px; width:50%; background-color : red; border:none; font-size:13px;font-weight: bold;" >Delete</button>
+                
+                <script>
+                function togglePopup_Delete(){
+                document.getElementById("popup_Delete").classList.toggle("active");
+                }
+            </script>
+            <!-- endpopup Delete -->
+
+            <!-- **************************************************************************************************************************************** -->
+
+            <!-- popup Save -->
+                <div class="popup" id="popup_Save">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:25%; weight:100%;">
+                        <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="; height : 40% ; text-align : center ;">
+                                <h1 style="font-family:Baloo;color : #0B7FC0 ; ">Save</h1>
+                            </div>
+                            <div style=" height : 30% ;  ">
+                                <span style="font-family:Baloo;color : #464645 ; font-size : 16px ; ">Are you sure to save edit your Product ?</span>
+                            </div>
+                            <div style=" height : 30% ; display:flex; flex-direction : row ; ">
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #464645;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                            onclick="togglePopup_Save()"
+                                    >Cancle</button>
+                                </div>
+                                <div style="   width : 25% ; "></div>
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #0B7FC0 ;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                    >Save</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                                        
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Save()" style="margin-top: 2%;margin-left:25%;;border-radius: 15px; width:50%; background-color : #0B7FC0; border:none; font-size:13px;font-weight: bold;" >Save</button>
+                
+                <script>
+                function togglePopup_Save(){
+                document.getElementById("popup_Save").classList.toggle("active");
+                }
+            </script>
+            <!-- endpopup Save -->
+
+            <!-- **************************************************************************************************************************************** -->
+
+            <!-- popup Refund -->
+                <div class="popup" id="popup_Refund">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:25%; weight:100%;">
+                        <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="; height : 40% ; text-align : center ;">
+                                <h1 style="font-family:Baloo;color : #C00B0B ; ">Refund</h1>
+                            </div>
+                            <div style=" height : 30% ;  ">
+                                <span style="font-family:Baloo;color : #464645 ; font-size : 16px ; ">Are you  sure you want to refund this receipt  ?</span>
+                            </div>
+                            <div style=" height : 30% ; display:flex; flex-direction : row ; ">
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #464645;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                            onclick="togglePopup_Refund()"
+                                    >Cancle</button>
+                                </div>
+                                <div style="   width : 25% ; "></div>
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #C31F1F ;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                    >Refund</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                                        
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Refund()" style="margin-top: 2%;margin-left:25%;;border-radius: 15px; width:50%; background-color : red; border:none; font-size:13px;font-weight: bold;" >Refund</button>
+                
+                <script>
+                function togglePopup_Refund(){
+                document.getElementById("popup_Refund").classList.toggle("active");
+                }
+            </script>
+            <!-- endpopup Refund -->
+
+
+            <!-- **************************************************************************************************************************************** -->
+
+            <!-- popup Logout -->
+                <div class="popup" id="popup_Logout">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:25%; weight:100%;">
+                        <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="; height : 40% ; text-align : center ;">
+                                <h1 style="font-family:Baloo;color : #C00B0B ; ">Logout</h1>
+                            </div>
+                            <div style=" height : 30% ;  ">
+                                <span style="font-family:Baloo;color : #464645 ; font-size : 16px ; ">Are you  sure you want to logout  ?</span>
+                            </div>
+                            <div style=" height : 30% ; display:flex; flex-direction : row ; ">
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #464645;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                            onclick="togglePopup_Logout()"
+                                    >Cancle</button>
+                                </div>
+                                <div style="   width : 25% ; "></div>
+                                <div style="  width : 37.5% ; ">
+                                    <button style="background-color: #C31F1F ;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                    >Yes</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                                        
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Logout()" style="margin-top: 2%;margin-left:25%;border-radius: 15px; width:50%; background-color : #0c1428; border:none; font-size:13px;font-weight: bold;" >Logout</button>
+                
+                <script>
+                function togglePopup_Logout(){
+                document.getElementById("popup_Logout").classList.toggle("active");
+                }
+            </script>
+            <!-- endpopup Logout -->
+
+
+
+            <!-- popup Receive -->
+                <div class="popup" id="popup_Receive">
+                    <div class="overlay"></div>
+                    <div class="content" style="background-color:white; border-radius : 40px; height:25%; weight:100%;">
+                        <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                            <div style="height : 14% ; text-align : center ;">    
+                                <span style="font-family:Baloo;color : #87B4E4 ; font-size : 18px ; ">Total</span>
+                            </div>
+                            <div style="height : 27% ;text-align : center ; ">
+                                <span style="font-family:Baloo;color : #464645 ; font-size : 28px ; ">12546.00</span>
+                            </div>
+                            <div style="background-color : #464645 ; height : 2% ; "></div>
+                            <div style="height : 23% ; display:flex; flex-direction : row ; ">
+                                <div style="width : 20% ;  margin-top : 2% ;">
+                                    <span style="font-family:Baloo;color : #464645 ; font-size : 13px ; ">Receive :</span>
+                                </div>
+                                <div style=" width : 30% ; display:flex ;  flex-direction : column ;">
+                                    <div style="background-color : white ; height : 15% ; "></div>
+                                    <div style="background-color : #D4D3D3 ; height : 70% ; margin-top : 5%; border-radius : 20px; display:flex ; justify-content: flex-start;  ">
+                                        <span style="font-family:Baloo;color : #464645 ; font-size : 13px ;margin-left : 10%; ">500.00</span>
+                                    </div>
+                                    <div style="background-color : white ; height : 15% ; "></div>
+                                </div>
+                                <div style=" width : 20% ; margin-top : 2% ; ">
+                                    <span style="font-family:Baloo;color : #464645 ; font-size : 13px ; ">Change :</span>
+                                </div>
+                                <div style=" width : 30% ; display:flex ;  flex-direction : column ;  ">
+                                    <div style="background-color : white ; height : 15% ; "></div>
+                                    <div style="background-color : #D4D3D3 ; height : 70% ; margin-top : 5%; border-radius : 20px; display:flex ; justify-content: flex-start;  ">
+                                        <span style="font-family:Baloo;color : #464645 ; font-size : 13px ;margin-left : 10%; ">100.00</span>
+                                    </div>
+                                    <div style="background-color : white ; height : 15% ; "></div>
+                                </div>
+                            </div>
+                            <div style=" height : 30% ; display:flex; flex-direction : row ; margin-top : 4% ;">
+                                <div style="  width : 37.5% ; display:flex ; justify-content: flex-start;">
+                                    <button style="background-color: #464645;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                            onclick="togglePopup_Receive()"
+                                    >Cancle</button>
+                                </div>
+                                <div style="   width : 25% ; "></div>
+                                <div style="  width : 37.5% ;display:flex ; justify-content: flex-end; ">
+                                    <button style="background-color: #87B4E4 ;
+                                                    color:  rgb(255, 255, 255);
+                                                    border: none;
+                                                    width:  90%;
+                                                    height:  80%;
+                                                    border-radius: 50px;
+                                                    font-family:Baloo;
+                                                    font-size:14px;"
+                                    >Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Receive()" style="margin-top: 2%;margin-left:25%;border-radius: 15px; width:50%; background-color : yellow ; border:none; font-size:13px;font-weight: bold;" >Receive</button>
+                
+                <script>
+                function togglePopup_Receive(){
+                document.getElementById("popup_Receive").classList.toggle("active");
+                }
+            </script>
+            <!-- endpopup Receive -->
+
+            <!--Popup Money -->
+                <div class="popup" id="popup-money">
+                                <div class="overlay"></div>
+                                <div class="content"  style="background-color:white; border-radius : 50px; height:30%; width:25%;" >
+                                    <div class="close-btn" onclick="togglePopup_Money()">&times;</div>
+                                        <div  style="width:100%; height:30%; display:flex;flex-direction:row">
+                                            <div  style=" width:50%; height:100%; margin-top : 2.2%; ">
+                                                <span style="font-weight: bold; font-family:Baloo; text-align:center;font-size:30px; color : #4F7BBC;">Choose</span>
+                                            </div>
+                                            <div  style="width:50%; height:100%; margin-top : 5%; margin-left : -12%; ">
+                                                <span style="font-family:Baloo;">a payment method</span>
+                                            </div>
+                                        </div>
+                                        <div  style="background-color : black ; width:100%; height:2%;"></div>
+                                        <div  style="background-color : white ; width:100%; height:65%; display:flex;flex-direction:row">
+                                            <div  style="background-color : white ; width:47.5%; height:100%; display:flex; justify-content :flex-end ;">
+                                                <button onclick="togglePopup_input(),togglePopup_money()" type="button" class="btn btn-primary" style=" margin-top : 10%; margin-right : 10%;height: 100px ;width :100px ; border: none; border-radius: 50px; background: url(https://cdn.discordapp.com/attachments/807134152011939850/817102873505955860/cash.png)"></button>
+                                            </div>
+                                            <div  style="background-color : white ; width:5%; height:100%;"></div>
+                                            <div  style="background-color : white ; width:47.5%; height:100%; display:flex; justify-content :flex-start ; ">
+                                                <button onclick="togglePopup_QR(),togglePopup_Money()" type="button" class="btn btn-primary" style=" margin-top : 10%; margin-left : 10%; height: 100px ;width :100px ; border: none; border-radius: 50px; background: url(https://cdn.discordapp.com/attachments/807134152011939850/817102872310841384/QR.png)"></button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            
+
+                <button  class="btn btn-success btn-lg" onclick="togglePopup_Money()" style="margin-top: 2%;margin-left:25%;border-radius: 15px; width:50%; background-color : pink ; border:none; font-size:13px;font-weight: bold;" >Money</button>
+                
+                <script>
+                function togglePopup_Money(){
+                document.getElementById("popup-money").classList.toggle("active");
+                }
+                </script>
+                <!--End Popup -->  
+            
+
+
+            </div>
+
+        </body>
+</html>
+
+

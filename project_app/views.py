@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled,Shelf,product_shelf,check,lost_list
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled,Shelf,product_shelf,check,lost_list,Group_analysis,history_lost
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -11,7 +11,68 @@ from datetime import  timedelta
 #asdasd
 # Create your views here.
 localStorage = localStoragePy('store', 'json')
+def dashboard(request):
+    user = Personal.objects.get(username=localStorage.getItem("user"))
+    if(user.rank == "admin") :
+        return render(request,'dashboard.html',{'name' :localStorage.getItem("user")})
+    else :
+         return render(request,'dashboard_owner.html',{'name' :localStorage.getItem("user")})
+    
+def auto_lost(request) :
+    for i in lost_list.objects.all() :
+        p_s = product_shelf.objects.get(product_code=i.product_code,shelf_id=i.shelf_id)
+        product = Product.objects.get(product_code=i.product_code)
+        product.product_balance -= i.qty
+        product.save()
+        lost = history_lost()
+        lost.product_code = i.product_code
+        p_s.qty -= i.qty
+        p_s.save()
+        lost.qty = i.qty
+        dates = date.today()
+        if dates.day > 1 and dates.day < 16 :
+            lost.check_date = datetime(dates.year, dates.month, 1)
+            lost.save()
+        else :
+            lost.check_date = datetime(dates.year, dates.month, 16)
+            lost.save()
+    return redirect('/checkstock')
 
+
+
+def filter_month():
+    start_date = date(2021,3,1)
+    stop_date = date(2021,3,31)
+    if(stop_date.month == 2):
+        stop_date = date(2021,2,28)
+    product = Product_output.objects.all()
+    output = Group_analysis.objects.all()
+    for j in output:
+        p = Group_analysis.objects.get(product_code=j.product_code)
+        p.month_qty=0
+        p.profit=0
+        p.profit_per=0
+        p.save()
+    for i in product :
+        print(i.product_code)
+
+        output = Group_analysis.objects.get(product_code=i.product_code)
+        cal = Product.objects.get(product_code=i.product_code)
+        if(i.date_output >= start_date and i.date_output <= stop_date ):
+            print(i.date_output)
+            output.month_qty += i.product_quantity
+            output.profit = (cal.product_selling-cal.product_cost)*output.month_qty
+        output.save()
+def analysis(request):
+    if(localStorage.getItem("user") is not None):
+        filter_month()
+
+        cursor = connection.cursor()
+        cursor.execute('select project_app_group_analysis.product_code,project_app_product.product_name,project_app_group_analysis.month_qty,project_app_product.product_selling*project_app_group_analysis.month_qty,project_app_group_analysis.profit,project_app_group_analysis.group from project_app_product join project_app_group_analysis on project_app_product.product_code = project_app_group_analysis.product_code  ')
+        itemlist = cursor.fetchall()
+        return render(request, 'analysis.html',{'name' :localStorage.getItem("user"),'itemlist':itemlist})
+    else :
+        return redirect('/login')
 def sum_lost(request):
     lost_list.objects.all().delete()
 
@@ -170,8 +231,7 @@ def store_preorder(request):
 def store_analysis(request):
     return render(request, 'store_analysis.html')
 
-def analysis(request):
-    return render(request, 'analysis.html')
+
 
 def check_detail(request):
     return render(request, 'check_detail.html')
@@ -218,7 +278,26 @@ def deleteshelf(request,code):
     return redirect('/cdshelf')
 
 def show_zone(request):
-    return render(request, 'show_zone.html')
+    checks = True
+    results = Shelf.objects.all()
+    for i in results :
+        items = product_shelf.objects.filter(shelf_id=i.code)
+        for item in items :
+            try :
+                check.objects.get(product_code=item.product_code,shelf_id=item.shelf_id)
+                pass
+            except :
+                eiei = Shelf.objects.get(code=item.shelf_id)
+                eiei.status = 'unCheck'
+                eiei.save()
+                checks = False
+                break
+        if(checks) :
+            eiei = Shelf.objects.get(code=item.shelf_id)
+            eiei.status = 'Checked'
+            print(item)
+            eiei.save()
+    return render(request, 'show_zone.html',{'results' : results})
 
 def select_id_shelf(request):
     return render(request, 'select_id_shelf.html')
@@ -829,7 +908,7 @@ def contact(request):
     if(localStorage.getItem("user") is not None):
         user = Personal.objects.get(username=localStorage.getItem("user"))
         if(user.rank == "admin") :
-            return render(request,'contact.html',{'name' :localStorage.getItem("user")})
+            return render(request,'popup.html',{'name' :localStorage.getItem("user")})
         else :
             #return render(request,'error.html',{'name' :localStorage.getItem("user")})
            return render(request,'contact_owner.html',{'name' :localStorage.getItem("user")})

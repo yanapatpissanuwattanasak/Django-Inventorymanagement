@@ -65,6 +65,7 @@ class Shelf(models.Model):
     code = models.TextField(max_length=50, blank=True)
     value = models.IntegerField()
     valueremain = models.IntegerField(default=0)
+    status = models.CharField(max_length=10)
 
 class preorder(models.Model):
     product_code = models.CharField(max_length=20)
@@ -129,3 +130,13 @@ class lost_list(models.Model) :
     shelf_id = models.TextField(max_length=50, blank=True)
     qty = models.IntegerField()
 
+class Group_analysis(models.Model):
+    product_code = models.CharField(max_length=20,default='')
+    group = models.CharField(max_length=1,default='A')
+    profit = models.IntegerField(default=0)
+    month_qty = models.IntegerField(default=0)
+
+class history_lost(models.Model) :
+    product_code = models.CharField(max_length=20)
+    qty = models.IntegerField()
+    check_date = models.DateField()

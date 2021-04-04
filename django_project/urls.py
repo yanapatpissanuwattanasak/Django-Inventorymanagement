@@ -84,6 +84,8 @@ urlpatterns = [
     path('order_detail/<slug:id>',views.order_detail),
     path('add_check',views.add_check),
     path('sum_lost',views.sum_lost),
+    path('dashboard',views.dashboard),
+    path('auto_lost',views.auto_lost),
     
 
 

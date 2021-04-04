@@ -28,11 +28,19 @@
         </tr>
       </thead>
       <tbody>
+      {% for item in results %}
         <tr align="center">
-          <th scope="row" style="font-size: 15px;">000</th>
-          <td style="font-size: 15px;">200</td>
+          <th scope="row" style="font-size: 15px;">{{item.code}}</th>
+          <td style="font-size: 15px;">{{item.value}}</td>'
+          
+          {% if item.status == 'Checked'%}
           <td style="font-size: 15px;">เช็คแล้ว</td>
+          {%else%}
+          <td style="font-size: 15px;">ยังไม่เช็ค</td>
+          {% endif %}
+          
         </tr>
+      {% endfor %}
       </tbody>
     </table>
     <div style="position: absolute;width: 136px;height: 23px;left: 700px;top: 650px;font-size: 15px;">
