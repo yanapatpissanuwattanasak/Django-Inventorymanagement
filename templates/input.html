@@ -24,7 +24,7 @@
             box-sizing: border-box;
             border-radius: 20px;}
 
-        input[type="submit"] {position: absolute;
+        input[type="bt"] {position: absolute;
             width: 120px;
             height: 50px;
             background: #FFB800;
@@ -54,7 +54,7 @@
     {%endif%}
     
     <div id="wbg"><h2 align="center" style="margin: 50px;">นำเข้าสินค้า</h2>
-        <form action="input" method="POST">
+        <form action="to_shelf" method="POST" id = "go">
             {% csrf_token %} 
         <div style="margin-left: 100px;margin-top: 50px;">
             
@@ -67,7 +67,7 @@
             
         </div>
         <div>
-            <input type="submit" value="บันทึก" class="btn btn-warning"  style="position: absolute; left: 260px; top: 350px;">
+            <input type="submit"  value="บันทึก" class="btn btn-success btn-lg"    style="position: absolute; left: 260px; top: 350px;">
             <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PHBhdGggZD0ibTQ5NSAxNDR2MzM4YzAgMTYuNTQtMTMuNDYgMzAtMzAgMzBoLTQxOGMtMTYuNTQgMC0zMC0xMy40Ni0zMC0zMHYtNDUyYzAtMTYuNTQgMTMuNDYtMzAgMzAtMzBoOThjMzguNyAxNy4zMiA3Ny4xOSAyMy43MSAxMTEgMjQuNjUgNjMuODggMS43OSAxMTEtMTUuODQgMTExLTE1Ljg0bDEyMy42NSAxMjQuNjJjMi43OSAyLjgxIDQuMzUgNi42MSA0LjM1IDEwLjU3eiIgZmlsbD0iIzRkNTc4OCIvPjxwYXRoIGQ9Im00OTUgMTQ0djMzOGMwIDE2LjU0LTEzLjQ2IDMwLTMwIDMwaC0yMDl2LTQ4Ny4zNWM2My44OCAxLjc5IDExMS0xNS44NCAxMTEtMTUuODRsMTIzLjY1IDEyNC42MmMyLjc5IDIuODEgNC4zNSA2LjYxIDQuMzUgMTAuNTd6IiBmaWxsPSIjMzEzYTZiIi8+PHBhdGggZD0ibTM2NyA4LjgxdjE1MS4xOWMwIDguMjgtNi43MiAxNS0xNSAxNWgtMTkyYy04LjI4IDAtMTUtNi43Mi0xNS0xNXYtMTYwaDIwN2M0IDAgNy44MyAxLjYgMTAuNjUgNC40M3oiIGZpbGw9IiNmM2Q2NTIiLz48cGF0aCBkPSJtMzY3IDguODF2MTUxLjE5YzAgOC4yOC02LjcyIDE1LTE1IDE1aC05NnYtMTc1aDk2YzQgMCA3LjgzIDEuNiAxMC42NSA0LjQzeiIgZmlsbD0iI2U5YmMzZSIvPjxwYXRoIGQ9Im0zMDMgMHY5NmMwIDguMjgtNi43MiAxNS0xNSAxNXMtMTUtNi43Mi0xNS0xNXYtOTZ6IiBmaWxsPSIjZGM0NTViIi8+PHBhdGggZD0ibTQzMSAyNTZ2MTc2YzAgOC4yOC02LjcyIDE1LTE1IDE1aC0zMjBjLTguMjggMC0xNS02LjcyLTE1LTE1di0xNzZjMC04LjI4IDYuNzItMTUgMTUtMTVoMzIwYzguMjggMCAxNSA2LjcyIDE1IDE1eiIgZmlsbD0iI2RmZTVmMiIvPjxwYXRoIGQ9Im00MzEgMjU2djE3NmMwIDguMjgtNi43MiAxNS0xNSAxNWgtMTYwdi0yMDZoMTYwYzguMjggMCAxNSA2LjcyIDE1IDE1eiIgZmlsbD0iI2M3Y2RkZSIvPjxwYXRoIGQ9Im0yMDggMzM1aC00OGMtOC4yODQgMC0xNS02LjcxNi0xNS0xNXM2LjcxNi0xNSAxNS0xNWg0OGM4LjI4NCAwIDE1IDYuNzE2IDE1IDE1cy02LjcxNiAxNS0xNSAxNXoiIGZpbGw9IiMzMTNhNmIiLz48L2c+PC9zdmc+" 
             style="position: absolute;
             height: 70px;
@@ -91,6 +91,120 @@
         </div> --> 
 
     </div>
+    <!-- popup Save -->
+    <!-- <div class="popup" id="popup_Save">
+        <div class="overlay"></div>
+        <div class="content" style="background-color:white; border-radius : 40px; height:95%; weight:100%;">
+            <div style="  height: 100% ; width : 100% ; display:flex ; flex-direction : column;">
+                <div style="; height : 10% ; text-align : center ;">
+                    <h1 style="font-family:Baloo;color : #0B7FC0 ; ">Save</h1>
+                </div>
+                <div style=" height : 10% ;  ">
+                    <span style="font-family:Baloo;color : #464645 ; font-size : 16px ; ">เลือกคลังที่ต้องการไปเก็บ</span>
+                    
+                </div>
+                <div>
+                    <table class="table table-bordered">
+                        <thead class="text-center"> 
+                          <tr bgcolor="FFB800">
+                            
+                            <th scope="col">รหัสคลัง</th>
+                            <th scope="col">จำนวนที่ใส้ได่</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            <tr>
+                                <td>EiEi</td>
+                                <td>555</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div style=" height : 10% ; display:flex; flex-direction : row ; ">
+                    <div style="  width : 37.5% ; ">
+                        <button style="background-color: #464645;
+                                        color:  rgb(255, 255, 255);
+                                        border: none;
+                                        width:  90%;
+                                        height:  80%;
+                                        border-radius: 50px;
+                                        font-family:Baloo;
+                                        font-size:14px;"
+                                onclick="togglePopup_Save()"
+                        >Cancle</button>
+                    </div>
+                    <div style="   width : 25% ; "></div>
+                    <div style="  width : 37.5% ; ">
+                        <button type="submit" style="background-color: #0B7FC0 ;
+                                        color:  rgb(255, 255, 255);
+                                        border: none;
+                                        width:  90%;
+                                        height:  80%;
+                                        border-radius: 50px;
+                                        font-family:Baloo;
+                                        font-size:14px;"
+                                    onclick="gosave()"
+                        >Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
+                            
+    <!-- <button  class="btn btn-success btn-lg" onclick="togglePopup_Save()" style="margin-top: 2%;margin-left:25%;;border-radius: 15px; width:50%; background-color : #0B7FC0; border:none; font-size:13px;font-weight: bold;" >Save</button>
+     -->
+    <script>
+    function togglePopup_Save(){
+    document.getElementById("popup_Save").classList.toggle("active");
+    
+    }
+    function gosave(){
+        document.getElementById("go").submit()
+    }
+</script>
+<!-- endpopup Save -->
     <div>
         <a href="#">
             <button type="button" class="btn btn-warning" style="top: 640px;left: 50px;">คำสั่งซื้อเพิ่มเติม</button>

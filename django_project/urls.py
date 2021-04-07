@@ -86,6 +86,8 @@ urlpatterns = [
     path('sum_lost',views.sum_lost),
     path('dashboard',views.dashboard),
     path('auto_lost',views.auto_lost),
+    path('to_shelf',views.to_shelfs),
+    path('save_product/<slug:product_code>/<int:amount>/<slug:shelf_id>',views.save_product)
     
 
 

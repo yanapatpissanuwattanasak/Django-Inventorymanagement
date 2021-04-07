@@ -140,3 +140,12 @@ class history_lost(models.Model) :
     product_code = models.CharField(max_length=20)
     qty = models.IntegerField()
     check_date = models.DateField()
+
+class history_product_shelf(models.Model):
+    product_code = models.CharField(max_length=20)
+    qty = models.IntegerField()
+    shelf_id =  models.TextField(max_length=50, blank=True)
+    total = models.IntegerField()
+    date = models.DateField()
+    user = models.CharField(max_length=50)
+    

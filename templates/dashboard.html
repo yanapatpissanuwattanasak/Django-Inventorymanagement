@@ -113,11 +113,11 @@
             <p>_____________________________________________________________</p>
             <div class="row">
               <div class="col-10 d-flex justify-content-left">Low Stock Item</div>
-              <div class="col-2 d-flex justify-content-center">3</div>
+              <div class="col-2 d-flex justify-content-center">{{stockstatus.0}}</div>
             </div>
             <div class="row">
               <div class="col-10 d-flex justify-content-left">Empty Stock Item</div>
-              <div class="col-2 d-flex justify-content-center">1</div>
+              <div class="col-2 d-flex justify-content-center">{{stockstatus.1}}</div>
             </div>
           </font>
         </div>
@@ -134,6 +134,13 @@
           <div id = "cstock">
             <div style = "margin: 20px">
               <h3 align = 'center'>สถานะเช็ค Stock</h3>
+              {%if stockstatus.2 != 0 %}
+              <img src="https://images.all-free-download.com/images/graphiclarge/x_icon_clip_art_9385.jpg" 
+              style=" height: 70px;width: 70px;border-radius: 0px;margin-left: 80px;margin-top: 15px;"/>
+              {% else %}
+              <img src="https://cms-assets.tutsplus.com/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" 
+              style=" height: 120px;width: 160px;border-radius: 0px;margin-left: 30px;margin-top: 0px;"/>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -144,19 +151,36 @@
             <h3 align = 'center'>Receive Product</h3>
             <p>______________________________________________________________________________________________________________</p>
             <font size=2>
-              <div class="row">
-                <div class="col-3 d-flex justify-content-center">รหัสสินค้า</div>
-                <div class="col-3 d-flex justify-content-center">ชื่อสินค้า</div>
-                <div class="col-3 d-flex justify-content-center">ประเภท</div>
-                <div class="col-3 d-flex justify-content-center">ราคารวม</div>
+              <div style="width: 450px;">
+                <table class="table" >
+                    <thead >
+                      <tr class="text-center" style="font-size: 2;">
+                      <th>รหัสสินค้า</th>
+                      <th>รหัสคลัง</th>
+                      <th>จำนวน</th>
+                      <th>ราคารวม</th>
+                      <th>ผู้รับ</th>
+                    </tr>
+                    </thead>
+                    
+                      <tbody>
+                        {% for input in inputs %}
+                         
+                          <tr class="text-center" style="font-size: 2;">
+                          <td>{{input.product_code}}</td>
+                          <td>{{input.shelf_id}}</td>
+                          <td>{{input.qty}}</td>
+                          <td>{{input.total}}</td>
+                          <td>{{input.user}}</td>
+                          </tr>
+                         
+                        {% endfor %}
+                      </tbody>
+                </table>
+               
               </div>
             </font>
-            <div class="row">
-              <div class="col-3 d-flex justify-content-center">qyu459x</div>
-              <div class="col-3 d-flex justify-content-center">เสื้อเเขนยาวลายดอก</div>
-              <div class="col-3 d-flex justify-content-center">เสื้อเเขนยาว</div>
-              <div class="col-3 d-flex justify-content-center">25100</div>
-            </div>
+           
           </font>
         </div>
       </div>

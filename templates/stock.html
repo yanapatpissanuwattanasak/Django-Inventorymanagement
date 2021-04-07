@@ -1,6 +1,33 @@
 {% extends 'header.html' %}
 
 {% block content %}
+ <style>
+  
+  .tableFixHead {
+        overflow-y: auto;
+        height: 700px;
+      }
+      .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        
+      }
+      th {
+        background: #FFB800;
+      }
+     
+
+
+ </style>
   <div class=" row container-fluid d-flex justify-content-center">
     <div class="col-10 "> 
   <h3 align = "center">ยอดคงเหลือสินค้า</Frame></align></h3>
@@ -60,33 +87,35 @@
         <OPTION VALUE=2>น้อยไปมาก
         </SELECT>
   </div>
-  <table class="table table-bordered">
-    <thead class="text-center"> 
-      <tr bgcolor="FFB800">
-        <th scope="col">รหัสสินค้า</th>
-        <th scope="col">ชื่อสินค้า</th>
-        <th scope="col">ประเภท</th>
-        <th scope="col">ราคาต้นทุน</th>
-        <th scope="col">ราคาขาย</th>
-        <th scope="col">ไซด์</th>
-        <th scope="col">เชลฟ์</th>
-        <th scope="col">จำนวน</th>
-        <th scope="col">สถานะ</th>
-        <th scope="col"> </th>
+  <div class="tableFixHead">
+  <table class=""  >
+    <thead class="text-center "  > 
+      <tr bgcolor="FFB800" >
+        <th >รหัสสินค้า</th>
+        <th >ชื่อสินค้า</th>
+        <th >ประเภท</th>
+        <th >ราคาต้นทุน</th>
+        <th >ราคาขาย</th>
+        <th >ไซด์</th>
+        
+        <th >จำนวน</th>
+        <th >สถานะ</th>
+        <th >ลบ</th>
       </tr>
     </thead>
-    <tbody>
+    
+    <tbody >
       
       {%for product in products%}
 
-      <tr>
-        <td><p style="margin-top: 10%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.product_code}}</a></p></td>
+      <tr >
+        <td ><p style="margin-top: 10%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.product_code}}</a></p></td>
         <td><p style="margin-top: 5%;"><a href="/detail/{{product.product_code}}"style="color:black;text-decoration:none">{{product.product_name}}</a></p></td>
         <td><p style="margin-top: 10%;">{{product.product_type}}</p></td>
         <td class="text-center "  ><p style="margin-top: 10%;">{{product.product_cost}}</p></td>
         <td class="text-center" ><p style="margin-top: 10%;">{{product.product_selling}}</p></td>
         <td class="text-center"  ><p style="margin-top: 17%;">{{product.product_size}}</p></td>
-        <td  ><button style="margin-block: 5%;margin-inline: 25%;" type="button" class="btn btn-secondary d-flex justify-content-center">Go to Shelf</button></td>
+        
         <td>{{product.product_balance}}</td>
         {% if product.prodect_status == "good"  %}
         <td style = "background-color : #00ff19"> </td>
@@ -103,31 +132,24 @@
       {% endfor %}
       
     </tbody>
+  
   </table>
-  <br>
-  <br>
-  
-  
-    
-    
-
-    
-    
-
-  
-  <div align = "Center">
-    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjU2LDBDMTE0LjgzNywwLDAsMTE0LjgzNywwLDI1NnMxMTQuODM3LDI1NiwyNTYsMjU2czI1Ni0xMTQuODM3LDI1Ni0yNTZTMzk3LjE2MywwLDI1NiwweiBNMzEzLjc0OSwzNDcuNTg0DQoJCQljOC4zNDEsOC4zNDEsOC4zNDEsMjEuODI0LDAsMzAuMTY1Yy00LjE2LDQuMTYtOS42MjEsNi4yNTEtMTUuMDgzLDYuMjUxYy01LjQ2MSwwLTEwLjkyMy0yLjA5MS0xNS4wODMtNi4yNTFMMTc2LjkxNywyNzEuMDgzDQoJCQljLTguMzQxLTguMzQxLTguMzQxLTIxLjgyNCwwLTMwLjE2NWwxMDYuNjY3LTEwNi42NjdjOC4zNDEtOC4zNDEsMjEuODI0LTguMzQxLDMwLjE2NSwwczguMzQxLDIxLjgyNCwwLDMwLjE2NUwyMjIuMTY1LDI1Ng0KCQkJTDMxMy43NDksMzQ3LjU4NHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" 
-    style="width: 32px;
-    height: 32px;
-    left: 604px;
-    top: 907px;">
-    1 2 3 4 5
-    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjU2LDBDMTE0LjgzNywwLDAsMTE0LjgzNywwLDI1NnMxMTQuODM3LDI1NiwyNTYsMjU2czI1Ni0xMTQuODM3LDI1Ni0yNTZTMzk3LjE2MywwLDI1NiwweiBNMzM1LjA4MywyNzEuMDgzDQoJCQlMMjI4LjQxNiwzNzcuNzQ5Yy00LjE2LDQuMTYtOS42MjEsNi4yNTEtMTUuMDgzLDYuMjUxYy01LjQ2MSwwLTEwLjkyMy0yLjA5MS0xNS4wODMtNi4yNTFjLTguMzQxLTguMzQxLTguMzQxLTIxLjgyNCwwLTMwLjE2NQ0KCQkJTDI4OS44MzUsMjU2bC05MS41ODQtOTEuNTg0Yy04LjM0MS04LjM0MS04LjM0MS0yMS44MjQsMC0zMC4xNjVzMjEuODI0LTguMzQxLDMwLjE2NSwwbDEwNi42NjcsMTA2LjY2Nw0KCQkJQzM0My40MjQsMjQ5LjI1OSwzNDMuNDI0LDI2Mi43NDEsMzM1LjA4MywyNzEuMDgzeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" 
-    style="width: 32px;
-    height: 32px;
-    left: 604px;
-    top: 907px;">
-  </div>
 </div>
+    
+</div>
+  <br>
+  <br>
+  
+  
+    
+    
+
+    
+    
+
+  
+  
+</div>
+<br><br><br>
 </div>
 {% endblock %}

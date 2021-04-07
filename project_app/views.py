@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled,Shelf,product_shelf,check,lost_list,Group_analysis,history_lost
+from .models import Tables,Personal,Product,Manufacturer,History_input,Product_output,preorder,Basket,Order,store_stock,saled,Shelf,product_shelf,check,lost_list,Group_analysis,history_lost,history_product_shelf
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
@@ -14,7 +14,15 @@ localStorage = localStoragePy('store', 'json')
 def dashboard(request):
     user = Personal.objects.get(username=localStorage.getItem("user"))
     if(user.rank == "admin") :
-        return render(request,'dashboard.html',{'name' :localStorage.getItem("user")})
+        Low = len(Product.objects.filter(prodect_status='Low'))
+        Empty = len(Product.objects.filter(prodect_status='Empty'))
+        uncheck = len(Shelf.objects.filter(status='unCheck'))
+        stockstatus = [Low,Empty,uncheck]
+        print(uncheck)
+        inputs = history_product_shelf.objects.all().order_by('-date','-id')[:3]
+       
+
+        return render(request,'dashboard.html',{'name' :localStorage.getItem("user"),'stockstatus':stockstatus,'inputs':inputs})
     else :
          return render(request,'dashboard_owner.html',{'name' :localStorage.getItem("user")})
     
@@ -36,7 +44,7 @@ def auto_lost(request) :
         else :
             lost.check_date = datetime(dates.year, dates.month, 16)
             lost.save()
-    return redirect('/checkstock')
+    return redirect('/showzone')
 
 
 
@@ -285,6 +293,8 @@ def show_zone(request):
         for item in items :
             try :
                 check.objects.get(product_code=item.product_code,shelf_id=item.shelf_id)
+                item.status = "Checked"
+                item.save()
                 pass
             except :
                 eiei = Shelf.objects.get(code=item.shelf_id)
@@ -297,6 +307,7 @@ def show_zone(request):
             eiei.status = 'Checked'
             print(item)
             eiei.save()
+        
     return render(request, 'show_zone.html',{'results' : results})
 
 def select_id_shelf(request):
@@ -496,7 +507,7 @@ def submit_request(request):
             item.qty = int(request.POST['amount'])
             if(item.qty > Product.objects.get(product_code=request.POST['code']).product_balance) :
                 item.qty = Product.objects.get(product_code=request.POST['code']).product_balance
-            item.employee = localStorage.getItem("user")
+            item.employee = Personal.objects.get(username=localStorage.getItem("user")).fullname
             item.status = "waiting"
             item.save()
         return redirect('/Request1_owner/Request_list')
@@ -513,6 +524,7 @@ def stock(request,manufact = None):
             print(search_words)
                 
             if(user.rank == 'admin') :
+               
                 if(search_words == "%%%%"):
                         results = Product.objects.all()
                 else :
@@ -591,6 +603,27 @@ def detail_user(request,user_id):
     else :
         return redirect('/login')
 
+def to_shelfs(request) :
+    if(localStorage.getItem("user") is not None):
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == "admin") :
+            product_code = request.POST['code']
+            product_balance = request.POST['balance']
+            product = [product_code,product_balance]
+            #same = product_shelf.objects.filter(product_code=product_code)
+            #inshelf = Shelf.objects.all()
+            cursor = connection.cursor()
+            cursor.execute('select project_app_shelf.code,project_app_shelf.value,project_app_shelf.valueremain,project_app_product_shelf.product_code from project_app_product_shelf join project_app_shelf on project_app_product_shelf.shelf_id = project_app_shelf.code WHERE project_app_shelf.valueremain >'+product_balance+' AND project_app_product_shelf.product_code = "'+product_code+'"')
+            inshelf = cursor.fetchall()
+            #outshelf = Shelf.objects.all()
+            cursor2 = connection.cursor()
+            cursor2.execute('select * from project_app_shelf')
+            outshelf = cursor2.fetchall()
+            print(inshelf,outshelf)
+            return render(request,'to_shelfs.html',{'name' :localStorage.getItem("user"),'inshelf':inshelf,'outshelf':outshelf,'product': product})
+        else :
+            return render(request,'error.html',{'name' :localStorage.getItem("user")})
+
 def input(request,validation = True):
     check = True
     if(localStorage.getItem("user") is not None):
@@ -611,7 +644,7 @@ def input(request,validation = True):
                 history.history_total = product.product_cost * int(product_balance)
                 print(history.history_total)
                 history.history_date = today
-                history.history_user = localStorage.getItem("user")
+                history.history_user = Personal.objects.get(username=localStorage.getItem("user")).fullname
                 history.save()
                 product.save()
                 return redirect('/import_product')
@@ -635,6 +668,63 @@ def order_detail(request,id):
     else:
         return redirect('/login')
 
+def save_product(request,product_code,amount,shelf_id):
+    if(localStorage.getItem("user") is not None):
+        user = Personal.objects.get(username=localStorage.getItem("user"))
+        if(user.rank == 'admin'):
+            try :
+                product = product_shelf.objects.get(product_code=product_code,shelf_id=shelf_id)
+                product.qty +=int(amount)
+                product.save()
+                save = Product.objects.get(product_code=product_code)
+                save.product_balance += int(amount)
+                save.save()
+                history = history_product_shelf()
+                history.product_code = product_code
+                history.qty = int(amount)
+                history.shelf_id = shelf_id
+                history.total = int(amount)*int(save.product_cost)
+                history.date = date.today()
+                history.user = Personal.objects.get(username=localStorage.getItem("user")).fullname
+                history.save()
+                update_shelf()
+                return redirect('/input')
+            except :
+                product = product_shelf()
+                product.product_code = product_code
+                product.qty = amount
+                product.shelf_id = shelf_id
+                product.status = "unCheck"
+                product.save()
+                save = Product.objects.get(product_code=product_code)
+                save.product_balance += int(amount)
+                save.save()
+                history = history_product_shelf()
+                history.product_code = product_code
+                history.qty = int(amount)
+                history.shelf_id = shelf_id
+                history.total = int(amount)*int(save.product_cost)
+                history.date = date.today()
+                history.user = Personal.objects.get(username=localStorage.getItem("user")).fullname
+                history.save()
+                update_shelf()
+                return redirect('/input')
+            
+        else :
+            return render(request,'error.html',{'name' :localStorage.getItem("user")})
+
+
+def update_shelf():
+    shelf = Shelf.objects.all()
+    for item in shelf :
+        p = product_shelf.objects.filter(shelf_id=item.code)
+        item.valueremain = item.value  
+        for i in p:
+            
+            item.valueremain -= int(i.qty)
+        item.save()
+
+
 def import_product(request):
     if(localStorage.getItem("user") is not None):
         user = Personal.objects.get(username=localStorage.getItem("user"))
@@ -643,7 +733,7 @@ def import_product(request):
             return render(request,'history_import_owner.html',{'name' :localStorage.getItem("user"),'tables':results,'fullname':user.fullname})
         else :
             cursor = connection.cursor()
-            cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_input.history_balance,project_app_product.product_cost,project_app_history_input.id,project_app_history_input.history_total,project_app_history_input.history_date from project_app_product join project_app_history_input on project_app_product.product_code = project_app_history_input.history_product_code')
+            cursor.execute('select project_app_product.product_code,project_app_product.product_name,project_app_product.product_type,project_app_history_product_shelf.qty,project_app_product.product_cost,project_app_history_product_shelf.id,project_app_history_product_shelf.total,project_app_history_product_shelf.shelf_id,project_app_history_product_shelf.date from project_app_product join project_app_history_product_shelf on project_app_product.product_code = project_app_history_product_shelf.product_code')
             results = cursor.fetchall()
             return render(request,'history_import.html',{'name' :localStorage.getItem("user"),'tables':results})
             

@@ -1,35 +1,7 @@
 {% extends 'header_owner.html' %}
 
 {% block content %}
-
-<style>
-  .tableFixHead {
-        overflow-y: auto;
-        height: 500px;
-      }
-      .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th,
-      td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-        
-      }
-      th {
-        background: #FFB800;
-      }
-     
-
-</style>
-
-    <h2 align="center" style="position: absolute;width: 256px;height: 35px;left: 601px;top: 130px;">ประวัติสินค้า</h2>
-    <h3 align="center" style="position: absolute;width: 256px;height: 35px;left: 601px;top: 170px;">การนำเข้า</h3>
+    <h2 align="center" style="position: absolute;width: 256px;height: 35px;left: 601px;top: 130px;">ประวัติการขายสินค้า</h2>
     <SELECT style="position: absolute;
                     width: 164px;
                     height: 28px;
@@ -41,6 +13,7 @@
     </SELECT>
     <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjMxMC40MnB4IiBoZWlnaHQ9IjMxMC40MnB4IiB2aWV3Qm94PSIwIDAgMzEwLjQyIDMxMC40MiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzEwLjQyIDMxMC40MjsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yNzMuNTg3LDIxNC45NjVjNDkuMTEtNDkuMTExLDQ5LjEwOS0xMjkuMDIxLDAtMTc4LjEzMmMtNDkuMTExLTQ5LjExMS0xMjkuMDItNDkuMTExLTE3OC4xMywwDQoJCQlDNTMuNzkzLDc4LjQ5Nyw0Ny40ODMsMTQwLjQ2Miw3Ni41MSwxODguODVjMCwwLDIuMDg1LDMuNDk4LTAuNzMxLDYuMzEyYy0xNi4wNjUsMTYuMDY0LTY0LjI2Myw2NC4yNjMtNjQuMjYzLDY0LjI2Mw0KCQkJYy0xMi43OTEsMTIuNzktMTUuODM2LDMwLjY3NS00LjQ5Myw0Mi4wMmwxLjk1MywxLjk1MWMxMS4zNDMsMTEuMzQ1LDI5LjIyOSw4LjMwMSw0Mi4wMTktNC40OWMwLDAsNDguMDk2LTQ4LjA5Nyw2NC4xMjgtNjQuMTI4DQoJCQljMi45NTEtMi45NTEsNi40NDgtMC44NjYsNi40NDgtMC44NjZDMTY5Ljk1OCwyNjIuOTM4LDIzMS45MjMsMjU2LjYyOSwyNzMuNTg3LDIxNC45NjV6IE0xMTguNzExLDE5MS43MQ0KCQkJYy0zNi4yODgtMzYuMjg4LTM2LjI4Ny05NS4zMzIsMC4wMDEtMTMxLjYyYzM2LjI4OC0zNi4yODcsOTUuMzMyLTM2LjI4OCwxMzEuNjE5LDBjMzYuMjg4LDM2LjI4NywzNi4yODgsOTUuMzMyLDAsMTMxLjYyDQoJCQlDMjE0LjA0MywyMjcuOTk2LDE1NSwyMjcuOTk2LDExOC43MTEsMTkxLjcxeiIvPg0KCQk8Zz4NCgkJCTxwYXRoIGQ9Ik0xMjYuNzUsMTE4LjQyNGMtMS42ODksMC0zLjQwNi0wLjMzMi01LjA2MS0xLjAzMWMtNi42MTEtMi43OTgtOS43MDQtMTAuNDI2LTYuOTA2LTE3LjAzOA0KCQkJCWMxNy41ODYtNDEuNTU5LDY1LjcwMy02MS4wNjIsMTA3LjI2MS00My40NzZjNi42MTEsMi43OTgsOS43MDQsMTAuNDI2LDYuOTA2LDE3LjAzOGMtMi43OTksNi42MTItMTAuNDI1LDkuNzAzLTE3LjAzOSw2LjkwNg0KCQkJCWMtMjguMzU0LTExLjk5OC02MS4xODYsMS4zMDktNzMuMTgzLDI5LjY2M0MxMzYuNjI5LDExNS40NDUsMTMxLjgxNSwxMTguNDI0LDEyNi43NSwxMTguNDI0eiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo="
         style="position: absolute;width: 28px;height: 28px;left: 1400px;top: 150px;"/>
+     
     <input type="text" class="form-control" name="code" style="position: absolute;
                 width: 178px;
                 height: 28px;
@@ -51,39 +24,82 @@
                 border: 3px solid #000000;
                 box-sizing: border-box;
                 border-radius: 20px;">
-    <div class="tableFixHead" style="position: absolute;width: 987px;left: 242px;top: 230px;">
-        <table class="">
+    <div style=" position: absolute ; width: 300; left: 17%; top: 30%;" >
+      <div class="row">
+        <div class="col">
+          <p>Product_code</p>
+        </div>
+        <div class="col">
+        <input type="text" name="code" value="{{product.0}}" disabled>
+      </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <p>Amount</p>
+        </div>
+        <div class="col">
+        <input type="text" name="amount"  value="{{product.1}}" disabled>
+      </div>
+      </div>
+      </div>
+        
+        
+
+    </div>
+    <div style="position: absolute;width: 400px;height: 203px;left: 17%;top: 40%;">
+      <h3>คลังที่มีสินค้าชื้นนี้อยู่</h3>
+        <table class="table table-bordered" style="font-size: 11;">
           <thead>
-            <tr bgcolor="#ffb800">
-              <th scope="col">รหัสสินค้า</th>
-              <th scope="col">ชื่อสินค้า</th>
-              <th scope="col">ประเภท</th>
-              <th scope="col">จำนวน</th>
-              <th scope="col">ราคาต่อหน่วย</th>
-              <th scope="col">ราคารวม</th>
+            <tr bgcolor="#ffb800" >
               <th scope="col">รหัสคลัง</th>
-              <th scope="col">วัน/เดือน/ปี</th>
-              <th scope="col">ลบ</th>
+              <th scope="col">มีพื้นที่เหลือ</th>
+              <th scope="col">ใช้ไปเเล้ว</th>
+                  
+           
             </tr>
           </thead>
           <tbody>
-            {% for table in tables %}
-            <tr>
-              <td>{{table.0}}</td>
-              <td>{{table.1}}</td>
-              <td>{{table.2}}</td>
-              <td>{{table.3}}</td>
-              <td>{{table.4}}</td>
-              <td>{{table.6}}</td>
-              <td>{{table.7}}</td>
-              <td>{{table.8}}</td>
-              <td> <a href="cancleImport/{{table.5}}"><img  src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM2NXB0IiB2aWV3Qm94PSIwIDAgMzY1LjcxNzMzIDM2NSIgd2lkdGg9IjM2NXB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGw9IiNmNDQzMzYiPjxwYXRoIGQ9Im0zNTYuMzM5ODQ0IDI5Ni4zNDc2NTYtMjg2LjYxMzI4Mi0yODYuNjEzMjgxYy0xMi41LTEyLjUtMzIuNzY1NjI0LTEyLjUtNDUuMjQ2MDkzIDBsLTE1LjEwNTQ2OSAxNS4wODIwMzFjLTEyLjUgMTIuNTAzOTA2LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMjg2LjYxMzI4MSAyODYuNjEzMjgyYzEyLjUwMzkwNyAxMi41IDMyLjc2OTUzMSAxMi41IDQ1LjI1IDBsMTUuMDgyMDMxLTE1LjA4MjAzMmMxMi41MjM0MzgtMTIuNDgwNDY4IDEyLjUyMzQzOC0zMi43NS4wMTk1MzItNDUuMjV6bTAgMCIvPjxwYXRoIGQ9Im0yOTUuOTg4MjgxIDkuNzM0Mzc1LTI4Ni42MTMyODEgMjg2LjYxMzI4MWMtMTIuNSAxMi41LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMTUuMDgyMDMxIDE1LjA4MjAzMmMxMi41MDM5MDcgMTIuNSAzMi43Njk1MzEgMTIuNSA0NS4yNSAwbDI4Ni42MzI4MTMtMjg2LjU5Mzc1YzEyLjUwMzkwNi0xMi41IDEyLjUwMzkwNi0zMi43NjU2MjYgMC00NS4yNDYwOTRsLTE1LjA4MjAzMi0xNS4wODIwMzJjLTEyLjUtMTIuNTIzNDM3LTMyLjc2NTYyNC0xMi41MjM0MzctNDUuMjY5NTMxLS4wMjM0Mzd6bTAgMCIvPjwvZz48L3N2Zz4="
-                style="
-                        height: 20px;
-                        width: 20px;
-                       
-                        border-radius: 0px;"/></a></td>
+       
+            {% for item in inshelf %}
+
+              
+              <tr>
+              <td><a href="save_product/{{product.0}}/{{product.1}}/{{item.0}}">{{item.0}}</a></td>
+              <td>{{item.1}}</td>
+              <td>{{item.2}}</td>
+             
+              
+              </tr>
+             
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <h3>คลังที่ใส่ได้</h3>
+        <table class="table table-bordered" style="font-size: 11;">
+          <thead>
+            <tr bgcolor="#ffb800" >
+              <th scope="col">รหัสคลัง</th>
+              <th scope="col">มีพื้นที่เหลือ</th>
+              <th scope="col">ใช้ไปเเล้ว</th>
+                  
+           
             </tr>
+          </thead>
+          <tbody>
+            
+            {% for item2 in outshelf %}
+
+             
+              <tr>
+              <td><a href="save_product/{{product.0}}/{{product.1}}/{{item2.4}}">{{item2.4}}</a></td>
+              <td>{{item2.5}}</td>
+              <td>{{item2.6}}</td>
+             
+              
+              </tr>
+             
             {% endfor %}
           </tbody>
         </table>
@@ -103,5 +119,4 @@
                 top: 280px;
                 border-radius: 0px;"/>
    
-    
 {% endblock %}
