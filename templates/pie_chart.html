@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr"> 
+
+<head> 
+<meta charset="utf-8"> 
+<title>Bright Company</title> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+<style>
+    #wbg {position: absolute;
+    width: 574px;
+    height: 592px;
+    left: 365px;
+    top: 70px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;} 
+
+    button[type="button"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        font-size: 17px;}
+</style>
+
+{% block content %}
+</head> 
+
+<body class="container-fluid"> 
+<center class="row"> 
+	<h1>ปริมาณสินค้าในคลังจัดกลุ่มแบบ ABC</h1> 
+	
+</center> 
+<hr /> 
+
+<center class="row">
+	<div class="col-md-9"> 
+		<h1></h1>
+		<canvas id="pie-chart"></canvas> 
+	</div> 
+</center>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> 
+<script>
+    var config = {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: {{ data|safe }},
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)', 
+			'rgba(54, 162, 235, 0.2)', 
+			'rgba(255, 206, 86, 0.2)'],
+            borderColor: [ 
+			'rgba(255, 99, 132, 1)', 
+			'rgba(54, 162, 235, 1)', 
+			'rgba(255, 206, 86, 1)', ],
+            label: 'Population'
+
+        }],
+        labels: {{ labels|safe }}
+        },
+        options: {
+        responsive: true
+        }
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById('pie-chart').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+
+	
+
+</script> 
+</body>
+{% endblock %}
+<a href="/analysis">
+	<button type="button" class="btn btn-warning" style="right : 50px;top: 650px;">ย้อนกลับ</button>
+  </a>
+
+</html> 

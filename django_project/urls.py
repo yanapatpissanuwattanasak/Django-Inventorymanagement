@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from project_app import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -71,7 +74,7 @@ urlpatterns = [
     path('store_detail',views.store_detail),
     path('store_analysis',views.store_analysis),
     path('check_detail',views.check_detail),
-    path('analysis',views.analysis),
+    path('analysis',views.analysis,name="analysis"),
     path('owner_preorder',views.owner_preorder),
     path('Request1_owner/',views.Request1_owner),
     path('Request1_owner/Request_value',views.Request_value),
@@ -87,8 +90,22 @@ urlpatterns = [
     path('dashboard',views.dashboard),
     path('auto_lost',views.auto_lost),
     path('to_shelf',views.to_shelfs),
-    path('save_product/<slug:product_code>/<int:amount>/<slug:shelf_id>',views.save_product)
+    path('save_product/<slug:product_code>/<int:amount>/<slug:shelf_id>',views.save_product),
+    path('graph/<slug:product_id>', views.index),
+    path('api', views.ChartData.as_view()),
+    path('moveTo',views.moveTo),
+    path('select/<int:id>',views.select),
+    path('endmove/<slug:id>/<slug:product_id>/<slug:shelf_id>/<int:qty>/<slug:shelf_id_2>',views.move),
+    path('detail_shelf/<slug:shelf_id>',views.detail_shelf),
+    path('edit/<slug:id>',views.edit),
+    path('submit_edit',views.submit_edit),
+    path('contact_complete',views.contact_complete),
+    path('detail_owner',views.detail_owner),
+    path('billtoshelf',views.billtoshelf),
+    path('pie-chart/', views.pie_chart, name='pie-chart')
     
 
-
+   
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

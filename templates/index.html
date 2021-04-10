@@ -1,0 +1,209 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr"> 
+
+<head> 
+<meta charset="utf-8"> 
+<title>Bright Company</title> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+<style>
+    #wbg {position: absolute;
+    width: 574px;
+    height: 592px;
+    left: 365px;
+    top: 70px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;} 
+
+    button[type="button"] {position: absolute;
+        width: 120px;
+        height: 50px;
+        background: #FFB800;
+        border: 5px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        font-size: 17px;}
+</style>
+
+{% block content %}
+</head> 
+
+<body class="container-fluid"> 
+<center class="row"> 
+	<h1>รหัสสินค้า <b> : {{product.product_code}} </b> </h1> 
+	
+</center> 
+<hr /> 
+
+<center class="row">
+	<div class="col-md-6"> 
+		<h1>ปีที่แล้ว</h1>
+		<canvas id="myChartBarago"></canvas> 
+	</div> 
+	<div class="col-md-6">
+		<h1>ปีปัจจุบัน</h1>
+		<canvas id="myChartBarnow"></canvas> 
+	</div> 
+</center>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+
+<script> 
+	var endpoint = '/api'; 
+
+	$.ajax({ 
+	method: "GET", 
+	url: endpoint, 
+	success: function(data) { 
+		
+		drawBarGraph(data, 'myChartBarago'); 
+		drawBarNowGraph(data, 'myChartBarnow'); 
+		console.log("drawing"); 
+	}, 
+	error: function(error_data) { 
+		console.log(error_data); 
+	} 
+	}) 
+
+
+	function drawBarNowGraph(data, id) { 
+	var labels = data.labels; 
+	var chartLabel = data.chartLabel; 
+	var chartdata = data.chartdata2; 
+	var ctx = document.getElementById(id).getContext('2d'); 
+	var chart = new Chart(ctx, { 
+		// The type of chart we want to create 
+		type: 'bar', 
+
+		// The data for our dataset 
+		data: { 
+		labels: labels, 
+		datasets: [{ 
+			label: chartLabel, 
+			backgroundColor: [ 
+			'rgba(255, 99, 132, 0.2)', 
+			'rgba(54, 162, 235, 0.2)', 
+			'rgba(255, 206, 86, 0.2)', 
+			'rgba(75, 192, 192, 0.2)', 
+			'rgba(153, 102, 255, 0.2)', 
+			'rgba(255, 159, 64, 0.2)',
+			'rgba(255, 99, 132, 0.2)', 
+			'rgba(54, 162, 235, 0.2)', 
+			'rgba(255, 206, 86, 0.2)', 
+			'rgba(75, 192, 192, 0.2)', 
+			'rgba(153, 102, 255, 0.2)', 
+			'rgba(255, 159, 64, 0.2)'
+			
+			], 
+			borderColor: [ 
+			'rgba(255, 99, 132, 1)', 
+			'rgba(54, 162, 235, 1)', 
+			'rgba(255, 206, 86, 1)', 
+			'rgba(75, 192, 192, 1)', 
+			'rgba(153, 102, 255, 1)', 
+			'rgba(255, 159, 64, 1)',
+			'rgba(255, 99, 132, 1)', 
+			'rgba(54, 162, 235, 1)', 
+			'rgba(255, 206, 86, 1)', 
+			'rgba(75, 192, 192, 1)', 
+			'rgba(153, 102, 255, 1)', 
+			'rgba(255, 159, 64, 1)'
+			
+			], 
+			data: chartdata,
+			borderWidth: 1  
+		}] 
+		}, 
+
+		// Configuration options go here 
+		options: { 
+		scales: { 
+			xAxes: [{ 
+			display: true 
+			}], 
+			yAxes: [{ 
+			ticks: { 
+				beginAtZero: true 
+			} 
+			}] 
+		} 
+		} 
+
+	}); 
+	}
+
+	function drawBarGraph(data, id) { 
+	var labels = data.labels; 
+	var chartLabel = data.chartLabel; 
+	var chartdata = data.chartdata; 
+	var ctx = document.getElementById(id).getContext('2d'); 
+	var myChart = new Chart(ctx, { 
+		type: 'bar', 
+		data: { 
+		labels: labels, 
+		datasets: [{ 
+			label: chartLabel, 
+			data: chartdata, 
+			backgroundColor: [ 
+			'rgba(255, 99, 132, 0.2)', 
+			'rgba(54, 162, 235, 0.2)', 
+			'rgba(255, 206, 86, 0.2)', 
+			'rgba(75, 192, 192, 0.2)', 
+			'rgba(153, 102, 255, 0.2)', 
+			'rgba(255, 159, 64, 0.2)',
+			'rgba(255, 99, 132, 0.2)', 
+			'rgba(54, 162, 235, 0.2)', 
+			'rgba(255, 206, 86, 0.2)', 
+			'rgba(75, 192, 192, 0.2)', 
+			'rgba(153, 102, 255, 0.2)', 
+			'rgba(255, 159, 64, 0.2)'
+			
+			], 
+			borderColor: [ 
+			'rgba(255, 99, 132, 1)', 
+			'rgba(54, 162, 235, 1)', 
+			'rgba(255, 206, 86, 1)', 
+			'rgba(75, 192, 192, 1)', 
+			'rgba(153, 102, 255, 1)', 
+			'rgba(255, 159, 64, 1)',
+			'rgba(255, 99, 132, 1)', 
+			'rgba(54, 162, 235, 1)', 
+			'rgba(255, 206, 86, 1)', 
+			'rgba(75, 192, 192, 1)', 
+			'rgba(153, 102, 255, 1)', 
+			'rgba(255, 159, 64, 1)'
+			
+			], 
+			borderWidth: 1 
+		}] 
+		}, 
+		options: { 
+		scales: { 
+			yAxes: [{ 
+			ticks: { 
+				beginAtZero: true 
+			} 
+			}] 
+		} 
+
+		} 
+	}); 
+	} 
+</script> 
+</body>
+{% endblock %}
+<a href="/analysis">
+	<button type="button" class="btn btn-warning" style="right : 50px;top: 650px;">ย้อนกลับ</button>
+  </a>
+
+</html> 

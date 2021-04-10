@@ -45,47 +45,7 @@
     top: 261px;
     border-radius: 0px;">
     <div>
-    รหัสสินค้า
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>A --> Z
-        <OPTION VALUE=2>Z --> A
-        </SELECT>
-    ประเภท
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>เสื้อคอกลม
-        </SELECT>
-    ไซด์
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>S
-        <OPTION VALUE=3>M
-        <OPTION VALUE=4>L
-        <OPTION VALUE=5>XL
-        </SELECT>
-    เชลฟ์
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>A
-        </SELECT>
-    ราคาขาย
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>มากกว่า
-        <OPTION VALUE=2>เท่ากับ
-        <OPTION VALUE=3>น้อยกว่า
-        </SELECT>
-    <input type="text" name="Number" size=4>
-    คงเหลือ
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>มากไปน้อย
-        <OPTION VALUE=2>น้อยไปมาก
-        </SELECT>
+    
   </div>
   <div class="tableFixHead">
   <table class=""  >
@@ -99,8 +59,9 @@
         <th >ไซด์</th>
         
         <th >จำนวน</th>
+        <th >เเก้ไข</th>
         <th >สถานะ</th>
-        <th >ลบ</th>
+      
       </tr>
     </thead>
     
@@ -117,6 +78,7 @@
         <td class="text-center"  ><p style="margin-top: 17%;">{{product.product_size}}</p></td>
         
         <td>{{product.product_balance}}</td>
+        <td><a href="/edit/{{product.product_code}}"><button>เเก้ไข</button></a></td>
         {% if product.prodect_status == "good"  %}
         <td style = "background-color : #00ff19"> </td>
         {% elif product.prodect_status == "Empty"  %}
@@ -124,10 +86,7 @@
         {% else %}
         <td style = "background-color : #ffa600"> </td>
         {% endif %}
-        <td class="d-flex justify-content-center" ><a href="/"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM2NXB0IiB2aWV3Qm94PSIwIDAgMzY1LjcxNzMzIDM2NSIgd2lkdGg9IjM2NXB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGw9IiNmNDQzMzYiPjxwYXRoIGQ9Im0zNTYuMzM5ODQ0IDI5Ni4zNDc2NTYtMjg2LjYxMzI4Mi0yODYuNjEzMjgxYy0xMi41LTEyLjUtMzIuNzY1NjI0LTEyLjUtNDUuMjQ2MDkzIDBsLTE1LjEwNTQ2OSAxNS4wODIwMzFjLTEyLjUgMTIuNTAzOTA2LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMjg2LjYxMzI4MSAyODYuNjEzMjgyYzEyLjUwMzkwNyAxMi41IDMyLjc2OTUzMSAxMi41IDQ1LjI1IDBsMTUuMDgyMDMxLTE1LjA4MjAzMmMxMi41MjM0MzgtMTIuNDgwNDY4IDEyLjUyMzQzOC0zMi43NS4wMTk1MzItNDUuMjV6bTAgMCIvPjxwYXRoIGQ9Im0yOTUuOTg4MjgxIDkuNzM0Mzc1LTI4Ni42MTMyODEgMjg2LjYxMzI4MWMtMTIuNSAxMi41LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMTUuMDgyMDMxIDE1LjA4MjAzMmMxMi41MDM5MDcgMTIuNSAzMi43Njk1MzEgMTIuNSA0NS4yNSAwbDI4Ni42MzI4MTMtMjg2LjU5Mzc1YzEyLjUwMzkwNi0xMi41IDEyLjUwMzkwNi0zMi43NjU2MjYgMC00NS4yNDYwOTRsLTE1LjA4MjAzMi0xNS4wODIwMzJjLTEyLjUtMTIuNTIzNDM3LTMyLjc2NTYyNC0xMi41MjM0MzctNDUuMjY5NTMxLS4wMjM0Mzd6bTAgMCIvPjwvZz48L3N2Zz4="
-            style = "height: 20px;
-            width: 21px;
-            "></a></td>
+        
       </tr>
       {% endfor %}
       

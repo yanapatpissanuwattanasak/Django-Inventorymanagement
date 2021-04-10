@@ -102,6 +102,23 @@
         border: 1px solid rgba(0, 0, 0, 0.4);
         box-sizing: border-box;
         border-radius: 20px;}
+        .card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+
 
 </style>
 
@@ -122,11 +139,13 @@
           </font>
         </div>
       </div>
+      
       <div class="row">
         <div class="col-6 d-flex justify-content-left">
-          <div id = "cgrape">
-            <div style = "margin: 20px">
+          <div id = "cgrape" style="">
+            <div style = "margin: 20px;height: 80px; width: 100%;">
               <h3 align = 'center'>หมวดหมู่</h3>
+              <div id="piechart" style=""></div>
             </div>
           </div>
         </div>
@@ -185,11 +204,59 @@
         </div>
       </div>
     </div>
+    
     <div id = "gup">
       <div id = "wup">
         <div style = "margin: 20px">
           <h3 align = 'center'>Top Seller</h3>
           <p>_________________________________________________________________________________________________________________________________________________________________________________</p>
+          <div class="row " >
+            {% for i in top %}
+            {%if forloop.counter0 == 0 %}
+              <div class="col d-flex justify-content-center">
+                <div class="card" style="width: 70%; top: 15px;">
+                  
+                  <img src="{{pic.0.image.url}}" alt="Avatar" style="width:100%;height: 150px;">
+                  
+                  <div class="container">
+                    <h4><b>{{i.product_code}}</b></h4>
+                    <p> Top : {{forloop.counter}}</p>
+                  </div>
+                </div>
+              </div>
+            {%endif%}
+            {% endfor %}
+            {% for i in top %}
+            {%if forloop.counter0 == 1 %}
+              <div class="col d-flex justify-content-center">
+                <div class="card" style="width: 70%; top: 15px;">
+                  
+                  <img src="{{pic.1.image.url}}" alt="Avatar" style="width:100%;height: 150px;">
+                  
+                  <div class="container">
+                    <h4><b>{{i.product_code}}</b></h4>
+                    <p> Top : {{forloop.counter}}</p>
+                  </div>
+                </div>
+              </div>
+            {%endif%}
+            {% endfor %}
+            {% for i in top %}
+            {%if forloop.counter0 == 2 %}
+              <div class="col d-flex justify-content-center">
+                <div class="card" style="width: 70%; top: 15px;">
+                  
+                  <img src="{{pic.2.image.url}}" alt="Avatar" style="width:100%;height: 150px;">
+                  
+                  <div class="container">
+                    <h4><b>{{i.product_code}}</b></h4>
+                    <p> Top : {{forloop.counter}}</p>
+                  </div>
+                </div>
+              </div>
+            {%endif%}
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
@@ -201,7 +268,7 @@
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
-        <h4 align = 'center'>2 %</h4>
+        <h4 align = 'center'>{{per_late}} %</h4>
         <h4 align = 'center'>Late</h4>
       </div>
 
@@ -212,10 +279,12 @@
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
-        <h4 align = 'center'>12130 Bath</h4>
+        <h4 align = 'center'>{{sums}} Bath</h4>
         <h4 align = 'center'>Cost</h4>
       </div>
-
+      <input type="text" name="pname[]" value={{group.0}} hidden />
+      <input type="text" name="pname[]" value={{group.1}} hidden />
+      <input type="text" name="pname[]" value={{group.2}} hidden />
       <div id = "wdown" style="left: 580px;top: 50px;">
         <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGc+PHBhdGggZD0ibTQyNS42ODcgMzgxLjY2M2gtNDEwLjY4N2MtOC4yODQgMC0xNS02LjcxNi0xNS0xNXYtMjc4LjI5OGMwLTguMjg0IDYuNzE2LTE1IDE1LTE1aDQxMC42ODdjOC4yODQgMCAxNSA2LjcxNiAxNSAxNXYyNzguMjk4YzAgOC4yODUtNi43MTYgMTUtMTUgMTV6IiBmaWxsPSIjZmZlMDdkIi8+PC9nPjxnPjxwYXRoIGQ9Im00MjUuNjg3IDczLjM2NWgtMjguNTE1djI0OS4zMDdjMCA4LjU0Ny02LjkyOSAxNS40NzYtMTUuNDc2IDE1LjQ3NmgtMzgxLjY5NnYyOC41MTVjMCA4LjI4NCA2LjcxNiAxNSAxNSAxNWg0MTAuNjg3YzguMjg0IDAgMTUtNi43MTYgMTUtMTV2LTI3OC4yOThjMC04LjI4NC02LjcxNi0xNS0xNS0xNXoiIGZpbGw9IiNmZmQwNjQiLz48L2c+PGc+PHBhdGggZD0ibTQyNS42ODcgMzgxLjY2M2gtMTA5LjkxOXYtMzA4LjI5OGgxMDkuOTE5YzguMjg0IDAgMTUgNi43MTYgMTUgMTV2Mjc4LjI5OGMwIDguMjg1LTYuNzE2IDE1LTE1IDE1eiIgZmlsbD0iI2ZmZDA2NCIvPjwvZz48Zz48cGF0aCBkPSJtMzUuMDM0IDI4MC4xNzd2LTE1OS43NDRjMC0zLjg2NiAzLjEzNC03IDctN2g4MS40NTNjMy44NjYgMCA3IDMuMTM0IDcgN3YxNTkuNzQ0YzAgMy44NjYtMy4xMzQgNy03IDdoLTgxLjQ1M2MtMy44NjYgMC03LTMuMTM0LTctN3oiIGZpbGw9IiNmNGZiZmYiLz48L2c+PHBhdGggZD0ibTEyMy40ODcgMTEzLjQzM2gtNi4yMDd2MTUzLjMyNWMwIDMuOTgzLTMuMjI5IDcuMjEyLTcuMjEyIDcuMjEyaC03NS4wMzR2Ni4yMDhjMCAzLjg2NiAzLjEzNCA3IDcgN2g4MS40NTNjMy44NjYgMCA3LTMuMTM0IDctN3YtMTU5Ljc0NWMwLTMuODY2LTMuMTM0LTctNy03eiIgZmlsbD0iI2U0ZjZmZiIvPjxnPjxwYXRoIGQ9Im0xMDAuOTM1IDE1NC42MTNoLTM4LjQzOWMtNC4yNzQgMC03LjczOC0zLjQ2NS03LjczOC03LjczOHMzLjQ2NS03LjczOCA3LjczOC03LjczOGgzOC40MzljNC4yNzQgMCA3LjczOCAzLjQ2NSA3LjczOCA3LjczOHMtMy40NjUgNy43MzgtNy43MzggNy43Mzh6IiBmaWxsPSIjMmI0ZDY2Ii8+PC9nPjxnPjxwYXRoIGQ9Im0xMDAuOTM1IDE4NS45MDFoLTM4LjQzOWMtNC4yNzQgMC03LjczOC0zLjQ2NS03LjczOC03LjczOHMzLjQ2NS03LjczOCA3LjczOC03LjczOGgzOC40MzljNC4yNzQgMCA3LjczOCAzLjQ2NSA3LjczOCA3LjczOHMtMy40NjUgNy43MzgtNy43MzggNy43Mzh6IiBmaWxsPSIjMmI0ZDY2Ii8+PC9nPjxnPjxwYXRoIGQ9Im0xMDAuOTM1IDIxMS40MjRoLTM4LjQzOWMtNC4yNzQgMC03LjczOC0zLjQ2NS03LjczOC03LjczOCAwLTQuMjc0IDMuNDY1LTcuNzM4IDcuNzM4LTcuNzM4aDM4LjQzOWM0LjI3NCAwIDcuNzM4IDMuNDY1IDcuNzM4IDcuNzM4cy0zLjQ2NSA3LjczOC03LjczOCA3LjczOHoiIGZpbGw9IiMyYjRkNjYiLz48L2c+PGc+PHBhdGggZD0ibTEwMC45MzUgMjYwLjMwM2gtMzguNDM5Yy00LjI3NCAwLTcuNzM4LTMuNDY1LTcuNzM4LTcuNzM4IDAtNC4yNzQgMy40NjUtNy43MzggNy43MzgtNy43MzhoMzguNDM5YzQuMjc0IDAgNy43MzggMy40NjUgNy43MzggNy43MzhzLTMuNDY1IDcuNzM4LTcuNzM4IDcuNzM4eiIgZmlsbD0iIzJiNGQ2NiIvPjwvZz48Zz48cGF0aCBkPSJtNDI1LjY4NyA3My4zNjVoLTI4LjUxNXYyNDkuMzA3YzAgOC41NDctNi45MjkgMTUuNDc2LTE1LjQ3NiAxNS40NzZoLTY1LjkyOHY0My41MTVoMTA5LjkxOWM4LjI4NCAwIDE1LTYuNzE2IDE1LTE1di0yNzguMjk4YzAtOC4yODQtNi43MTYtMTUtMTUtMTV6IiBmaWxsPSIjZmZjMjUwIi8+PC9nPjxnPjxwYXRoIGQ9Im0xODEuMjY2IDM4MS42NjN2LTcyLjQ5M2MwLS44MjcuNDkzLTEuNTczIDEuMjUzLTEuODk4bDUuOTQ4LTIuNTM5YzEuODExLS43NzMgMy44NTgtLjc3MyA1LjY2OSAwbDguODM4IDMuNzcyYzEuODExLjc3MyAzLjg1OC43NzMgNS42NjkgMGw4LjgzNi0zLjc3MWMxLjgxMS0uNzczIDMuODU5LS43NzMgNS42NyAwbDguODM2IDMuNzcxYzEuODExLjc3MyAzLjg1OC43NzMgNS42NjkgMGw4LjgzOC0zLjc3MmMxLjgxMS0uNzczIDMuODU4LS43NzMgNS42NjkgMGw2LjAwNSAyLjU2MmMuNzYuMzI0IDEuMjU0IDEuMDcxIDEuMjU0IDEuODk4djcyLjQ3eiIgZmlsbD0iIzM2NWU3ZCIvPjwvZz48Zz48Zz48cGF0aCBkPSJtMjQxLjYyMyAzODEuNjYzdi03Mi40N2MwLS44MDctLjQ3NS0xLjUzMi0xLjIwNS0xLjg2OGw2LjA3NC0yLjU5MmMxLjgxMS0uNzczIDMuODU4LS43NzMgNS42NjkgMGw2LjAwNSAyLjU2MmMuNzYuMzI0IDEuMjU0IDEuMDcxIDEuMjU0IDEuODk4djcyLjQ3eiIgZmlsbD0iIzJiNGQ2NiIvPjwvZz48L2c+PGc+PGNpcmNsZSBjeD0iNDAwLjg4NyIgY3k9IjM2Ny41NzYiIGZpbGw9IiMzNjVlN2QiIHI9IjExMS4xMTMiLz48L2c+PHBhdGggZD0ibTQ2Ny41MTUgMjc4LjY1YzEzLjkzMSAxOC41NjQgMjIuMTg3IDQxLjYzMSAyMi4xODcgNjYuNjI3IDAgNjEuMzY2LTQ5Ljc0NyAxMTEuMTEzLTExMS4xMTMgMTExLjExMy0yNC45OTYgMC00OC4wNjQtOC4yNTYtNjYuNjI3LTIyLjE4NyAyMC4yNyAyNy4wMSA1Mi41NTYgNDQuNDg1IDg4LjkyNiA0NC40ODUgNjEuMzY2IDAgMTExLjExMy00OS43NDcgMTExLjExMy0xMTEuMTEzLS4wMDEtMzYuMzY5LTE3LjQ3Ni02OC42NTUtNDQuNDg2LTg4LjkyNXoiIGZpbGw9IiMyYjRkNjYiLz48Zz48Y2lyY2xlIGN4PSI0MDAuODg3IiBjeT0iNDIzLjgzNyIgZmlsbD0iI2Y0ZmJmZiIgcj0iOC4yODUiLz48L2c+PGc+PGc+PHBhdGggZD0ibTQwMC44ODcgMzk4LjQ1MWMtNC4yNzQgMC03LjczOC0zLjQ2NS03LjczOC03LjczOHYtMjUuMTAxYzAtNC4yNzQgMy40NjUtNy43MzggNy43MzgtNy43MzggNC41MDEgMCA4LjY5LTEuODAxIDExLjc5Ni01LjA3MiAzLjEwMy0zLjI2OCA0LjY4My03LjU1NSA0LjQ0OC0xMi4wNzEtLjQzOS04LjQ1Ny03LjQyNS0xNS4yMTYtMTUuOTA1LTE1LjM4Ny04LjI0Mi0uMjE1LTE1LjMxMyA1Ljg0NS0xNi40NDggMTMuOTg0LS4xMDUuNzQ5LS4xNTggMS41MTYtLjE1OCAyLjI3OSAwIDQuMjc0LTMuNDY1IDcuNzM4LTcuNzM4IDcuNzM4LTQuMjc0IDAtNy43MzgtMy40NjUtNy43MzgtNy43MzggMC0xLjQ3Ni4xMDMtMi45NjIuMzA2LTQuNDE3IDIuMjE5LTE1Ljg5OCAxNi4wMDgtMjcuNjQ5IDMyLjA4OC0yNy4zMTkgMTYuNTUyLjMzMyAzMC4xOSAxMy41MzYgMzEuMDQ4IDMwLjA1OC40NTYgOC43OTctMi42MjYgMTcuMTUzLTguNjggMjMuNTI5LTQuMTYgNC4zODEtOS40OTcgNy40Ni0xNS4yODEgOC45MjR2MTguMzNjMCA0LjI3NS0zLjQ2NCA3LjczOS03LjczOCA3LjczOXoiIGZpbGw9IiNmNGZiZmYiLz48L2c+PC9nPjxnPjxwYXRoIGQ9Im0yODYuNjM5IDIwOS40MzctLjg0Ljg0Yy03LjMwNyA3LjMwNy0xOS4xNTQgNy4zMDctMjYuNDYgMGwtNDguMDk4LTQ4LjA5OCAyNy4zLTI3LjMgNDguMDk4IDQ4LjA5OGM3LjMwNyA3LjMwNyA3LjMwNyAxOS4xNTMgMCAyNi40NnoiIGZpbGw9IiMzNjVlN2QiLz48L2c+PHBhdGggZD0ibTI4Ni42MzkgMTgyLjk3Ny00OC4wOTgtNDguMDk4LTEyLjg3OSAxMi44NzkgNDEuNDc3IDQxLjQ3N2M3LjExNCA3LjExNCA3LjI4MSAxOC41MTguNTQzIDI1Ljg1OSA2LjI1NCAxLjY4NyAxMy4yMDguMDkyIDE4LjExNy00LjgxN2wuODQtLjg0YzcuMzA3LTcuMzA3IDcuMzA3LTE5LjE1MyAwLTI2LjQ2eiIgZmlsbD0iIzJiNGQ2NiIvPjxnPjxjaXJjbGUgY3g9IjE4Ni41IiBjeT0iMTEwLjEzOCIgZmlsbD0iI2NiZTJmZiIgcj0iNjkuMTI1Ii8+PC9nPjxwYXRoIGQ9Im0xMzcuNjIxIDE1OS4wMTdjMjYuOTk1IDI2Ljk5NSA3MC43NjIgMjYuOTk1IDk3Ljc1NyAwIDIzLjI1NS0yMy4yNTUgMjYuNDU3LTU4Ljk0OCA5LjY0Ni04NS42NTJoLTExNy4wNWMtMTYuODEgMjYuNzA0LTEzLjYwNyA2Mi4zOTcgOS42NDcgODUuNjUyeiIgZmlsbD0iI2JlZDhmYiIvPjxnPjxwYXRoIGQ9Im0yMzUuMzc5IDYxLjI2Yy01LjI5NC01LjI5NC0xMS4yMzgtOS41MzQtMTcuNTY5LTEyLjc1MSAxMy4xOSAyNS45NTIgOC45NSA1OC40ODctMTIuNzUxIDgwLjE4OHMtNTQuMjM2IDI1Ljk0MS04MC4xODggMTIuNzUxYzMuMjE3IDYuMzMxIDcuNDU3IDEyLjI3NSAxMi43NTEgMTcuNTY5IDI2Ljk5NSAyNi45OTUgNzAuNzYyIDI2Ljk5NSA5Ny43NTcgMCAyNi45OTQtMjYuOTk1IDI2Ljk5NC03MC43NjIgMC05Ny43NTd6IiBmaWxsPSIjYmVkOGZiIi8+PC9nPjxwYXRoIGQ9Im0yMDUuMDU5IDEyOC42OTdjLTIxLjcwMSAyMS43MDEtNTQuMjM2IDI1Ljk0MS04MC4xODggMTIuNzUxIDMuMjE3IDYuMzMxIDcuNDU3IDEyLjI3NSAxMi43NTEgMTcuNTY5IDI2Ljk5NSAyNi45OTUgNzAuNzYyIDI2Ljk5NSA5Ny43NTcgMCAyMy4yNTUtMjMuMjU1IDI2LjQ1Ny01OC45NDggOS42NDYtODUuNjUyaC0yMC4wNDRjMS44NDkgMTkuNzc1LTQuNzggNDAuMTktMTkuOTIyIDU1LjMzMnoiIGZpbGw9IiM5ZGM2ZmIiLz48Zz48cGF0aCBkPSJtMTg2LjUgMTg3LjAwMmMtMjAuNTMxIDAtMzkuODMzLTcuOTk2LTU0LjM1LTIyLjUxMy0xNC41MTgtMTQuNTE3LTIyLjUxMy0zMy44MTktMjIuNTEzLTU0LjM1czcuOTk2LTM5LjgzMyAyMi41MTMtNTQuMzVjMjkuOTY5LTI5Ljk3IDc4LjczMi0yOS45NjkgMTA4LjcgMHMyOS45NjkgNzguNzMyIDAgMTA4LjdjLTE0LjUxNyAxNC41MTctMzMuODE5IDIyLjUxMy01NC4zNSAyMi41MTN6bTAtMTM4LjIyMWMtMTUuNzIgMC0zMS40MzkgNS45ODMtNDMuNDA3IDE3Ljk1MS0xMS41OTUgMTEuNTk1LTE3Ljk4IDI3LjAxLTE3Ljk4IDQzLjQwN3M2LjM4NSAzMS44MTIgMTcuOTggNDMuNDA3IDI3LjAxIDE3Ljk4IDQzLjQwNyAxNy45OCAzMS44MTMtNi4zODUgNDMuNDA3LTE3Ljk4YzIzLjkzNC0yMy45MzUgMjMuOTM0LTYyLjg3OSAwLTg2LjgxNC0xMS45NjgtMTEuOTY4LTI3LjY4Ny0xNy45NTEtNDMuNDA3LTE3Ljk1MXoiIGZpbGw9IiMzNjVlN2QiLz48L2c+PC9nPjwvc3ZnPg=="
         style="position: absolute; height: 70px;width: 70px;left: 40px;top: 15px;border-radius: 0px;"/>
@@ -223,7 +292,7 @@
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
         <h4 align = 'center'>&nbsp;</h4>
-        <h4 align = 'center'>200 Bath</h4>
+        <h4 align = 'center'>{{sum_lost}} Bath</h4>
         <h4 align = 'center'>Lost</h4>
       </div>
     </div>
@@ -231,4 +300,62 @@
     </div>
     <div id = "line2">
     </div>
+
+    
+    <script>
+
+window.onload = function() {
+  var values = $("input[name='pname[]']").map(function(){return $(this).val();}).get(); 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: ""
+	},
+	data: [{
+		type: "pie",
+		startAngle: 120,
+		yValueFormatString: "##0.00\"\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: parseInt(values[0]), label: "A"},
+			{y: parseInt(values[1]), label: "B"},
+			{y: parseInt(values[2]), label: "C"},
+	
+		]
+	}]
+});
+chart.render();
+
+}
+
+    </script>
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+     
+      // Draw the chart and set the chart values
+      function drawChart() {
+        var values = $("input[name='pname[]']").map(function(){return $(this).val();}).get();
+        console.log(values[0])
+        var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['A', parseInt(values[0])],
+        ['B', parseInt(values[1])],
+        ['C', parseInt(values[2])],
+        
+      ]);
+      
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':150, 'height':120};
+      
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
 {% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบนำเก็บ</title>
+    
+</head>
+<body>
+    <style>
+        #bg{
+            width: 300px;
+            height: 150px;
+            margin-top: -220px;
+            margin-left: 750px;
+
+            background: #FFFF;
+            border: 2px solid #000000;
+            border-radius: 20px;
+        }
+        #modi{
+            position: absolute;
+            width: 1370px;
+            height: 0px;
+            left: 5px;
+            top: 450px;
+
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            transform: rotate(0deg);
+        }
+    </style>
+    <div>
+        <div>
+            <img src="https://image.flaticon.com/icons/png/512/2897/2897785.png" width="256" height="256"/>    
+        </div>
+        <div id="bg">
+            <h1 align=center>ใบนำเก็บ</h1>
+            <h1 align=center>AddtoShelf</h1>
+        </div>
+        <div style="margin-top: 75px;">
+            <h2><b>โกดัง Brightkung Clothing จำกัด</b></h2>
+            <p style="font-size: 125%;">199/2 หมู่ 5 ตำบลหนองปรือ อำเภอบางละมุง จังหวัดชลบุรี 20250</p>
+            <p style="font-size: 125%;">โทร 086-8464543 มือถือ 095-6905521</p>
+            <div id="modi"></div>
+        </div>
+        <div style="position: absolute;top: 50px;left: 1400px;">
+            <button onclick="window.print()"><img src="https://www.flaticon.com/svg/vstatic/svg/3003/3003232.svg?token=exp=1617471705~hmac=b7977e1e0ba33712e69620c44cc87c2c" width="64" height="64"></button>
+        </div>
+        <div style="margin-top: 100px;">
+            <p style="font-size: 115%;margin-left: 50px;margin-top: 200px;">รหัสสินค้า : {{product.product_code}}</p>
+            <p style="font-size: 115%;margin-left: 50px;margin-top: 50px;">ชื่อสินค้า : {{name}}</p>
+            <p style="font-size: 115%;margin-left: 50px;margin-top: 50px;">จำนวน :{{product.qty}}</p>
+            <p style="font-size: 115%;margin-left: 50px;margin-top: 50px;">นำไปเก็บที่ : {{product.to_shelf}}</p> 
+       
+        </div>
+    </div>
+</body>
+</html>

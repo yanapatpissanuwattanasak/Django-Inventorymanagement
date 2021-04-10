@@ -230,7 +230,7 @@
 
 <div class="row d-flex justify-content-center container-fluid" style="border-radius: 50px;">
   <div class="col-12 ">
-      <form id="msform" action="submit_product" method="POST">
+      <form id="msform" action="submit_product" method="POST" enctype="multipart/form-data">
         {% csrf_token %} 
           <!-- progressbar -->
           <div class="row">
@@ -330,7 +330,28 @@
             
           </fieldset>
           <fieldset>
+            
               <h2 class="fs-title">Verifiy</h2>
+              <div class="row">
+
+                <div class="col-2">
+                  <p class="text-left fs-subtitle">ผู้ผลิตเดิม</p>
+                </div>
+                <div class="col-2">
+                  <select class="form-select" aria-label="Default select example" id="rApply" name="select">
+                    <option value="No" selected>ไม่มีผู้ผลิตเก่า</option>
+                    {% for i in menu %}
+                    <option value={{i.fact_name}} >{{i.fact_desc}} </option>
+                    
+                    {% endfor %}
+                </select>
+                </div>
+  
+              </div>
+              
+              <br>
+              <h2>---------------------------------------------------------------------------------------------------------------------------------------------------</h2>
+              <br>
               <!-- <h3 class="fs-subtitle">Your presence on the social network</h3> -->
               <div class="row ">
                 <div class="col-2 d-flex justify-content-left" ><p class="fs-subtitle"  required>ชื่อผู้ผลิต</p>
@@ -411,10 +432,14 @@
               <h2 class="fs-title">Address</h2>
               <div class="row ">
                 <div class="col-2 d-flex justify-content-left" ><p class="fs-subtitle"  required>ตัวอย่างภาพ</p>
+                  {{ form.as_p }}
                     </div>
                     
                     
-                <div class="col-4 d-flex justify-content-right" ><input class="form-control is-invalid" type="file" name="product_image" id="validationServer03" aria-describedby="validationServer03Feedback" placeholder=""/></div>
+                   
+                   
+                      
+                         
               
                   </div>
                   <div class="row ">

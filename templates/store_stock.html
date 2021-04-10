@@ -2,7 +2,33 @@
 
 {% block content %}
 
+<style>
+  
+  .tableFixHead {
+        overflow-y: auto;
+        height: 700px;
+      }
+      .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        
+      }
+      th {
+        background: #FFB800;
+      }
+     
 
+
+ </style>
   <div class=" row container-fluid d-flex justify-content-center">
     <div class="col-10 "> 
   <h3 align = "center">ยอดคงเหลือสินค้า</Frame></align></h3>
@@ -14,55 +40,12 @@
     left: 1317px;
     top: 273px;"></button>
     </form>
-    <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGc+PGc+PGc+PGc+PGc+PGc+PGc+PGc+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiBmaWxsPSIjZmZjZTAwIiByPSIyNTYiLz48L2c+PC9nPjwvZz48L2c+PC9nPjwvZz48L2c+PC9nPjxwYXRoIGQ9Im01MTIgMjU2YzAtMTguMzI0LTEuOTI2LTM2LjE5OS01LjU4NS01My40MzNsLTEzMC4xOTgtMTMwLjE5OC0yOTkuMjE3IDI3NC4yNTkgODcuNDA3IDg3LjQwNy03LjE3MiA1LjgyNiA3MC42MDcgNzAuNjA3YzkuMjQ3IDEuMDEyIDE4LjY0MiAxLjUzMiAyOC4xNTggMS41MzIgMTQxLjM4NSAwIDI1Ni0xMTQuNjE1IDI1Ni0yNTZ6IiBmaWxsPSIjZmZhMzAwIi8+PGc+PHBhdGggZD0ibTQwOS4wODIgMzU4LjQxNGgtMzA2LjE2NGMtMTkuMDA4IDAtMzQuNDE4LTE1LjQwOS0zNC40MTgtMzQuNDE4di0xMjQuNTU3YzAtMTkuMDA4IDE1LjQwOS0zNC40MTggMzQuNDE4LTM0LjQxOGgzMDYuMTY0YzE5LjAwOCAwIDM0LjQxOCAxNS40MDkgMzQuNDE4IDM0LjQxOHYxMjQuNTU3YzAgMTkuMDA4LTE1LjQwOSAzNC40MTgtMzQuNDE4IDM0LjQxOHoiIGZpbGw9IiM2MzY5NzgiLz48L2c+PGc+PHBhdGggZD0ibTQwOS4wODIgMTY1LjAyMWgtMTUyLjk2MnYxOTMuMzkzaDE1Mi45NjJjMTkuMDA5IDAgMzQuNDE4LTE1LjQwOSAzNC40MTgtMzQuNDE3di0xMjQuNTU4YzAtMTkuMDA5LTE1LjQwOS0zNC40MTgtMzQuNDE4LTM0LjQxOHoiIGZpbGw9IiM0MTQ5NTIiLz48L2c+PGc+PHBhdGggZD0ibTEzNS43ODMgMzEyLjE1MWgyNDAuNDM0djQ2LjI2MmgtMjQwLjQzNHoiIGZpbGw9IiM0MTQ5NTIiLz48L2c+PGc+PHBhdGggZD0ibTI1Ni4xMiAzMTIuMTUxaDEyMC4wOTd2NDYuMjYyaC0xMjAuMDk3eiIgZmlsbD0iIzIzMjcyYiIvPjwvZz48Zz48cGF0aCBkPSJtMTM1Ljc4MyA3Mi4zNjloMjQwLjQzNHYxMzYuMTgxaC0yNDAuNDM0eiIgZmlsbD0iIzQxNDk1MiIvPjwvZz48Zz48cGF0aCBkPSJtMjU2LjEyIDcyLjM2OWgxMjAuMDk3djEzNi4xODFoLTEyMC4wOTd6IiBmaWxsPSIjMjMyNzJiIi8+PC9nPjxnPjxwYXRoIGQ9Im0zMjAuMDMyIDEzNy4xNzloLTEyOC4wNjRjLTExLjc0OCAwLTIxLjI3Mi05LjUyNC0yMS4yNzItMjEuMjcydi00My41MzhoMTcwLjYwOHY0My41MzhjMCAxMS43NDgtOS41MjQgMjEuMjcyLTIxLjI3MiAyMS4yNzJ6IiBmaWxsPSIjNTU1YTY2Ii8+PC9nPjxnPjxwYXRoIGQ9Im0yNTYuMTIgNzIuMzY5djY0LjgxaDYzLjkxMWMxMS43NDggMCAyMS4yNzItOS41MjQgMjEuMjcyLTIxLjI3MnYtNDMuNTM4eiIgZmlsbD0iIzMzMzk0MCIvPjwvZz48Zz48cGF0aCBkPSJtMTAxLjI0OSAyNzQuNTZoMzA5LjUwMnYyNS42NjNoLTMwOS41MDJ6IiBmaWxsPSIjNTU1YTY2Ii8+PC9nPjxnPjxwYXRoIGQ9Im0yNTYuMTIgMjc0LjU2aDE1NC42M3YyNS42NjNoLTE1NC42M3oiIGZpbGw9IiMzMzM5NDAiLz48L2c+PGc+PGNpcmNsZSBjeD0iMTE2LjIwMSIgY3k9IjI0NS4wMDQiIGZpbGw9IiM2NGUxZGMiIHI9IjE0Ljk1MiIvPjwvZz48Zz48Y2lyY2xlIGN4PSIxNTUuNzQ0IiBjeT0iMjQ1LjAwNCIgZmlsbD0iIzY0ZTFkYyIgcj0iMTQuOTUyIi8+PC9nPjxnPjxwYXRoIGQ9Im0xNTcuMjM1IDMxMi4xNTFoMTk3LjUzdjEyNy43MWgtMTk3LjUzeiIgZmlsbD0iI2ZmZiIvPjwvZz48Zz48cGF0aCBkPSJtMjU2LjEyIDMxMi4xNTFoOTguNjQ1djEyNy43MWgtOTguNjQ1eiIgZmlsbD0iI2U5ZWRmNSIvPjwvZz48L2c+PC9zdmc+" style="height: 51px;
-    width: 50px;
-    left: 1366px;
-    top: 261px;
-    border-radius: 0px;">
+    
     <div>
-    รหัสสินค้า
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>A --> Z
-        <OPTION VALUE=2>Z --> A
-        </SELECT>
-    ประเภท
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>เสื้อคอกลม
-        </SELECT>
-    ไซด์
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>S
-        <OPTION VALUE=3>M
-        <OPTION VALUE=4>L
-        <OPTION VALUE=5>XL
-        </SELECT>
-    เชลฟ์
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>ทั้งหมด
-        <OPTION VALUE=2>A
-        </SELECT>
-    ราคาขาย
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>มากกว่า
-        <OPTION VALUE=2>เท่ากับ
-        <OPTION VALUE=3>น้อยกว่า
-        </SELECT>
-    <input type="text" name="Number" size=4>
-    คงเหลือ
-    <SELECT>
-        <OPTION SELECTED>เลือกข้อความ
-        <OPTION VALUE=1>มากไปน้อย
-        <OPTION VALUE=2>น้อยไปมาก
-        </SELECT>
+    
   </div>
-  <table class="table table-bordered">
+  <div class="tableFixHead">
+  <table class="">
     <thead class="text-center"> 
       <tr bgcolor="FFB800">
         <th scope="col"  style="font-family: montserrat;">รหัสสินค้า</th>
@@ -73,7 +56,7 @@
         <th scope="col">ไซด์</th>
         <th scope="col">จำนวน</th>
         <th scope="col">สถานะ</th>
-        <th scope="col"> </th>
+      
       </tr>
     </thead>
     <tbody>
@@ -96,15 +79,13 @@
         {% else %}
         <td style = "background-color : #ff0000"> </td>
         {% endif %}
-        <td class="d-flex justify-content-center" ><a href="/"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM2NXB0IiB2aWV3Qm94PSIwIDAgMzY1LjcxNzMzIDM2NSIgd2lkdGg9IjM2NXB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGZpbGw9IiNmNDQzMzYiPjxwYXRoIGQ9Im0zNTYuMzM5ODQ0IDI5Ni4zNDc2NTYtMjg2LjYxMzI4Mi0yODYuNjEzMjgxYy0xMi41LTEyLjUtMzIuNzY1NjI0LTEyLjUtNDUuMjQ2MDkzIDBsLTE1LjEwNTQ2OSAxNS4wODIwMzFjLTEyLjUgMTIuNTAzOTA2LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMjg2LjYxMzI4MSAyODYuNjEzMjgyYzEyLjUwMzkwNyAxMi41IDMyLjc2OTUzMSAxMi41IDQ1LjI1IDBsMTUuMDgyMDMxLTE1LjA4MjAzMmMxMi41MjM0MzgtMTIuNDgwNDY4IDEyLjUyMzQzOC0zMi43NS4wMTk1MzItNDUuMjV6bTAgMCIvPjxwYXRoIGQ9Im0yOTUuOTg4MjgxIDkuNzM0Mzc1LTI4Ni42MTMyODEgMjg2LjYxMzI4MWMtMTIuNSAxMi41LTEyLjUgMzIuNzY5NTMyIDAgNDUuMjVsMTUuMDgyMDMxIDE1LjA4MjAzMmMxMi41MDM5MDcgMTIuNSAzMi43Njk1MzEgMTIuNSA0NS4yNSAwbDI4Ni42MzI4MTMtMjg2LjU5Mzc1YzEyLjUwMzkwNi0xMi41IDEyLjUwMzkwNi0zMi43NjU2MjYgMC00NS4yNDYwOTRsLTE1LjA4MjAzMi0xNS4wODIwMzJjLTEyLjUtMTIuNTIzNDM3LTMyLjc2NTYyNC0xMi41MjM0MzctNDUuMjY5NTMxLS4wMjM0Mzd6bTAgMCIvPjwvZz48L3N2Zz4="
-            style = "height: 20px;
-            width: 21px;
-            "></a></td>
+        
       </tr>
       {% endfor %}
       
     </tbody>
   </table>
+</div>
   <br>
   <br>
   
@@ -116,19 +97,7 @@
     
 
   
-  <div align = "Center">
-    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjU2LDBDMTE0LjgzNywwLDAsMTE0LjgzNywwLDI1NnMxMTQuODM3LDI1NiwyNTYsMjU2czI1Ni0xMTQuODM3LDI1Ni0yNTZTMzk3LjE2MywwLDI1NiwweiBNMzEzLjc0OSwzNDcuNTg0DQoJCQljOC4zNDEsOC4zNDEsOC4zNDEsMjEuODI0LDAsMzAuMTY1Yy00LjE2LDQuMTYtOS42MjEsNi4yNTEtMTUuMDgzLDYuMjUxYy01LjQ2MSwwLTEwLjkyMy0yLjA5MS0xNS4wODMtNi4yNTFMMTc2LjkxNywyNzEuMDgzDQoJCQljLTguMzQxLTguMzQxLTguMzQxLTIxLjgyNCwwLTMwLjE2NWwxMDYuNjY3LTEwNi42NjdjOC4zNDEtOC4zNDEsMjEuODI0LTguMzQxLDMwLjE2NSwwczguMzQxLDIxLjgyNCwwLDMwLjE2NUwyMjIuMTY1LDI1Ng0KCQkJTDMxMy43NDksMzQ3LjU4NHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" 
-    style="width: 32px;
-    height: 32px;
-    left: 604px;
-    top: 907px;">
-    1 2 3 4 5
-    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjU2LDBDMTE0LjgzNywwLDAsMTE0LjgzNywwLDI1NnMxMTQuODM3LDI1NiwyNTYsMjU2czI1Ni0xMTQuODM3LDI1Ni0yNTZTMzk3LjE2MywwLDI1NiwweiBNMzM1LjA4MywyNzEuMDgzDQoJCQlMMjI4LjQxNiwzNzcuNzQ5Yy00LjE2LDQuMTYtOS42MjEsNi4yNTEtMTUuMDgzLDYuMjUxYy01LjQ2MSwwLTEwLjkyMy0yLjA5MS0xNS4wODMtNi4yNTFjLTguMzQxLTguMzQxLTguMzQxLTIxLjgyNCwwLTMwLjE2NQ0KCQkJTDI4OS44MzUsMjU2bC05MS41ODQtOTEuNTg0Yy04LjM0MS04LjM0MS04LjM0MS0yMS44MjQsMC0zMC4xNjVzMjEuODI0LTguMzQxLDMwLjE2NSwwbDEwNi42NjcsMTA2LjY2Nw0KCQkJQzM0My40MjQsMjQ5LjI1OSwzNDMuNDI0LDI2Mi43NDEsMzM1LjA4MywyNzEuMDgzeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" 
-    style="width: 32px;
-    height: 32px;
-    left: 604px;
-    top: 907px;">
-  </div>
+  
 </div>
 </div>
 {% endblock %}
